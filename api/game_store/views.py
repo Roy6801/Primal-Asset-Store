@@ -5,8 +5,8 @@ from django.http import HttpResponse
 
 
 def discover(request):
-    return HttpResponse("I Discovered!!")
+    return HttpResponse("Game / I Discovered!!")
 
 
 def browse(request):
-    return HttpResponse("I'm Browsing!!")
+    return HttpResponse("Game / I'm Browsing!!")

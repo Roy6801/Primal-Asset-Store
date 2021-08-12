@@ -7,6 +7,7 @@ Deprecated==1.2.12
 Django==3.2.5
 gcloud==0.18.3
 googleapis-common-protos==1.53.0
+gunicorn==20.1.0
 httplib2==0.19.1
 idna==3.2
 jwcrypto==0.9.1
@@ -28,3 +29,4 @@ six==1.16.0
 sqlparse==0.4.1
 urllib3==1.26.6
 wrapt==1.12.1
+yapf==0.31.0

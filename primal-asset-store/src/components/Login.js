@@ -1,6 +1,7 @@
 import GoogleLogin from "react-google-login";
 import useToken from "./functions/useToken";
 import krypton from "./functions/krypton";
+import React from 'react';
 
 const Login = () => {
   //window.localStorage.removeItem("primal-UIG-asset-store-G10");
@@ -51,7 +52,8 @@ const Login = () => {
     );
   } else {
     return (
-      <div>
+      // <div>
+      
         <button
           onClick={(e) => {
             setToken();
@@ -60,7 +62,7 @@ const Login = () => {
         >
           Sign out
         </button>
-      </div>
+      // </div>
     );
   }
 };

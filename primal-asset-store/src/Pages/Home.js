@@ -2,16 +2,9 @@ import React from 'react';
 
 const Home = () => {
 return (
-	<div
-	style={{
-		display: 'flex',
-		justifyContent: 'Right',
-		alignItems: 'Right',
-		height: '100vh'
-	}}
-	>
-	<h1>Primal</h1>
-	</div>
+  <div style={{ width: "80%", height: "100vh", backgroundColor: "yellow" }}>
+    <h1>Primal</h1>
+  </div>
 );
 };
 

@@ -1,18 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const About = () => {
-return (
-	<div
-	style={{
-		display: 'flex',
-		justifyContent: 'Right',
-		alignItems: 'Right',
-		height: '100vh'
-	}}
-	>
-	<h1>About</h1>
-	</div>
-);
+  return (
+    <div style={{ width: "80%", height: "90vh", backgroundColor: "yellow" }}>
+      <h1>About</h1>
+    </div>
+  );
 };
 
 export default About;

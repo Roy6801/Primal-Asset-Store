@@ -1,15 +1,28 @@
+import { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
+import ProfileMenu from "./navigation/ProfileMenu";
 import useToken from "./functions/useToken";
 import krypton from "./functions/krypton";
+import "./stylesheets/Home.css";
 
 const Login = () => {
-  //window.localStorage.removeItem("primal-UIG-asset-store-G10");
+  // window.localStorage.removeItem("primal-UIG-asset-store-G10");
   const { REACT_APP_CLIENT_ID } = process.env;
 
   const { token, setToken } = useToken();
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setShowMenu(false);
+  //   }, 10000);
+  // }, []);
+
+  // console.log(showMenu);
+
   const onSuccess = (resp) => {
-    console.log(resp.profileObj);
+    // get user profile on login and encrypt data
     const user = {
       email: krypton.encrypt(resp.profileObj.email),
       familyName: krypton.encrypt(resp.profileObj.familyName),
@@ -19,17 +32,8 @@ const Login = () => {
       userName: krypton.encrypt(""),
       mobileNo: krypton.encrypt(""),
     };
-    console.log(user);
-    const deUser = {
-      email: krypton.decrypt(user.email),
-      familyName: krypton.decrypt(user.familyName),
-      givenName: krypton.decrypt(user.givenName),
-      googleId: krypton.decrypt(user.googleId),
-      imageUrl: krypton.decrypt(user.imageUrl),
-      userName: krypton.decrypt(user.userName),
-      mobileNo: krypton.decrypt(user.mobileNo),
-    };
-    console.log(deUser);
+
+    // save user data locally
     setToken(JSON.stringify(user));
   };
 
@@ -50,17 +54,38 @@ const Login = () => {
       </div>
     );
   } else {
+    if (showMenu) {
+      return (
+        <div>
+          <img
+            src={krypton.decrypt(JSON.parse(token).imageUrl)}
+            className="profile-view"
+            onClick={(e) => setShowMenu(false)}
+          />
+          <div className="profile-menu">
+            <ProfileMenu
+              googleId={krypton.decrypt(JSON.parse(token).googleId)}
+            />
+          </div>
+        </div>
+      );
+    }
     return (
-      <div>
-        <button
-          onClick={(e) => {
-            setToken();
-            window.localStorage.removeItem("primal-UIG-asset-store-G10");
-          }}
-        >
-          Sign out
-        </button>
-      </div>
+      // <div>
+      //   <button
+      //     onClick={(e) => {
+      //       setToken();
+      //       window.localStorage.removeItem("primal-UIG-asset-store-G10");
+      //     }}
+      //   >
+      //     Sign out
+      //   </button>
+      // </div>
+      <img
+        src={krypton.decrypt(JSON.parse(token).imageUrl)}
+        className="profile-view"
+        onClick={(e) => setShowMenu(true)}
+      />
     );
   }
 };

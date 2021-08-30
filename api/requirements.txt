@@ -29,3 +29,4 @@ six==1.16.0
 sqlparse==0.4.1
 urllib3==1.26.6
 wrapt==1.12.1
+yapf==0.31.0

@@ -4,11 +4,11 @@ import Nav from "./components/navigation/Nav";
 import SubNav from "./components/navigation/SubNav";
 import Footer from "./components/navigation/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import UI from "./pages/UI";
-import Game from "./pages/Game";
-import About from "./pages/About";
-import FAQ from "./pages/Faq";
+import Home from "./Pages/Home";
+import UI from "./Pages/Ui";
+import Game from "./Pages/Game";
+import About from "./Pages/About";
+import FAQ from "./Pages/Faq";
 import "./components/stylesheets/Home.css";
 
 const App = () => {

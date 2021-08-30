@@ -35,7 +35,7 @@
 }
 
 .sub-nav-link {
-    font-family: monospace;
+    font-family: Arial;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -55,7 +55,7 @@
 
 .search-icon {
     width: 2vw;
-    margin: 2vw;
+    /* margin: 2vw; */
 }
 
 .login-menu {
@@ -89,7 +89,7 @@
     font-family: monospace;
     font-style: normal;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 12px;
     
     text-align: center;
     color: #FFFFFF;

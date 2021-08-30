@@ -4,11 +4,13 @@ import Nav from "./components/navigation/Nav";
 import SubNav from "./components/navigation/SubNav";
 import Footer from "./components/navigation/Footer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import Home from "./components/pages/Home";
 import UI from "./components/pages/UI";
 import Game from "./components/pages/Game";
 import About from "./components/pages/About";
 import FAQ from "./components/pages/Faq";
+
 import "./components/stylesheets/Home.css";
 
 const App = () => {

@@ -1,20 +1,23 @@
-import React from "react";
+import { useState } from "react";
+import searchicon from "./static/Search.svg";
+import "./stylesheets/Home.css";
 
-const SearchBar = ({ keyword, setKeyword }) => {
-  const BarStyling = {
-    width: "30vw",
-    height: "6vh",
-    background: "#FFFFFF",
-    borderRadius: "30px",
-  };
+const SearchBar = () => {
+  const [keyword, setKeyword] = useState(null);
+
   return (
-    <input
-      style={BarStyling}
-      key="random1"
-      value={keyword}
-      placeholder={"search "}
-      onChange={(e) => setKeyword(e.target.value)}
-    />
+    <div>
+      <input
+        className="search-bar"
+        key="search-input"
+        value={keyword}
+        placeholder={"search"}
+        onChange={(e) => setKeyword(e.target.value)}
+      />
+      <button className="search-icon">
+        <img width="20vw" src={searchicon} />
+      </button>
+    </div>
   );
 };
 export default SearchBar;

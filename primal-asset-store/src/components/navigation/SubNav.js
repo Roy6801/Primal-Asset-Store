@@ -1,18 +1,37 @@
+import { NavLink, useLocation } from "react-router-dom";
 import SearchBar from "../SearchBar";
 import "../stylesheets/Home.css";
-import searchicon from "../static/Search.svg";
 
 const SubNav = () => {
+  const location = useLocation();
+
+  var path = location.pathname;
+
+  path = path.replace("/browse", "");
+
   return (
     <div className="sub-nav">
-      <div className="sub-nav-link">Discover</div>
-      <div className="sub-nav-link">Browse</div>
-      <div className="sub-nav-link">Suggested</div>
+      <NavLink
+        to={path}
+        activeStyle={{ color: "#FFA825" }}
+        className="sub-nav-link"
+      >
+        Discover
+      </NavLink>
+      <NavLink
+        to={path + "/browse"}
+        activeStyle={{ color: "#FFA825" }}
+        className="sub-nav-link"
+      >
+        Browse
+      </NavLink>
+      {/* <NavLink to="/suggested" className="sub-nav-link">
+        Suggested
+      </NavLink> */}
       <div
         className="sub-nav-link"
         style={{ display: "flex", flexGrow: 1, flexDirection: "row-reverse" }}
       >
-        <img src={searchicon} className="search-icon" />
         <SearchBar />
       </div>
     </div>

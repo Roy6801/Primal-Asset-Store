@@ -7,19 +7,31 @@ import cart from "../static/Cart.svg";
 const Nav = () => {
   return (
     <div className="nav">
-      <NavLink to="/" className="nav-link">
+      <NavLink to="/" activeStyle={{ color: "#FFA825" }} className="nav-link">
         <img src={primal} style={{ width: "18vw" }} />
       </NavLink>
-      <NavLink to="/ui" className="nav-link">
+      <NavLink to="/ui" activeStyle={{ color: "#FFA825" }} className="nav-link">
         UI
       </NavLink>
-      <NavLink to="/game" className="nav-link">
+      <NavLink
+        to="/game"
+        activeStyle={{ color: "#FFA825" }}
+        className="nav-link"
+      >
         Game
       </NavLink>
-      <NavLink to="/about" className="nav-link">
+      <NavLink
+        to="/about"
+        activeStyle={{ color: "#FFA825" }}
+        className="nav-link"
+      >
         About
       </NavLink>
-      <NavLink to="/faq" className="nav-link">
+      <NavLink
+        to="/faq"
+        activeStyle={{ color: "#FFA825" }}
+        className="nav-link"
+      >
         FAQ
       </NavLink>
       <div

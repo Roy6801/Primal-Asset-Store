@@ -18,9 +18,6 @@ const App = () => {
     <div className="screen">
       <Router>
         <Nav />
-        <div className="screen-sub-nav">
-          <SubNav />
-        </div>
         <div className="screen-pager">
           <Switch>
             <Route path="/" exact component={Home} />

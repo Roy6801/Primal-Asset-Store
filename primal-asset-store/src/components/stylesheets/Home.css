@@ -18,13 +18,18 @@
     display: flex;
     align-items: center;
     text-align: center;
+    text-decoration: none;
 
     color: #FFFFFF;
 }
 
+.nav-link:hover {
+    color: #FFA825;
+}
+
+
 .sub-nav {
-    position: relative;
-    width: 80%;
+    width: 100%;
     height: 80px;
     
     display: flex;
@@ -42,11 +47,15 @@
     display: flex;
     align-items: center;
     text-align: center;
+    text-decoration: none;
 
     margin: 2vw;
 
     color: #FFFFFF;
+}
 
+.sub-nav-link:hover, :active {
+    color: #FFA825;
 }
 
 .cart {
@@ -54,8 +63,31 @@
 }
 
 .search-icon {
-    width: 2vw;
-    /* margin: 2vw; */
+    width: auto;
+    height: auto;
+
+    background: #B5B3F2;
+    border-radius: 0px 30px 30px 0px;
+    
+    border: none;
+
+    padding: 1vh 2vh 1vh 1vh;
+}
+
+.search-icon:hover {
+    background: #FFA825;
+}
+
+.search-bar {
+    width: 35vw;
+    height: auto;
+
+    background: #FFFFFF;
+    border-radius: 30px 0px 0px 30px;
+    outline: none;
+    border: none;
+
+    padding: 1vh 1vh 1vh 2vh;
 }
 
 .login-menu {

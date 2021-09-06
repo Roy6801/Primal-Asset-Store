@@ -9,6 +9,9 @@ import About from './Pages/About';
 import FAQ from './Pages/Faq';
 import Login from './components/Login';
 import SearchBar from './Pages/SearchBar';
+import Preview from "./components/pages/Preview";
+import AssetsList from "./components/pages/AssetsList";
+
 
 function App() {
 return (
@@ -21,6 +24,8 @@ return (
 		<Route path='/game' component={Game} />
 		<Route path='/about' component={About} />
 		<Route path='/faq' component={FAQ} />
+		<Route path="/preview" component={Preview} />
+        <Route path="/assetslist" component={AssetsList} />
 		<Route path='/components/Login' component={Login} />
 	</Switch>
 	<Navbar />

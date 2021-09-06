@@ -1,9 +1,9 @@
 .nav {
     position: relative;
     width: 100%;
-    height: 60px;
-    padding-left: 20px;
-
+    height: 10%;
+    padding-left:  1.50vw;
+    display: flex;
     background: #363477;
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.4);
 
@@ -14,7 +14,7 @@
     font-family: sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     text-align: center;
@@ -30,12 +30,12 @@
 
 .sub-nav {
     width: 100%;
-    height: 80px;
+    height: 15%;
     
     display: flex;
     background: #5D5BAB;
     box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.4);
-    border-radius: 0px 0px 30px 30px;
+    border-radius: 0vh 0vh 4.56vh 4.56vh;
     z-index: 0;
 }
 
@@ -43,7 +43,7 @@
     font-family: Arial;
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     text-align: center;
@@ -63,11 +63,11 @@
 }
 
 .search-icon {
-    width: auto;
-    height: auto;
+    width: 4vw;
+    height: 6vh;
 
     background: #B5B3F2;
-    border-radius: 0px 30px 30px 0px;
+    border-radius: 0vw 4.56vh 4.56vh 0vw;
     
     border: none;
 
@@ -80,10 +80,10 @@
 
 .search-bar {
     width: 35vw;
-    height: auto;
+    height: 6vh;
 
     background: #FFFFFF;
-    border-radius: 30px 0px 0px 30px;
+    border-radius: 4.56vh 0vh 0vh 4.56vh;
     outline: none;
     border: none;
 
@@ -108,7 +108,7 @@
 
 .footer {
     width: 100%;
-    height: 60px;
+    height: 10%;
 
     display: flex;
     align-items: center;
@@ -121,7 +121,7 @@
     font-family: monospace;
     font-style: normal;
     font-weight: 300;
-    font-size: 12px;
+    font-size: 0.75rem;
     
     text-align: center;
     color: #FFFFFF;

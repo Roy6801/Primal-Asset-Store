@@ -21,14 +21,15 @@ const App = () => {
         <div className="screen-pager">
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/ui" component={UI} />
-            <Route path="/game" component={Game} />
+            <Route path="/ui" exact component={UI} />
+            <Route path="/game" exact component={Game} />
+            <Route path="/ui/browse" exact component={UI} />
+            <Route path="/game/browse" exact component={Game} />
             <Route path="/about" component={About} />
             <Route path="/faq" component={FAQ} />
           </Switch>
         </div>
       </Router>
-      <Footer />
     </div>
   );
 };

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles', 'ui_store',
-    'game_store', 'primal_user'
+    'game_store','primal_user', "phonenumber_field",
 ]
 
 MIDDLEWARE = [
@@ -81,12 +81,13 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'primalassetstore',
-        'USER': 'postgres',
-        'PASSWORD' : '1234',
-        'HOST' : '127.0.0.1',
-        'PORT' : '5432'
+        'ENGINE': os.getenv('ENGINE'),
+        'NAME': os.getenv('NAME'),
+        'USER' : os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('ALLOWED_HOST_2'),
+        'PORT': os.getenv('PORT')
+
     }
 }
 

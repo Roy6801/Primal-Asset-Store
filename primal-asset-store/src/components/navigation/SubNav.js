@@ -12,6 +12,7 @@ const SubNav = () => {
   return (
     <div className="sub-nav">
       <NavLink
+        exact
         to={path}
         activeStyle={{ color: "#FFA825" }}
         className="sub-nav-link"
@@ -19,15 +20,13 @@ const SubNav = () => {
         Discover
       </NavLink>
       <NavLink
+        exact
         to={path + "/browse"}
         activeStyle={{ color: "#FFA825" }}
         className="sub-nav-link"
       >
         Browse
       </NavLink>
-      {/* <NavLink to="/suggested" className="sub-nav-link">
-        Suggested
-      </NavLink> */}
       <div
         className="sub-nav-link"
         style={{ display: "flex", flexGrow: 1, flexDirection: "row-reverse" }}

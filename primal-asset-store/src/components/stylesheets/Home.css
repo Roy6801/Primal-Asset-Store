@@ -100,6 +100,7 @@
 }
 
 .profile-menu {
+    position: absolute;
     width: 5vw;
     background-color: white;
     color: black;

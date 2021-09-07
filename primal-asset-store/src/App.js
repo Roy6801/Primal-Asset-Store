@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar';
+import Navbar from './components/navigation/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './Pages/Home';
-import UI from './Pages/Ui';
-import Game from './Pages/Game';
-import About from './Pages/About';
-import FAQ from './Pages/Faq';
+import Home from './components/pages/Home';
+import UI from './components/pages/UI';
+import Game from './components/pages/Game';
+import About from './components/pages/About';
+import FAQ from './components/pages/Faq';
 import Login from './components/Login';
-import SearchBar from './Pages/SearchBar';
+import SearchBar from './components/SearchBar';
 import Preview from "./components/pages/Preview";
 import AssetsList from "./components/pages/AssetsList";
 

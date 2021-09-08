@@ -21,13 +21,9 @@ def register(request):
         email_1= request.POST['email1']
         mobile_no= request.POST['mobile_no']
         if User.objects.filter(userName = username).exists():
-            messages.info(request,'username Taken')
-            return redirect('register')
-        elif User.objects.filter(phoneNumber=mobile_no).exists():
-            messages.info(request,'Phone NUmber Already registered')
-            return redirect('register')
+            return "0"
         else:
-            user =User(userName=username,firstName=first_name,lastName=last_name,phoneNumber=mobile_no,email1=email_1)
+            user = User(userName=username,firstName=first_name,lastName=last_name,phoneNumber=mobile_no,email1=email_1)
             user.save()
             return redirect('discover')
     else:

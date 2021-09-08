@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles', 'ui_store',
-    'game_store','primal_user', "phonenumber_field",
+    'game_store','primal_user'
 ]
 
 MIDDLEWARE = [

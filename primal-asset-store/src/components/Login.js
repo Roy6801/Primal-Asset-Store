@@ -3,10 +3,10 @@ import GoogleLogin from "react-google-login";
 import ProfileMenu from "./navigation/ProfileMenu";
 import useToken from "./functions/useToken";
 import krypton from "./functions/krypton";
+import service from "./functions/service";
 import "./stylesheets/Home.css";
 
 const Login = () => {
-  // window.localStorage.removeItem("primal-UIG-asset-store-G10");
   const { REACT_APP_CLIENT_ID } = process.env;
 
   const { token, setToken } = useToken();
@@ -24,17 +24,19 @@ const Login = () => {
   const onSuccess = (resp) => {
     // get user profile on login and encrypt data
     const user = {
-      email: krypton.encrypt(resp.profileObj.email),
-      familyName: krypton.encrypt(resp.profileObj.familyName),
-      givenName: krypton.encrypt(resp.profileObj.givenName),
-      googleId: krypton.encrypt(resp.profileObj.googleId),
-      imageUrl: krypton.encrypt(resp.profileObj.imageUrl),
-      userName: krypton.encrypt(""),
-      mobileNo: krypton.encrypt(""),
+      email1: resp.profileObj.email,
+      familyName: resp.profileObj.familyName,
+      givenName: resp.profileObj.givenName,
+      googleId: resp.profileObj.googleId,
+      imageUrl: resp.profileObj.imageUrl,
     };
 
     // save user data locally
-    setToken(JSON.stringify(user));
+
+    service.auth(user).then((resp) => {
+      console.log(resp.data);
+      setToken(JSON.stringify(user));
+    });
   };
 
   const onFailure = (resp) => {
@@ -58,29 +60,20 @@ const Login = () => {
       return (
         <div>
           <img
-            src={krypton.decrypt(JSON.parse(token).imageUrl)}
+            src={JSON.parse(token).imageUrl}
             className="profile-view"
             onClick={(e) => setShowMenu(false)}
           />
           <div className="profile-menu">
             <ProfileMenu
-              googleId={krypton.decrypt(JSON.parse(token).googleId)}
+              setToken={setToken}
+              googleId={JSON.parse(token).googleId}
             />
           </div>
         </div>
       );
     }
     return (
-      // <div>
-      //   <button
-      //     onClick={(e) => {
-      //       setToken();
-      //       window.localStorage.removeItem("primal-UIG-asset-store-G10");
-      //     }}
-      //   >
-      //     Sign out
-      //   </button>
-      // </div>
       <img
         src={krypton.decrypt(JSON.parse(token).imageUrl)}
         className="profile-view"

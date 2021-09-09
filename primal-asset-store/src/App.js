@@ -1,5 +1,3 @@
-import React from "react";
-import "./App.css";
 import Nav from "./components/navigation/Nav";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -9,9 +7,11 @@ import About from "./components/pages/About";
 import FAQ from "./components/pages/Faq";
 import Browse from "./components/pages/Browse";
 
-import "./components/stylesheets/Home.css";
 import Preview from "./components/pages/Preview";
 import AssetsList from "./components/pages/AssetsList";
+
+import "./components/stylesheets/Home.css";
+import "./App.css";
 
 const App = () => {
   return (

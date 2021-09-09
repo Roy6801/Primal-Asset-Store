@@ -5,34 +5,34 @@ from django.core.validators import BaseValidator, RegexValidator
 
 # Create your models here.
 class User(models.Model):
-    userName = models.CharField(max_length=32, primary_key=True)
-    firstName = models.CharField(max_length=32, null=False, default='')
-    lastName = models.CharField(max_length=32, null=True)
-    phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phoneNumber = models.CharField(validators=[phoneNumberRegex],
-                                   max_length=16,
-                                   unique=True)
-    email1 = models.EmailField(max_length=32, blank=False)
-    email2 = models.EmailField(max_length=32, blank=True)
+    googleId = models.CharField(max_length=512, primary_key=True, default='')
+    imageURL = models.CharField(max_length=512, null=True)
+    userName = models.CharField(max_length=512)
+    firstName = models.CharField(max_length=512, null=True)
+    lastName = models.CharField(max_length=512, null=True)
+    #phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
+    phoneNumber = models.CharField(
+        max_length=512,
+    )
+    email1 = models.CharField(max_length=512, blank=False)
+    email2 = models.CharField(max_length=512, blank=True)
     bio = models.TextField(blank=True)
-    planId = models.ForeignKey('primal_user.Plans', on_delete=models.CASCADE)
-    securityPin = models.IntegerField(null=True)
-    accountCreationDate = models.DateTimeField()
+    planId = models.ForeignKey('primal_user.Plans', on_delete=models.CASCADE, default="Free")
+    securityPin = models.CharField(max_length=512,null=True)
+    accountCreationDate = models.DateTimeField(auto_now_add=True)
     coins = models.IntegerField(default=0)
     assetsDownloaded = models.IntegerField(default=0)
     assetsPurchased = models.IntegerField(default=0)
-    imageURL = models.CharField(max_length=256, null=True)
-    googleId = models.CharField(max_length=256, null=True)
 
-    def __str__(self):
-        return self.userName
+    # def __str__(self):
+    #     return self.userName
 
 
 class Plans(models.Model):
     planId = models.CharField(max_length=10,
                               primary_key=True,
-                              default="DEFAULT VALUE")
-    quota = models.CharField(max_length=10)
+                              default="Free")
+    quota = models.CharField(max_length=10, default="100MB")
 
 
 class Tags(models.Model):

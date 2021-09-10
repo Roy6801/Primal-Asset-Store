@@ -1,9 +1,3 @@
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from .models import *
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-import json
 from  rest_framework import generics, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,15 +6,6 @@ from .models import User
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
-# Create your views here.
-
-
-def discover(request):
-    return HttpResponse("User / I Discovered!!")
-
-
-def browse(request):
-    return HttpResponse("User / I'm Browsing!!")
 
 #userAuth
 class userAuth(APIView):
@@ -81,29 +66,18 @@ class UserProfile(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+    '''@api_view(['GET','POST'])
+    def userAuth(request):
+    if request.method == 'GET':
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
 
-'''@csrf_exempt
-def userAuth(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        print(data)
-        first_name = data['givenName']
-        last_name = data['familyName']
-        email_1 = data['email1']
-        google_id = data['googleId']
-        image_url = data['imageUrl']
-        if User.objects.filter(googleId=google_id).exists():
-            print(User.objects.filter(googleId=google_id))
-            return HttpResponse("1")
-        else:
-            try:
-                user = User(firstName=first_name,
-                            lastName=last_name,
-                            email1=email_1,
-                            imageURL=image_url,
-                            googleId=google_id)
-                user.save()
-                return HttpResponse("1")
-            except Exception as e:
-                print(e)
-                return HttpResponse("0")'''
+    elif request.method == 'POST':
+        serializer = UserSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
+        '''
+    

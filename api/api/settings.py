@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'game_store',
     'primal_user',
     'corsheaders',
+    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [

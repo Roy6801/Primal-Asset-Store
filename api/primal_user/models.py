@@ -7,20 +7,20 @@ from django.core.validators import BaseValidator, RegexValidator
 class User(models.Model):
     googleId = models.CharField(max_length=512, primary_key=True, default='')
     imageURL = models.CharField(max_length=512, null=True)
-    userName = models.CharField(max_length=512)
+    userName = models.CharField(max_length=512, null=True)
     firstName = models.CharField(max_length=512, null=True)
     lastName = models.CharField(max_length=512, null=True)
     #phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    phoneNumber = models.CharField(
-        max_length=512,
-    )
+    phoneNumber = models.CharField(max_length=512, null=True)
     email1 = models.CharField(max_length=512, blank=False)
     email2 = models.CharField(max_length=512, blank=True)
     bio = models.TextField(blank=True)
-    planId = models.ForeignKey('primal_user.Plans', on_delete=models.CASCADE, default="Free")
-    securityPin = models.CharField(max_length=512,null=True)
+    planId = models.ForeignKey('primal_user.Plans',
+                               on_delete=models.CASCADE,
+                               default="Free")
+    securityPin = models.CharField(max_length=512, null=True)
     accountCreationDate = models.DateTimeField(auto_now_add=True)
-    coins = models.IntegerField(default=0)
+    coins = models.IntegerField(default=2)
     assetsDownloaded = models.IntegerField(default=0)
     assetsPurchased = models.IntegerField(default=0)
 
@@ -29,9 +29,7 @@ class User(models.Model):
 
 
 class Plans(models.Model):
-    planId = models.CharField(max_length=10,
-                              primary_key=True,
-                              default="Free")
+    planId = models.CharField(max_length=10, primary_key=True, default="Free")
     quota = models.CharField(max_length=10, default="100MB")
 
 

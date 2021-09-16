@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import Login from "../Login";
 import "../stylesheets/Home.css";
 import primal from "../static/Primal.svg";
-import cart from "../static/Cart.svg";
 
 const Nav = () => {
   return (
@@ -34,14 +33,9 @@ const Nav = () => {
       >
         FAQ
       </NavLink>
-      <div
-        className="nav-link"
-        style={{ flexGrow: 1, flexDirection: "row-reverse" }}
-      >
-        <div className="login-menu">
-          <Login />
-        </div>
-        <img src={cart} className="cart" />
+
+      <div className="menu-section">
+        <Login />
       </div>
     </div>
   );

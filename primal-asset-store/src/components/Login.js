@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import ProfileMenu from "./navigation/ProfileMenu";
 import useToken from "./functions/useToken";
-import krypton from "./functions/krypton";
 import service from "./functions/service";
+import cart from "./static/Cart.svg";
 import "./stylesheets/Home.css";
 
 const Login = () => {
+  // window.localStorage.removeItem("primal-UIG-asset-store-G10");
   const { REACT_APP_CLIENT_ID } = process.env;
 
   const { token, setToken } = useToken();
@@ -25,28 +26,33 @@ const Login = () => {
     // get user profile on login and encrypt data
     const user = {
       email1: resp.profileObj.email,
-      familyName: resp.profileObj.familyName,
-      givenName: resp.profileObj.givenName,
+      lastName: resp.profileObj.familyName,
+      firstName: resp.profileObj.givenName,
       googleId: resp.profileObj.googleId,
-      imageUrl: resp.profileObj.imageUrl,
+      imageURL: resp.profileObj.imageUrl,
     };
 
-    // save user data locally
+    // verify or register user and save user data locally
 
-    service.auth(user).then((resp) => {
-      console.log(resp.data);
-      setToken(JSON.stringify(user));
-    });
+    service
+      .verify(user)
+      .then((resp) => {
+        setToken(JSON.stringify(user));
+      })
+      .catch((err) => {
+        service.auth(user).then((resp) => {
+          setToken(JSON.stringify(user));
+        });
+      });
   };
 
   const onFailure = (resp) => {
-    console.log(resp);
     alert("Login Failed!!");
   };
 
   if (!token) {
     return (
-      <div>
+      <div className="menu-section">
         <GoogleLogin
           clientId={REACT_APP_CLIENT_ID}
           buttonText="Sign in"
@@ -56,29 +62,42 @@ const Login = () => {
       </div>
     );
   } else {
+    service
+      .verify(JSON.parse(token))
+      .then((resp) => {
+        setToken(token);
+      })
+      .catch((err) => {
+        setToken();
+        window.localStorage.removeItem("primal-UIG-asset-store-G10");
+      });
+
     if (showMenu) {
       return (
-        <div>
-          <img
-            src={JSON.parse(token).imageUrl}
-            className="profile-view"
-            onClick={(e) => setShowMenu(false)}
-          />
-          <div className="profile-menu">
-            <ProfileMenu
-              setToken={setToken}
-              googleId={JSON.parse(token).googleId}
+        <div style={{width:"30%"}}>
+          <div className="menu-section">
+            <img src={cart} className="cart" />
+            <img
+              src={JSON.parse(token).imageURL}
+              className="profile-view"
+              onClick={(e) => setShowMenu(false)}
             />
+          </div>
+          <div className="profile-menu">
+            <ProfileMenu setToken={setToken} user={JSON.parse(token)} />
           </div>
         </div>
       );
     }
     return (
-      <img
-        src={krypton.decrypt(JSON.parse(token).imageUrl)}
-        className="profile-view"
-        onClick={(e) => setShowMenu(true)}
-      />
+      <div className="menu-section">
+        <img src={cart} className="cart" />
+        <img
+          src={JSON.parse(token).imageURL}
+          className="profile-view"
+          onClick={(e) => setShowMenu(true)}
+        />
+      </div>
     );
   }
 };

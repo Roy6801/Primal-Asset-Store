@@ -47,13 +47,12 @@ const Login = () => {
   };
 
   const onFailure = (resp) => {
-    console.log(resp);
     alert("Login Failed!!");
   };
 
   if (!token) {
     return (
-      <div>
+      <div className="menu-section">
         <GoogleLogin
           clientId={REACT_APP_CLIENT_ID}
           buttonText="Sign in"
@@ -75,27 +74,26 @@ const Login = () => {
 
     if (showMenu) {
       return (
-        <div>
-          <img src={cart} className="cart" />
-          <img
-            src={JSON.parse(token).imageUrl}
-            className="profile-view"
-            onClick={(e) => setShowMenu(false)}
-          />
-          <div className="profile-menu">
-            <ProfileMenu
-              setToken={setToken}
-              googleId={JSON.parse(token).googleId}
+        <div style={{width:"30%"}}>
+          <div className="menu-section">
+            <img src={cart} className="cart" />
+            <img
+              src={JSON.parse(token).imageURL}
+              className="profile-view"
+              onClick={(e) => setShowMenu(false)}
             />
+          </div>
+          <div className="profile-menu">
+            <ProfileMenu setToken={setToken} user={JSON.parse(token)} />
           </div>
         </div>
       );
     }
     return (
-      <div>
+      <div className="menu-section">
         <img src={cart} className="cart" />
         <img
-          src={JSON.parse(token).imageUrl}
+          src={JSON.parse(token).imageURL}
           className="profile-view"
           onClick={(e) => setShowMenu(true)}
         />

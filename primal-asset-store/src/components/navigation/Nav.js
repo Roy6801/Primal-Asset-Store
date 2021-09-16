@@ -34,7 +34,7 @@ const Nav = () => {
         FAQ
       </NavLink>
 
-      <div className="login-menu">
+      <div className="menu-section">
         <Login />
       </div>
     </div>

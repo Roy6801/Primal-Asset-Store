@@ -9,6 +9,11 @@ const service = {
   verify: (googleId) => {
     return axios.get(REACT_APP_API_BASE_URL + "user/profile/" + googleId);
   },
+  editProfile: (googleId, user) => {
+    return axios.put(REACT_APP_API_BASE_URL + "user/profile/" + googleId, {
+      ...user,
+    });
+  },
 };
 
 export default service;

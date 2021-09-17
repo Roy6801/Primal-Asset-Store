@@ -13,6 +13,17 @@
   text-align: start;
 }
 
+.link-style {
+  color: white;
+  font-family: monospace;
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.link-style:hover {
+  color: #b5b3f2;
+}
+
 .container {
   width: "100%";
   text-align: center;

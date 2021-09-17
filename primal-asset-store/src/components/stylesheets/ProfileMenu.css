@@ -1,0 +1,19 @@
+.detail-info,
+.detail-tag {
+  font-size: large;
+  font-weight: 500;
+  font-family: monospace;
+}
+
+.detail-info {
+  text-align: end;
+}
+
+.detail-tag {
+  text-align: start;
+}
+
+.container {
+  width: "100%";
+  text-align: center;
+}

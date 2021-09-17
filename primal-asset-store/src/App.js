@@ -8,8 +8,8 @@ import FAQ from "./components/pages/Faq";
 import Browse from "./components/pages/Browse";
 import ViewProfile from "./components/pages/ViewProfile";
 import NotFound from "./components/NotFound";
-import Preview from "./components/pages/Preview";
-import AssetsList from "./components/pages/AssetsList";
+import Preview from "./components/elements/Preview";
+import AssetsList from "./components/elements/AssetsList";
 
 import "./components/stylesheets/Home.css";
 import "./App.css";

@@ -1,8 +1,9 @@
-import "../stylesheets/Home.css";
 import { useState } from "react";
 import service from "../functions/service";
 import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
+import "../stylesheets/Home.css";
+import "../stylesheets/ProfileMenu.css";
 
 const ProfileMenu = ({ googleId, setToken }) => {
   const [user, setUser] = useState();
@@ -21,21 +22,63 @@ const ProfileMenu = ({ googleId, setToken }) => {
   } else {
     if (user.userName) {
       return (
-        <div className="profile-menu-display">
-          <div className="profile-menu-display-section1">
-            <label>{`User - ${user.userName}`}</label>
-            <label>{`${user.firstName} ${user.lastName}`}</label>
-            <label>{`Coins - ${user.coins}`}</label>
-            <label>{`Downloads - ${user.assetsDownloaded}`}</label>
-            <label>{`Purchases - ${user.assetsPurchased}`}</label>
-            <label>{`Projects - ${user.coins}`}</label>
-            <label>{`Favorites - ${user.coins}`}</label>
+        <div>
+          <div className="profile-menu-display">
+            <div className="profile-menu-display-section1 detail-tag">
+              <label>User</label>
+              <label>Name</label>
+              <label>Coins</label>
+              <label>Downloads</label>
+              <label>Purchases</label>
+              <label>Projects</label>
+              <label>Favorites</label>
+            </div>
+            <div className="profile-menu-display-section1 ">
+              <label>-</label>
+              <label>-</label>
+              <label>-</label>
+              <label>-</label>
+              <label>-</label>
+              <label>-</label>
+              <label>-</label>
+            </div>
+            <div className="profile-menu-display-section1 detail-info">
+              <label>{user.userName}</label>
+              <label>{user.firstName + " " + user.lastName}</label>
+              <label>{user.coins}</label>
+              <label>{user.assetsDownloaded}</label>
+              <label>{user.assetsPurchased}</label>
+              <label>{user.coins}</label>
+              <label>{user.coins}</label>
+            </div>
           </div>
-          <div style={{ display: "flex" }}>
-            <NavLink to="/user/profile" activeStyle={{ color: "#FFA825" }}>
+          <div className="container">
+            <NavLink
+              to="/user/profile"
+              className="view-link"
+              style={{
+                color: "white",
+                fontFamily: "monospace",
+                fontWeight: "bolder",
+                fontSize: "larger",
+              }}
+              activeStyle={{ color: "#FFA825" }}
+            >
               View Profile
             </NavLink>
-            <NavLink to="/user/account" activeStyle={{ color: "#FFA825" }}>
+          </div>
+          <div className="container">
+            <NavLink
+              to="/user/account"
+              className="view-link"
+              style={{
+                color: "white",
+                fontFamily: "monospace",
+                fontWeight: "bolder",
+                fontSize: "larger",
+              }}
+              activeStyle={{ color: "#FFA825" }}
+            >
               View Account
             </NavLink>
           </div>
@@ -52,10 +95,10 @@ const ProfileMenu = ({ googleId, setToken }) => {
     } else {
       return (
         <div className="profile-menu-display">
-          <div className="profile-menu-display-section1">
+          <div className="profile-menu-display">
             <label>Set Profile Username!</label>
           </div>
-          <div style={{ display: "flex" }}>
+          <div>
             <NavLink to="/user/profile" activeStyle={{ color: "#FFA825" }}>
               View Profile
             </NavLink>

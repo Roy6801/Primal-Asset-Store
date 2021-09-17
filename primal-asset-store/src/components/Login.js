@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import GoogleLogin from "react-google-login";
 import ProfileMenu from "./navigation/ProfileMenu";
 import useToken from "./functions/useToken";
@@ -10,21 +10,33 @@ const Login = () => {
   // window.localStorage.removeItem("primal-UIG-asset-store-G10");
   const { REACT_APP_CLIENT_ID } = process.env;
 
+  const [user, setUser] = useState();
+
+  const userValue = useRef(user);
+
   const { token, setToken } = useToken();
 
   const [showMenu, setShowMenu] = useState(false);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setShowMenu(false);
-  //   }, 10000);
-  // }, []);
+  useEffect(() => {
+    if (userValue.current !== user) {
+      const tokenData = {
+        email1: user.email1,
+        lastName: user.lastName,
+        firstName: user.firstName,
+        googleId: user.googleId,
+        imageURL: user.imageURL,
+      };
+      userValue.current = user;
+      setToken(JSON.stringify(tokenData));
+    }
+  }, [user, setToken]);
 
   // console.log(showMenu);
 
   const onSuccess = (resp) => {
     // get user profile on login and encrypt data
-    const user = {
+    const oauthData = {
       email1: resp.profileObj.email,
       lastName: resp.profileObj.familyName,
       firstName: resp.profileObj.givenName,
@@ -34,16 +46,18 @@ const Login = () => {
 
     // verify or register user and save user data locally
 
-    service
-      .verify(user)
-      .then((resp) => {
-        setToken(JSON.stringify(user));
-      })
-      .catch((err) => {
-        service.auth(user).then((resp) => {
-          setToken(JSON.stringify(user));
+    if (!token) {
+      service
+        .verify(oauthData.googleId)
+        .then((resp) => {
+          setUser(resp.data);
+        })
+        .catch((err) => {
+          service.auth(oauthData).then((resp) => {
+            setUser(resp.data);
+          });
         });
-      });
+    }
   };
 
   const onFailure = (resp) => {
@@ -62,19 +76,21 @@ const Login = () => {
       </div>
     );
   } else {
-    service
-      .verify(JSON.parse(token))
-      .then((resp) => {
-        setToken(token);
-      })
-      .catch((err) => {
-        setToken();
-        window.localStorage.removeItem("primal-UIG-asset-store-G10");
-      });
+    if (!token) {
+      service
+        .verify(JSON.parse(token).googleId)
+        .then((resp) => {
+          setUser(resp.data);
+        })
+        .catch((err) => {
+          setToken();
+          window.localStorage.removeItem("primal-UIG-asset-store-G10");
+        });
+    }
 
     if (showMenu) {
       return (
-        <div style={{width:"30%"}}>
+        <div>
           <div className="menu-section">
             <img src={cart} className="cart" />
             <img
@@ -84,7 +100,10 @@ const Login = () => {
             />
           </div>
           <div className="profile-menu">
-            <ProfileMenu setToken={setToken} user={JSON.parse(token)} />
+            <ProfileMenu
+              setToken={setToken}
+              googleId={JSON.parse(token).googleId}
+            />
           </div>
         </div>
       );

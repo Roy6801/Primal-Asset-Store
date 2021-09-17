@@ -18,7 +18,7 @@ class User(models.Model):
     planId = models.ForeignKey('primal_user.Plans',
                                on_delete=models.CASCADE,
                                default="Free")
-    securityPin = models.CharField(max_length=512, null=True)
+    password = models.CharField(max_length=512, null=True)
     accountCreationDate = models.DateTimeField(auto_now_add=True)
     coins = models.IntegerField(default=2)
     assetsDownloaded = models.IntegerField(default=0)

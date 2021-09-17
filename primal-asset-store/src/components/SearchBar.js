@@ -3,7 +3,7 @@ import searchicon from "./static/Search.svg";
 import "./stylesheets/Home.css";
 
 const SearchBar = () => {
-  const [keyword, setKeyword] = useState(null);
+  const [keyword, setKeyword] = useState("");
 
   return (
     <div>

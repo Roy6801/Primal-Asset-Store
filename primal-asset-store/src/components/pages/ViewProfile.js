@@ -5,7 +5,11 @@ import service from "../functions/service";
 const ViewProfile = () => {
   const [user, setUser] = useState();
 
-  const googleId = JSON.parse(window.localStorage.getItem("primal-UIG-asset-store-G10")).googleId;
+  const googleId = JSON.parse(
+    window.localStorage.getItem("primal-UIG-asset-store-G10")
+  ).googleId;
+
+  console.log(user);
 
   if (!user) {
     service
@@ -19,11 +23,7 @@ const ViewProfile = () => {
 
     return <NotFound />;
   } else {
-    return (
-      <div>
-        <h1>{JSON.stringify(user)}</h1>
-      </div>
-    );
+    return <div></div>;
   }
 };
 

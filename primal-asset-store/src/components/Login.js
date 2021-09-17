@@ -90,7 +90,7 @@ const Login = () => {
 
     if (showMenu) {
       return (
-        <div style={{ width: "30%" }}>
+        <div>
           <div className="menu-section">
             <img src={cart} className="cart" />
             <img

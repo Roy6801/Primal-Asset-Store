@@ -24,7 +24,7 @@
 }
 
 .nav-link:hover {
-  color: #ffa825;
+  color: #b5b3f2;
 }
 
 .sub-nav {
@@ -53,9 +53,8 @@
   color: #ffffff;
 }
 
-.sub-nav-link:hover,
-:active {
-  color: #ffa825;
+.sub-nav-link:hover {
+  color: #b5b3f2;
 }
 
 .cart {

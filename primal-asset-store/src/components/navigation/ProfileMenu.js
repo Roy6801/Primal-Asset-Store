@@ -55,13 +55,7 @@ const ProfileMenu = ({ googleId, setToken }) => {
           <div className="container">
             <NavLink
               to="/user/profile"
-              className="view-link"
-              style={{
-                color: "white",
-                fontFamily: "monospace",
-                fontWeight: "bolder",
-                fontSize: "larger",
-              }}
+              className="link-style"
               activeStyle={{ color: "#FFA825" }}
             >
               View Profile
@@ -70,13 +64,7 @@ const ProfileMenu = ({ googleId, setToken }) => {
           <div className="container">
             <NavLink
               to="/user/account"
-              className="view-link"
-              style={{
-                color: "white",
-                fontFamily: "monospace",
-                fontWeight: "bolder",
-                fontSize: "larger",
-              }}
+              className="link-style"
               activeStyle={{ color: "#FFA825" }}
             >
               View Account
@@ -94,18 +82,25 @@ const ProfileMenu = ({ googleId, setToken }) => {
       );
     } else {
       return (
-        <div className="profile-menu-display">
-          <div className="profile-menu-display">
-            <label>Set Profile Username!</label>
-          </div>
-          <div>
-            <NavLink to="/user/profile" activeStyle={{ color: "#FFA825" }}>
-              View Profile
-            </NavLink>
-            <NavLink to="/user/account" activeStyle={{ color: "#FFA825" }}>
-              View Account
-            </NavLink>
-          </div>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <label className="detail-tag" style={{ color: "#ffa825" }}>
+            Set your Profile Username!
+          </label>
+
+          <NavLink
+            className="link-style"
+            to="/user/profile"
+            activeStyle={{ color: "#FFA825" }}
+          >
+            View Profile
+          </NavLink>
+          <NavLink
+            className="link-style"
+            to="/user/account"
+            activeStyle={{ color: "#FFA825" }}
+          >
+            View Account
+          </NavLink>
           <button
             onClick={(e) => {
               setToken();

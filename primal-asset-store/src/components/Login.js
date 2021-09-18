@@ -32,6 +32,14 @@ const Login = () => {
     }
   }, [user, setToken]);
 
+  useEffect(() => {
+    if (showMenu) {
+      setTimeout(() => {
+        setShowMenu(false);
+      }, 20000);
+    }
+  }, [showMenu, setShowMenu]);
+
   // console.log(showMenu);
 
   const onSuccess = (resp) => {
@@ -100,10 +108,7 @@ const Login = () => {
             />
           </div>
           <div className="profile-menu">
-            <ProfileMenu
-              setToken={setToken}
-              googleId={JSON.parse(token).googleId}
-            />
+            <ProfileMenu setToken={setToken} />
           </div>
         </div>
       );

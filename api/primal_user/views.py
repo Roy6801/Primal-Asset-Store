@@ -33,7 +33,7 @@ class UserAuth(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#userProfile
+#UserProfile
 class UserProfile(APIView):
     def get_object(self, googleId):
         try:
@@ -41,7 +41,7 @@ class UserProfile(APIView):
         except User.DoesNotExist:
             raise Http404
 
-    def get(self, request, googleId, format=None):
+    def get(self, request, googleId):
         user = self.get_object(googleId)
         serializer = UserSerializer(user)
         return Response(serializer.data)
@@ -58,30 +58,3 @@ class UserProfile(APIView):
         user = self.get_object(googleId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-'''@csrf_exempt
-def userAuth(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        print(data)
-        first_name = data['givenName']
-        last_name = data['familyName']
-        email_1 = data['email1']
-        google_id = data['googleId']
-        image_url = data['imageUrl']
-        if User.objects.filter(googleId=google_id).exists():
-            print(User.objects.filter(googleId=google_id))
-            return HttpResponse("1")
-        else:
-            try:
-                user = User(firstName=first_name,
-                            lastName=last_name,
-                            email1=email_1,
-                            imageURL=image_url,
-                            googleId=google_id)
-                user.save()
-                return HttpResponse("1")
-            except Exception as e:
-                print(e)
-                return HttpResponse("0")'''

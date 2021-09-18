@@ -18,6 +18,7 @@
   font-family: monospace;
   font-weight: bolder;
   font-size: larger;
+  text-align: center;
 }
 
 .link-style:hover {

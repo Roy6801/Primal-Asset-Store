@@ -14,6 +14,9 @@ const service = {
       ...user,
     });
   },
+  deleteAccount: (googleId) => {
+    return axios.delete(REACT_APP_API_BASE_URL + "user/profile/" + googleId);
+  },
 };
 
 export default service;

@@ -1,11 +1,12 @@
 
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from .views  import  UserAuth, UserProfile
+from .views  import  userAuth,UserProfile,USerName
 
 #urlpatterns = [path('auth/', views.userAuth)]
 
 urlpatterns = [
-    path('auth/', UserAuth.as_view()),
+    path('auth/', userAuth.as_view()),
     path('profile/<str:googleId>', UserProfile.as_view()),
+    path('profile/<str:userName>',USerName.as_view())
 ]

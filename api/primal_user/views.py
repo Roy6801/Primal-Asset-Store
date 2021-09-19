@@ -25,7 +25,7 @@ def browse(request):
     return HttpResponse("User / I'm Browsing!!")
 
 #userAuth
-class userAuth(APIView):
+class UserAuth(APIView):
     
     def get(self, request, format=None):
         user = User.objects.all()
@@ -71,7 +71,7 @@ class UserProfile(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 #for checking if the Username Exits or not 
-class USerName(APIView):
+class UserName(APIView):
     
     def get_object(self, userName):
         

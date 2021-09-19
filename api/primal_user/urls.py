@@ -1,7 +1,7 @@
 
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from .views  import  userAuth,UserProfile,USerName
+from .views  import  UserAuth,UserProfile,UserName
 
 #urlpatterns = [path('auth/', views.userAuth)]
 

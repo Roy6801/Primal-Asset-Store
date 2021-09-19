@@ -1,4 +1,8 @@
 from django.urls import path
-from . import views
+from .views import *
 
-urlpatterns = [path('', views.discover), path('browse/', views.browse)]
+urlpatterns = [
+    path('asset/',UiAsset.as_view()),
+    path('asset/<str:assetId>',UiAssetDetails.as_view()),
+    path('browse/', browse),
+     ]

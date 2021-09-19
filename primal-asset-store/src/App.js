@@ -7,6 +7,7 @@ import About from "./components/pages/About";
 import FAQ from "./components/pages/Faq";
 import Browse from "./components/pages/Browse";
 import ViewProfile from "./components/pages/ViewProfile";
+import ViewAccount from "./components/pages/ViewAccount";
 import NotFound from "./components/NotFound";
 import Preview from "./components/elements/Preview";
 import AssetsList from "./components/elements/AssetsList";
@@ -43,6 +44,7 @@ const App = () => {
               render={(props) => <Browse assetType="game" {...props} />}
             />
             <Route path="/user/profile" exact component={ViewProfile} />
+            <Route path="/user/account" exact component={ViewAccount} />
             <Route path="/about" component={About} />
             <Route path="/faq" component={FAQ} />
             <Route path="/preview" component={Preview} />

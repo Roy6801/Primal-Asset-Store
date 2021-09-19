@@ -6,7 +6,7 @@ from .views  import  UserAuth,UserProfile,UserName
 #urlpatterns = [path('auth/', views.userAuth)]
 
 urlpatterns = [
-    path('auth/', userAuth.as_view()),
+    path('auth/', UserAuth.as_view()),
     path('profile/<str:googleId>', UserProfile.as_view()),
-    path('profile/<str:userName>',USerName.as_view())
+    path('profile/<str:userName>',UserName.as_view())
 ]

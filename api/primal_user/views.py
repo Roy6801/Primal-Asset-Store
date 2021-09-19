@@ -39,8 +39,7 @@ class UserAuth(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
 
-   
-#userProfile
+#UserProfile
 class UserProfile(APIView):
     
     def get_object(self, googleId):
@@ -49,8 +48,7 @@ class UserProfile(APIView):
         except User.DoesNotExist:
             raise Http404
 
-    #To get the user details
-    def get(self, request,googleId, format=None):
+    def get(self, request, googleId):
         user = self.get_object(googleId)
         serializer = UserSerializer(user)
         return Response(serializer.data)

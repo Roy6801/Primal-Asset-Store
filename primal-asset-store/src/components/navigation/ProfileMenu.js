@@ -1,12 +1,20 @@
 import { useState } from "react";
 import service from "../functions/service";
 import { NavLink } from "react-router-dom";
-import PropTypes from "prop-types";
 import "../stylesheets/Home.css";
 import "../stylesheets/ProfileMenu.css";
 
-const ProfileMenu = ({ googleId, setToken }) => {
+const ProfileMenu = ({ setToken }) => {
   const [user, setUser] = useState();
+
+  const googleId = JSON.parse(
+    window.localStorage.getItem("primal-UIG-asset-store-G10")
+  ).googleId;
+
+  if (!googleId) {
+    setToken();
+    window.localStorage.removeItem("primal-UIG-asset-store-G10");
+  }
 
   if (!user) {
     service
@@ -15,7 +23,8 @@ const ProfileMenu = ({ googleId, setToken }) => {
         setUser(resp.data);
       })
       .catch((err) => {
-        console.log(err);
+        setToken();
+        window.localStorage.removeItem("primal-UIG-asset-store-G10");
       });
 
     return null;
@@ -113,11 +122,6 @@ const ProfileMenu = ({ googleId, setToken }) => {
       );
     }
   }
-};
-
-ProfileMenu.propTypes = {
-  googleId: PropTypes.string.isRequired,
-  setToken: PropTypes.func.isRequired,
 };
 
 export default ProfileMenu;

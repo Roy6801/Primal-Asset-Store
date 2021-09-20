@@ -1,0 +1,11 @@
+.confirm-popup {
+  display: flex;
+  flex-direction: column;
+  background-color: bisque;
+  font-family: monospace;
+}
+
+.prompt {
+  font-weight: 900;
+  font-size: 1.2em;
+}

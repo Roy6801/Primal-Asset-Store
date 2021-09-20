@@ -1,3 +1,5 @@
+from django.http import response
+from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
@@ -23,9 +25,14 @@ def browse(request):
     return HttpResponse("User / I'm Browsing!!")
 
 
-#UserAuth
+#userAuth
 class UserAuth(APIView):
-    def post(self, request):
+    def get(self, request, format=None):
+        user = User.objects.all()
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -33,7 +40,7 @@ class UserAuth(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#userProfile
+#UserProfile
 class UserProfile(APIView):
     def get_object(self, googleId):
         try:
@@ -41,11 +48,12 @@ class UserProfile(APIView):
         except User.DoesNotExist:
             raise Http404
 
-    def get(self, request, googleId, format=None):
+    def get(self, request, googleId):
         user = self.get_object(googleId)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
+    #for updatind user Details
     def put(self, request, googleId):
         user = self.get_object(googleId)
         serializer = UserSerializer(user, data=request.data)
@@ -54,34 +62,31 @@ class UserProfile(APIView):
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, googleId):
+    #for deleting user account
+    def delete(self, request, googleId, forma=None):
         user = self.get_object(googleId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-'''@csrf_exempt
-def userAuth(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        print(data)
-        first_name = data['givenName']
-        last_name = data['familyName']
-        email_1 = data['email1']
-        google_id = data['googleId']
-        image_url = data['imageUrl']
-        if User.objects.filter(googleId=google_id).exists():
-            print(User.objects.filter(googleId=google_id))
-            return HttpResponse("1")
-        else:
-            try:
-                user = User(firstName=first_name,
-                            lastName=last_name,
-                            email1=email_1,
-                            imageURL=image_url,
-                            googleId=google_id)
-                user.save()
-                return HttpResponse("1")
-            except Exception as e:
-                print(e)
-                return HttpResponse("0")'''
+#for checking if the Username Exits or not
+class UserName(APIView):
+    def get(self, request, userName):
+        try:
+            User.objects.get(userName=userName)
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_200_OK)
+
+    # def put(self, request, userName):
+    #     try:
+    #         user = User.objects.get(userName=userName)
+    #         serializer = UserSerializer(user)
+    #         return Response(status=status.HTTP_403_FORBIDDEN)
+    #     except User.DoesNotExist:
+    #         user = User.objects.get(userName=userName)
+    #         serializer = UserSerializer(user)
+    #         if serializer.is_valid():
+    #             serializer.save()
+    #             return Response(status=status.HTTP_200_OK)
+    #         return Response(status=status.HTTP_400_BAD_REQUEST)

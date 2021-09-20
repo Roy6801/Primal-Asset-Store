@@ -25,9 +25,9 @@ def discover(request):
 def browse(request):
     return HttpResponse("User / I'm Browsing!!")
 
+
 #userAuth
 class UserAuth(APIView):
-    
     def get(self, request, format=None):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
@@ -38,11 +38,11 @@ class UserAuth(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)     
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 #UserProfile
 class UserProfile(APIView):
-    
     def get_object(self, googleId):
         try:
             return User.objects.get(googleId=googleId)
@@ -53,9 +53,9 @@ class UserProfile(APIView):
         user = self.get_object(googleId)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-        
+
     #for updatind user Details
-    def put(self,request,googleId):
+    def put(self, request, googleId):
         user = self.get_object(googleId)
         serializer = UserSerializer(user, data=request.data)
         if serializer.is_valid():
@@ -64,66 +64,30 @@ class UserProfile(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     #for deleting user account
-    def delete(self,request,googleId,forma = None):
+    def delete(self, request, googleId, forma=None):
         user = self.get_object(googleId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-    
-#for checking if the Username Exits or not 
+
+
+#for checking if the Username Exits or not
 class UserName(APIView):
-    
-    '''def get_object(self, userName):
-        
+    def get(self, request, userName):
         try:
-            return User.objects.get(userName = userName)
+            User.objects.get(userName=userName)
+            return Response(status=status.HTTP_403_FORBIDDEN)
         except User.DoesNotExist:
-            raise Http404'''
+            return Response(status=status.HTTP_200_OK)
 
-    def get(self, request,userName, format=None):
-        try:
-            user = User.objects.get(userName = userName)
-            serializer = UserSerializer(user)        
-            return Response(serializer.data)
-        except  User.DoesNotExist:
-           raise Http404
-
-    def put (self, request, userName):
-        try:
-            user = User.objects.get(userName = userName)
-            serializer = UserSerializer(user)        
-            return Response(status= status.HTTP_403_FORBIDDEN)
-        except  User.DoesNotExist:
-            user = User.objects.get(userName = userName)
-            serializer = UserSerializer(user)
-            if serializer.is_valid():    
-                serializer.save()
-                return Response(status= status.HTTP_200_OK)
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-
-'''@csrf_exempt
-def userAuth(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        print(data)
-        first_name = data['givenName']
-        last_name = data['familyName']
-        email_1 = data['email1']
-        google_id = data['googleId']
-        image_url = data['imageUrl']
-        if User.objects.filter(googleId=google_id).exists():
-            print(User.objects.filter(googleId=google_id))
-            return HttpResponse("1")
-        else:
-            try:
-                user = User(firstName=first_name,
-                            lastName=last_name,
-                            email1=email_1,
-                            imageURL=image_url,
-                            googleId=google_id)
-                user.save()
-                return HttpResponse("1")
-            except Exception as e:
-                print(e)
-                return HttpResponse("0")'''
+    # def put(self, request, userName):
+    #     try:
+    #         user = User.objects.get(userName=userName)
+    #         serializer = UserSerializer(user)
+    #         return Response(status=status.HTTP_403_FORBIDDEN)
+    #     except User.DoesNotExist:
+    #         user = User.objects.get(userName=userName)
+    #         serializer = UserSerializer(user)
+    #         if serializer.is_valid():
+    #             serializer.save()
+    #             return Response(status=status.HTTP_200_OK)
+    #         return Response(status=status.HTTP_400_BAD_REQUEST)

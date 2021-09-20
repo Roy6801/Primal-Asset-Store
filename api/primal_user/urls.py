@@ -8,5 +8,5 @@ from .views  import  UserAuth,UserProfile,UserName
 urlpatterns = [
     path('auth/', UserAuth.as_view()),
     path('profile/<str:googleId>', UserProfile.as_view()),
-    path('profile/edit/<str:userName>',UserName.as_view())
+    path('profile/exist/<str:userName>',UserName.as_view())
 ]

@@ -1,3 +1,4 @@
+from typing import final
 from django.http import response
 from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
@@ -71,28 +72,33 @@ class UserProfile(APIView):
 #for checking if the Username Exits or not 
 class UserName(APIView):
     
-    def get_object(self, userName):
+    '''def get_object(self, userName):
         
         try:
             return User.objects.get(userName = userName)
         except User.DoesNotExist:
-            raise Http404
+            raise Http404'''
 
     def get(self, request,userName, format=None):
-        user = self.get_object(userName)
-        serializer = UserSerializer(user)        
-        return Response(serializer.data)
-        
+        try:
+            user = User.objects.get(userName = userName)
+            serializer = UserSerializer(user)        
+            return Response(serializer.data)
+        except  User.DoesNotExist:
+           raise Http404
+
     def put (self, request, userName):
-        user = self.get_object(userName)
-        serializer = UserSerializer(user , data =request.data)
-        if User.objects.filter(userName=userName).exists():
+        try:
+            user = User.objects.get(userName = userName)
+            serializer = UserSerializer(user)        
             return Response(status= status.HTTP_403_FORBIDDEN)
-        else:
+        except  User.DoesNotExist:
+            user = User.objects.get(userName = userName)
+            serializer = UserSerializer(user)
             if serializer.is_valid():    
                 serializer.save()
                 return Response(status= status.HTTP_200_OK)
-            return Response(status = status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 

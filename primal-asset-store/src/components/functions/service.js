@@ -17,6 +17,9 @@ const service = {
   deleteAccount: (googleId) => {
     return axios.delete(REACT_APP_API_BASE_URL + "user/profile/" + googleId);
   },
+  usernameExists: (userName) => {
+    return axios.get(REACT_APP_API_BASE_URL + "user/profile/exist/" + userName);
+  },
 };
 
 export default service;

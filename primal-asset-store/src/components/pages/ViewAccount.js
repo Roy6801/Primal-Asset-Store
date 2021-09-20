@@ -10,9 +10,14 @@ const ViewAccount = () => {
   const [del, setDel] = useState(false);
   const userData = useRef(user);
 
-  const googleId = JSON.parse(
-    window.localStorage.getItem("primal-UIG-asset-store-G10")
-  ).googleId;
+  var googleId;
+  try {
+    googleId = JSON.parse(
+      window.localStorage.getItem("primal-UIG-asset-store-G10")
+    ).googleId;
+  } catch (e) {
+    return <NotFound />;
+  }
 
   const SEButton = () => {
     const saveNew = (e) => {
@@ -27,17 +32,20 @@ const ViewAccount = () => {
     };
     if (edit) {
       return (
-        <button
-          type="submit"
-          onClick={(e) => {
-            if (userData.current !== user) {
-              saveNew(e);
-            }
-            setEdit(false);
-          }}
-        >
-          Save
-        </button>
+        <div>
+          <button
+            type="submit"
+            onClick={(e) => {
+              if (userData.current !== user) {
+                saveNew(e);
+              }
+              setEdit(false);
+            }}
+          >
+            Save
+          </button>
+          <button onClick={(e) => window.location.reload()}>Cancel</button>
+        </div>
       );
     } else {
       return (
@@ -55,11 +63,7 @@ const ViewAccount = () => {
 
   if (del) {
     return (
-      <Deletion
-        confirmKey={user.email1}
-        type="account"
-        setDelete={setDel}
-      />
+      <Deletion confirmKey={user.email1} type="account" setDelete={setDel} />
     );
   }
 

@@ -6,11 +6,43 @@ import "../stylesheets/ViewProfile.css";
 const ViewProfile = () => {
   const [user, setUser] = useState();
   const [edit, setEdit] = useState(false);
+  const [reject, setReject] = useState(false);
   const userData = useRef(user);
+  const [userName, setUserName] = useState();
 
-  const googleId = JSON.parse(
-    window.localStorage.getItem("primal-UIG-asset-store-G10")
-  ).googleId;
+  var googleId;
+  try {
+    googleId = JSON.parse(
+      window.localStorage.getItem("primal-UIG-asset-store-G10")
+    ).googleId;
+  } catch (e) {
+    return <NotFound />;
+  }
+
+  const PromptExists = () => {
+    if (reject) {
+      return <label>Username Exists</label>;
+    }
+    return null;
+  };
+
+  const checkUsername = (e) => {
+    const val = e.target.value;
+    service
+      .usernameExists(val)
+      .then((resp) => {
+        console.log(resp);
+        if (resp.status === 200) {
+          setReject(false);
+        }
+      })
+      .catch((err) => {
+        console.log(userName);
+        if (userName !== val) {
+          setReject(true);
+        }
+      });
+  };
 
   const SEButton = () => {
     const saveNew = (e) => {
@@ -25,17 +57,20 @@ const ViewProfile = () => {
     };
     if (edit) {
       return (
-        <button
-          type="submit"
-          onClick={(e) => {
-            if (userData.current !== user) {
-              saveNew(e);
-            }
-            setEdit(false);
-          }}
-        >
-          Save
-        </button>
+        <div>
+          <button
+            disabled={reject}
+            onClick={(e) => {
+              if (userData.current !== user) {
+                saveNew(e);
+              }
+              setEdit(false);
+            }}
+          >
+            Save
+          </button>
+          <button onClick={(e) => window.location.reload()}>Cancel</button>
+        </div>
       );
     } else {
       return (
@@ -55,6 +90,7 @@ const ViewProfile = () => {
       .verify(googleId)
       .then((resp) => {
         userData.current = resp.data;
+        setUserName(resp.data.userName);
         setUser(resp.data);
       })
       .catch((err) => {
@@ -76,10 +112,12 @@ const ViewProfile = () => {
             placeholder="Set Username"
             disabled={!edit}
             onChange={(e) => {
+              checkUsername(e);
               setUser({ ...user, userName: e.target.value });
             }}
           />
         </div>
+        <PromptExists />
         <div>
           <label>First Name</label>
           <input

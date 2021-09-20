@@ -12,8 +12,8 @@ const ProfileMenu = ({ setToken }) => {
   ).googleId;
 
   if (!googleId) {
-    window.localStorage.removeItem("primal-UIG-asset-store-G10");
     setToken();
+    window.localStorage.removeItem("primal-UIG-asset-store-G10");
   }
 
   if (!user) {
@@ -23,7 +23,8 @@ const ProfileMenu = ({ setToken }) => {
         setUser(resp.data);
       })
       .catch((err) => {
-        console.log(err);
+        setToken();
+        window.localStorage.removeItem("primal-UIG-asset-store-G10");
       });
 
     return null;

@@ -24,9 +24,6 @@ class User(models.Model):
     assetsDownloaded = models.IntegerField(default=0)
     assetsPurchased = models.IntegerField(default=0)
 
-    # def __str__(self):
-    #     return self.userName
-
 
 class Plans(models.Model):
     planId = models.CharField(max_length=10, primary_key=True, default="Free")

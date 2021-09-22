@@ -4,8 +4,8 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Plans)
 admin.site.register(Tags)
+admin.site.register(RelatedTags)
 admin.site.register(Asset)
 admin.site.register(Review)
 admin.site.register(SearchHistory)
 admin.site.register(Order)
-

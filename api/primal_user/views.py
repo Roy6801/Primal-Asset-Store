@@ -28,12 +28,12 @@ def browse(request):
 
 #userAuth
 class UserAuth(APIView):
-    def get(self, request, format=None):
+    def get(self, request):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -64,7 +64,7 @@ class UserProfile(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     #for deleting user account
-    def delete(self, request, googleId, forma=None):
+    def delete(self, request, googleId):
         user = self.get_object(googleId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -102,7 +102,7 @@ class UserAsset(APIView):
         except Asset.DoesNotExist:
             raise Http404
 
-#Tosee the Items in the cart
+#To see the Items in the cart
 class UserCart(APIView):
     def get(self,request,userId):
         try:

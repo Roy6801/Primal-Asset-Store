@@ -1,4 +1,4 @@
-const userNameGen = (length) => {
+const idGen = (length) => {
   var result = "";
   var characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -9,4 +9,4 @@ const userNameGen = (length) => {
   return result;
 };
 
-export default userNameGen;
+export default idGen;

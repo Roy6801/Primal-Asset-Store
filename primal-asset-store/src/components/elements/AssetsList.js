@@ -1,5 +1,3 @@
-import Preview from "./Preview";
-
 const AssetsList = () => {
   return (
     <div>

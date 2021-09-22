@@ -79,6 +79,15 @@ const ProfileMenu = ({ setToken }) => {
               View Account
             </NavLink>
           </div>
+          <div className="container">
+            <NavLink
+              to="/user/publish"
+              className="link-style"
+              activeStyle={{ color: "#FFA825" }}
+            >
+              Publish Asset
+            </NavLink>
+          </div>
           <button
             onClick={(e) => {
               setToken();

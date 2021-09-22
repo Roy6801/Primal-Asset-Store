@@ -1,3 +1,4 @@
+from typing import final
 from django.http import response
 from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
 from django.shortcuts import redirect, render
@@ -9,13 +10,13 @@ import json
 from rest_framework import generics, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import UserSerializer
-from .models import User
+from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, UserSerializer
+from .models import User, Asset,Order
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
-# Create your views here.
 
+# Create your views here.
 
 def discover(request):
     return HttpResponse("User / I Discovered!!")
@@ -90,3 +91,33 @@ class UserName(APIView):
     #             serializer.save()
     #             return Response(status=status.HTTP_200_OK)
     #         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+#To get User Asset usingdevUserId(googleId)
+class UserAsset(APIView):
+    def get(self,request,devUserId):
+        try:
+            user = Asset.objects.filter(devUserId=devUserId)
+            serializer = AssetSerializer(user, many = True)
+            return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404
+
+#Tosee the Items in the cart
+class UserCart(APIView):
+    def get(self,request,userId):
+        try:
+            user = Order.objects.filter(userId=userId)
+            serializer = OrderSerializer(user, many = True)
+            return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404
+
+#To view the history of User
+class UserHistory(APIView):
+    def get(self,request,userId):
+        try:
+            user = SearchHistory.objects.filter(userId=userId)
+            serializer = SearchHistorySerializer(user, many = True)
+            return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404

@@ -43,8 +43,8 @@ class SearchHistory(models.Model):
 
 class Asset(models.Model):
     assetId = models.CharField(max_length=20, primary_key=True)
-    devUserId = models.ForeignKey('primal_user.User', on_delete=models.CASCADE)
-    keywordId = models.ForeignKey('primal_user.Tags', on_delete=models.CASCADE)
+    devUserId = models.ForeignKey(User, on_delete=models.CASCADE)
+    keywordId = models.ForeignKey(Tags, on_delete=models.CASCADE)
     assetName = models.CharField(max_length=50, null=False)
     description = models.TextField(blank=True)
     features = models.TextField(blank=True)

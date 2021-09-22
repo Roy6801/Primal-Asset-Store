@@ -1,8 +1,9 @@
+from django.http.response import HttpResponseNotFound
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from primal_user.models import Asset
-from primal_user.serializer import AssetSerializer
+from primal_user.models import Asset,Review
+from primal_user.serializer import AssetSerializer,ReviewSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -60,3 +61,28 @@ class UiAssetDetails(APIView):
         user = self.get_object(assetId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+#To get Review of particular Asset
+class AssetReview(APIView):
+    def get(self,request,assetId):
+        try:
+            review = Review.objects.filter(assetId = assetId)
+            serializer = ReviewSerializer(review,many = True)
+            return Response(serializer.data)
+        except Review.DoesNotExist:
+            raise Http404
+
+#To post a review on Asset
+class ReviewPost(APIView):
+    #used just to check if its working
+    def get(self, request, format=None):
+        user = Review.objects.all()
+        serializer = ReviewSerializer(user, many=True)
+        return Response(serializer.data)
+    #For User To post the review for asset
+    def post(self,request):
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

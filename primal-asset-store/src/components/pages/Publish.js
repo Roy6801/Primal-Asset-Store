@@ -2,12 +2,16 @@ import { useState } from "react";
 import NotFound from "../NotFound";
 import AssetsList from "../elements/AssetsList";
 import service from "../functions/service";
-import idGen from "../functions/idGen";
 import SetPay from "./SetPay";
 
 const Publish = () => {
   const [devMode, setDevMode] = useState(0);
-  const [assetInfo, setAssetInfo] = useState({});
+  const [assetInfo, setAssetInfo] = useState();
+  const [file, setFile] = useState();
+  const [uploaded, setUploaded] = useState(false);
+  const [created, setCreated] = useState(false);
+
+  const uploadLimit = 100;
 
   var googleId;
   try {
@@ -18,12 +22,26 @@ const Publish = () => {
     return <NotFound />;
   }
 
+  const handleUpload = (e) => {
+    console.log(file);
+    service
+      .assetUpload(assetInfo, file)
+      .then((resp) => {
+        console.log(resp);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const publishAsset = (e) => {
     console.log(assetInfo);
     service
       .assetPublish(assetInfo)
       .then((resp) => {
         console.log(resp);
+        setAssetInfo({ ...assetInfo, assetId: resp.data.assetId });
+        setCreated(true);
       })
       .catch((err) => {
         console.log(err);
@@ -69,12 +87,6 @@ const Publish = () => {
           <label>Game Asset</label>
         </div>
         <input
-          placeholder="Enter Asset ID"
-          onChange={(e) => {
-            setAssetInfo({ ...assetInfo, assetId: e.target.value });
-          }}
-        />
-        <input
           placeholder="Enter Asset Name"
           required
           onChange={(e) => {
@@ -100,6 +112,7 @@ const Publish = () => {
             setAssetInfo({ ...assetInfo, price: e.target.value });
           }}
         />
+        <input placeholder="Enter Currency" />
         <input
           placeholder="Enter Size"
           onChange={(e) => {
@@ -112,15 +125,35 @@ const Publish = () => {
             setAssetInfo({ ...assetInfo, version: e.target.value });
           }}
         />
-        <input placeholder="Enter URL" />
-        <button onClick={(e) => {}}>Upload</button>
+        <input
+          type="file"
+          onChange={(e) => {
+            try {
+              if (e.target.files[0].size < 1024 * 1024 * uploadLimit) {
+                setFile(e.target.files[0]);
+              } else {
+                alert("File Size too Big");
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        />
+        <button
+          disabled={!created}
+          onClick={(e) => {
+            handleUpload(e);
+          }}
+        >
+          Upload
+        </button>
         <button
           onClick={(e) => {
             setAssetInfo({ ...assetInfo, devUserId: googleId });
             publishAsset(e);
           }}
         >
-          Publish Asset
+          Save
         </button>
       </div>
     );

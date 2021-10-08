@@ -33,30 +33,41 @@ const ViewAccount = () => {
     if (edit) {
       return (
         <div>
-          <button
-            type="submit"
-            onClick={(e) => {
-              if (userData.current !== user) {
-                saveNew(e);
-              }
-              setEdit(false);
-            }}
-          >
-            Save
-          </button>
-          <button onClick={(e) => window.location.reload()}>Cancel</button>
+          <div className="buttonsave">
+            <button
+              id="btnid"
+              type="submit"
+              onClick={(e) => {
+                if (userData.current !== user) {
+                  saveNew(e);
+                }
+                setEdit(false);
+              }}
+            >
+              Save
+            </button>
+          </div>
+          <div className="buttoncancel">
+            <button id="btnid" onClick={(e) => window.location.reload()}>
+              Cancel
+            </button>
+          </div>
         </div>
       );
     } else {
       return (
-        <button
-          type="submit"
-          onClick={(e) => {
-            setEdit(true);
-          }}
-        >
-          Edit
-        </button>
+        <div className="buttonsave">
+          <button
+            id="btnid"
+            className="center"
+            type="submit"
+            onClick={(e) => {
+              setEdit(true);
+            }}
+          >
+            Edit
+          </button>
+        </div>
       );
     }
   };
@@ -81,74 +92,122 @@ const ViewAccount = () => {
     return <NotFound />;
   } else {
     return (
-      <div style={{ backgroundColor: "yellow" }}>
-        <div>
-          <label>Email Id 1</label>
-          <label>{user.email1}</label>
-        </div>
-        <div>
-          <label>Email Id 2</label>
-          <input
-            value={user.email2 ? user.email2 : ""}
-            placeholder="Edit Email Id 2"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, email2: e.target.value });
-            }}
-          />
-        </div>
-        <div>
-          <label>Phone No.</label>
-          <input
-            value={user.phoneNumber ? user.phoneNumber : ""}
-            placeholder="Edit Phone Number"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, phoneNumber: e.target.value });
-            }}
-          />
-        </div>
+      <div className="profilebackground ">
+        <div className=" components-acc">
+          <div className="  center">
+            <div className="label">
+              <label>Email Id 1</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.email1}</label>
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Email Id 2</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.email2 ? user.email2 : ""}
+                placeholder="Edit Email Id 2"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, email2: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Phone No.</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.phoneNumber ? user.phoneNumber : ""}
+                placeholder="Edit Phone Number"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, phoneNumber: e.target.value });
+                }}
+              />
+            </div>
+          </div>
 
-        <div>
-          <label>Password</label>
-          <input
-            value={user.password ? user.password : ""}
-            placeholder="Set Password"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, password: e.target.value });
-            }}
-          />
+          <div className="  center">
+            <div className="label">
+              <label>Password</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.password ? user.password : ""}
+                placeholder="Set Password"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, password: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Coins</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.coins}</label>
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Account Created On</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.accountCreationDate}</label>
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Assets Downloaded</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.assetsDownloaded}</label>
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Assets Purchased</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.assetsPurchased}</label>
+            </div>
+          </div>
+          <div className="  center">
+            <div className="label">
+              <label>Plan</label>
+            </div>
+            <div className="input-field">
+              <label className="input-box">{user.planId}</label>
+            </div>
+          </div>
+          <div>
+            <div style={{ display: "inline-block" }}>
+              <SEButton />
+            </div>
+            <div className="buttondel">
+              <button
+                id="btnid"
+                type="button"
+                onClick={(e) => {
+                  setDel(true);
+                }}
+              >
+                Delete
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <label>Coins</label>
-          <label>{user.coins}</label>
-        </div>
-        <div>
-          <label>Account Created On</label>
-          <label>{user.accountCreationDate}</label>
-        </div>
-        <div>
-          <label>Assets Downloaded</label>
-          <label>{user.assetsDownloaded}</label>
-        </div>
-        <div>
-          <label>Assets Purchased</label>
-          <label>{user.assetsPurchased}</label>
-        </div>
-        <div>
-          <label>Plan</label>
-          <label>{user.planId}</label>
-        </div>
-        <SEButton />
-        <button
-          type="button"
-          onClick={(e) => {
-            setDel(true);
-          }}
-        >
-          Delete
-        </button>
       </div>
     );
   }

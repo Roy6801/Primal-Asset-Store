@@ -1,0 +1,141 @@
+.profilebackground {
+  background-color: red;
+  justify-content: center;
+  display: flex;
+  width: 80%;
+  height: fit-content;
+}
+
+.components {
+  flex-direction: column;
+  background-color: teal;
+  margin: 7.2vh;
+  padding: 4vh;
+  border: 3px black solid;
+  border-radius: 3vw 3vw 3vw 3vw;
+  box-shadow: 2px 2px 2px 2px black;
+  height: fit-content;
+}
+.components-acc {
+  flex-direction: column;
+  background-color: teal;
+  margin: 2vw;
+  padding: 4.5vh 5vh 0vh 0vh;
+  border: 3px black solid;
+  border-radius: 3vw 3vw 3vw 3vw;
+  box-shadow: 2px 2px 0px 0px black;
+  height: fit-content;
+}
+
+/* inline css*/
+.center {
+  margin: 1vh 5vh 0 0;
+  /* padding: 0.5vh 1vh 1vh 0vh; */
+  font-family: Helvetica, sans-serif;
+  color: yellow;
+}
+
+.buttonsave {
+  margin: 0 1em 0 1em;
+  display: inline-block;
+  margin-left: 4em;
+  border-radius: 1em 1em 1em 1em;
+}
+
+.buttoncancel {
+  display: inline-block;
+  /* margin-left: 0em; */
+}
+
+.buttonedit {
+  /* margin: 0 1em 0 1em; */
+  display: inline-block;
+  margin-left: 6em;
+  border-radius: 4px;
+}
+
+.buttondel {
+  display: inline-block;
+  /* margin-left: 2em; */
+}
+
+.input-box {
+  border-radius: 1em 1em 1em 1em;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+}
+
+.label {
+  display: inline-block;
+  text-align: right;
+  width: 40%;
+  padding: 0 0 5px 0;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.input-field {
+  display: inline-block;
+  text-align: left;
+  width: 48%;
+  vertical-align: middle;
+}
+#btnid {
+  background-color: #1a8cff;
+  border-radius: 1em;
+  color: white;
+  font-size: 1em;
+  height: 3em;
+  width: 5em;
+  margin: 1em;
+  border: 0rem solid;
+}
+
+/* #edit {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+
+#save {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+
+#cancel {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+#del {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+} */
+
+.margin-box {
+  margin: 2vh 2vh 2vh 2vh;
+}

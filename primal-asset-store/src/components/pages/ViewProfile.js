@@ -58,29 +58,39 @@ const ViewProfile = () => {
     if (edit) {
       return (
         <div>
-          <button
-            disabled={reject}
-            onClick={(e) => {
-              if (userData.current !== user) {
-                saveNew(e);
-              }
-              setEdit(false);
-            }}
-          >
-            Save
-          </button>
-          <button onClick={(e) => window.location.reload()}>Cancel</button>
+          <div className="buttonsave">
+            <button
+              id="btnid"
+              disabled={reject}
+              onClick={(e) => {
+                if (userData.current !== user) {
+                  saveNew(e);
+                }
+                setEdit(false);
+              }}
+            >
+              Save
+            </button>
+          </div>
+          <div className="buttoncancel">
+            <button id="btnid" onClick={(e) => window.location.reload()}>
+              Cancel
+            </button>
+          </div>
         </div>
       );
     } else {
       return (
-        <button
-          onClick={(e) => {
-            setEdit(true);
-          }}
-        >
-          Edit
-        </button>
+        <div className="buttonedit">
+          <button
+            id="btnid"
+            onClick={(e) => {
+              setEdit(true);
+            }}
+          >
+            Edit
+          </button>
+        </div>
       );
     }
   };
@@ -100,59 +110,85 @@ const ViewProfile = () => {
     return <NotFound />;
   } else {
     return (
-      <div style={{ backgroundColor: "yellow" }}>
-        <div>
-          <label>Avatar</label>
-          <img src={user.imageURL} />
-        </div>
-        <div>
-          <label>Username</label>
-          <input
-            value={user.userName ? user.userName : ""}
-            placeholder="Set Username"
-            disabled={!edit}
-            onChange={(e) => {
-              checkUsername(e);
-              setUser({ ...user, userName: e.target.value });
-            }}
-          />
-        </div>
-        <PromptExists />
-        <div>
-          <label>First Name</label>
-          <input
-            value={user.firstName}
-            placeholder="Edit First Name"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, firstName: e.target.value });
-            }}
-          />
-        </div>
-        <div>
-          <label>Last Name</label>
-          <input
-            value={user.lastName}
-            placeholder="Edit Last Name"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, lastName: e.target.value });
-            }}
-          />
-        </div>
+      <div className="profilebackground">
+        <div className="components">
+          <div className="center">
+            <div className="label">
+              <label>Avatar : </label>
+            </div>
+            <div className="input-field">
+              <img className="input-box" src={user.imageURL} />
+            </div>
+          </div>
+          <div className=" center">
+            <div className="label">
+              <label>Username :</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.userName ? user.userName : ""}
+                placeholder="Set Username"
+                disabled={!edit}
+                onChange={(e) => {
+                  checkUsername(e);
+                  setUser({ ...user, userName: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <PromptExists />
+          <div className=" center">
+            <div className="label">
+              <label>First Name :</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.firstName}
+                placeholder="Edit First Name"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, firstName: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <div className=" center">
+            <div className="label">
+              <label>Last Name :</label>
+            </div>
+            <div className="input-field">
+              <input
+                className="input-box"
+                value={user.lastName}
+                placeholder="Edit Last Name"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, lastName: e.target.value });
+                }}
+              />
+            </div>
+          </div>
 
-        <div>
-          <label>Bio</label>
-          <input
-            value={user.bio ? user.bio : ""}
-            placeholder="Edit Your Bio"
-            disabled={!edit}
-            onChange={(e) => {
-              setUser({ ...user, bio: e.target.value });
-            }}
-          />
+          <div className=" center">
+            <div className="label">
+              <label>Bio :</label>
+            </div>
+            <div className="input-field">
+              <textarea
+                className="input-box"
+                value={user.bio ? user.bio : ""}
+                placeholder="Edit Your Bio"
+                disabled={!edit}
+                onChange={(e) => {
+                  setUser({ ...user, bio: e.target.value });
+                }}
+              />
+            </div>
+          </div>
+          <SEButton />
         </div>
-        <SEButton />
       </div>
     );
   }

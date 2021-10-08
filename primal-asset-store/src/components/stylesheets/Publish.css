@@ -1,0 +1,41 @@
+.main-div {
+  background-color: crimson;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.heading {
+  display: inline-block;
+  margin: 2px;
+}
+
+.btnuse {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+
+.asset-input {
+  border-radius: 4px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  width: 25vw;
+  text-align: center;
+}
+
+.check-box {
+  display: inline-block;
+  margin: 3vh 0 1vh 0;
+  padding: 0 2vh 0 2vh;
+  font-family: monospace;
+  font-size: 1.6em;
+}

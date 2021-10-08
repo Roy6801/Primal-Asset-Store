@@ -8,7 +8,7 @@
 
 .components {
   flex-direction: column;
-  background-color: teal;
+  background-color: cornflowerblue;
   margin: 7.2vh;
   padding: 4vh;
   border: 3px black solid;
@@ -18,7 +18,7 @@
 }
 .components-acc {
   flex-direction: column;
-  background-color: teal;
+  background-color: cornflowerblue;
   margin: 2vw;
   padding: 4.5vh 5vh 0vh 0vh;
   border: 3px black solid;
@@ -59,11 +59,23 @@
   /* margin-left: 2em; */
 }
 
-.input-box {
-  border-radius: 1em 1em 1em 1em;
+.input-box-acc {
+  border-radius: 2px;
   padding: 5px;
   margin: 10px;
   border: 1px solid #c0c0c0;
+  width: 20vw;
+  text-align: center;
+  /* border-radius: 2px; */
+}
+
+.input-box {
+  border-radius: 4px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  width: 15vw;
+  text-align: center;
   /* border-radius: 2px; */
 }
 
@@ -138,4 +150,13 @@
 
 .margin-box {
   margin: 2vh 2vh 2vh 2vh;
+}
+
+.image-box {
+  border-radius: 4px;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  width: 10vw;
+  text-align: center;
 }

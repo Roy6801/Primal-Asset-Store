@@ -36,27 +36,44 @@ const Deletion = ({ confirmKey, type, setDelete }) => {
 
   return (
     <div className="confirm-popup">
-      <label className="prompt">Delete Account ?</label>
-      <label>
-        Enter 'delete/{confirmKey}' for confirming deletion of your Account:
-      </label>
-      <input
-        placeholder="Delete Account"
-        onChange={(e) => {
-          setConfirmation(e.target.value);
-        }}
-      />
-      <div>
-        <button
-          type="button"
-          disabled={!(confirmation === `delete/${confirmKey}`)}
-          onClick={(e) => {
-            confirmDelete(e);
-          }}
-        >
-          Delete
-        </button>
-        <button onClick={(e) => setDelete(false)}>Cancel</button>
+      <div id="box-id" className="components-del">
+        <div className="center align-box">
+          <label className="prompt">Delete Account ?</label>
+        </div>
+        <div className="center align-box">
+          <label>
+            Enter '<label id="dellabel">delete/{confirmKey}</label>' for
+            confirming deletion of your Account:
+          </label>
+        </div>
+        <div className="center align-box">
+          <input
+            className="input-container"
+            placeholder="Delete Account"
+            onChange={(e) => {
+              setConfirmation(e.target.value);
+            }}
+          />
+        </div>
+        <div className="btn-container">
+          <div className="button-box">
+            <button
+              id="del"
+              type="button"
+              disabled={!(confirmation === `delete/${confirmKey}`)}
+              onClick={(e) => {
+                confirmDelete(e);
+              }}
+            >
+              Delete
+            </button>
+            <div className="button-box">
+              <button id="btnid" onClick={(e) => setDelete(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,67 @@
+.asset-type {
+  background-color: cornflowerblue;
+  display: flex;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 1vh;
+  justify-content: center;
+}
+
+.container {
+  background-color: white;
+  border: 2px black solid;
+  box-shadow: 0 2px 2px 0;
+  border-radius: 10px;
+  padding: 1vw;
+  max-width: 30vw;
+  box-shadow: 0 5px 5px 0 black;
+  text-align: center;
+}
+
+.header {
+  display: inline-block;
+  margin: 4px;
+}
+
+.image-container {
+  height: 40vh;
+  width: 100%;
+  background-color: darkblue;
+  border-radius: 5px;
+}
+
+.div-box {
+  display: inline-block;
+}
+
+.header-sub {
+  display: inline-block;
+  margin: 2px;
+
+  width: vw;
+}
+
+.input-area {
+  width: 7vw;
+}
+.btn-use {
+  background-color: #1a8cff;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+.btn-use:disabled {
+  background-color: #6797c7;
+}
+
+.btn-use:active,
+:visited {
+  color: white;
+}
+
+.asset-info {
+  height: 15vh;
+}

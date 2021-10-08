@@ -6,17 +6,20 @@ from django.http import HttpResponse
 from .models import *
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
-import json
 from rest_framework import generics, mixins
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, UserSerializer
-from .models import User, Asset,Order
+from .models import User, Asset, Order
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
+from static.fire import FireAPI
+
+import os
 
 # Create your views here.
+
 
 def discover(request):
     return HttpResponse("User / I Discovered!!")
@@ -92,32 +95,79 @@ class UserName(APIView):
     #             return Response(status=status.HTTP_200_OK)
     #         return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 #To get User Asset usingdevUserId(googleId)
 class UserAsset(APIView):
-    def get(self,request,devUserId):
+    def get(self, request, devUserId):
         try:
             user = Asset.objects.filter(devUserId=devUserId)
-            serializer = AssetSerializer(user, many = True)
+            serializer = AssetSerializer(user, many=True)
             return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404
+
+
+class QueryAsset(APIView):
+    def __init__(self):
+        self.conn = FireAPI()
+
+    def get(self, request, assetId):
+        try:
+            user = Asset.objects.get(assetId=assetId)
+            serializer = AssetSerializer(user)
+            return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404
+
+    def post(self, request, assetId):
+        path = os.path.join(os.path.abspath("static/media"), assetId)
+        fileName = request.data['fileName']
+        file = request.FILES['fileData'].read()
+        size = request.data['fileSize']
+        os.makedirs(path)
+        try:
+            os.remove(path + "/" + fileName)
+        except:
+            pass
+        with open(path + "/" + fileName, "wb") as fw:
+            fw.write(file)
+        response = self.conn.uploadAsset(request.data)
+        if response:
+            Asset.objects.filter(assetId=assetId).update(uploaded=response,
+                                                         size=size)
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+class EditAsset(APIView):
+    def put(self, request, assetId):
+        try:
+            asset = Asset.objects.get(assetId=assetId)
+            serializer = AssetSerializer(asset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except Asset.DoesNotExist:
             raise Http404
 
 #To see the Items in the cart
 class UserCart(APIView):
-    def get(self,request,userId):
+    def get(self, request, userId):
         try:
             user = Order.objects.filter(userId=userId)
-            serializer = OrderSerializer(user, many = True)
+            serializer = OrderSerializer(user, many=True)
             return Response(serializer.data)
         except Asset.DoesNotExist:
             raise Http404
 
+
 #To view the history of User
 class UserHistory(APIView):
-    def get(self,request,userId):
+    def get(self, request, userId):
         try:
             user = SearchHistory.objects.filter(userId=userId)
-            serializer = SearchHistorySerializer(user, many = True)
+            serializer = SearchHistorySerializer(user, many=True)
             return Response(serializer.data)
         except Asset.DoesNotExist:
             raise Http404

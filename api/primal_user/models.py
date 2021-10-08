@@ -45,13 +45,15 @@ class Asset(models.Model):
     assetName = models.CharField(max_length=512, null=False)
     description = models.TextField(blank=True)
     features = models.TextField(blank=True)
-    uploadedDate = models.DateField(auto_now_add=True)
+    createdDate = models.DateField(auto_now_add=True)
     typeId = models.BooleanField(default=True)
     paidStatus = models.BooleanField(default=False)
-    price = models.IntegerField(null=True)
-    size = models.FloatField(null=False)
+    price = models.FloatField(null=True)
+    currency = models.CharField(max_length=10, blank=True)
+    size = models.FloatField(default=1.0)
     downloadCount = models.BigIntegerField(null=True)
-    version = models.CharField(max_length=10)
+    version = models.CharField(max_length=10, default="1.0.0")
+    uploaded = models.CharField(max_length=512, blank=True)
 
 
 class Review(models.Model):

@@ -30,6 +30,26 @@ const service = {
       return axios.post(REACT_APP_API_BASE_URL + "ui/asset/", assetInfo);
     }
   },
+  assetUpload: (assetInfo, file) => {
+    var data = new FormData();
+    for (const [key, val] of Object.entries(assetInfo)) {
+      data.append(key, val);
+    }
+    data.append("fileName", file.name);
+    data.append("fileSize", file.size);
+    data.append("fileData", file);
+    return axios.post(
+      REACT_APP_API_BASE_URL + "user/asset/assetid/" + assetInfo.assetId,
+      data,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+  },
+  assetEdit: (assetInfo) => {
+    return axios.put(
+      REACT_APP_API_BASE_URL + "user/asset/edit/assetid/" + assetInfo.assetId,
+      assetInfo
+    );
+  },
 };
 
 export default service;

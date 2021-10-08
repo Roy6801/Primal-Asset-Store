@@ -82,19 +82,6 @@ class UserName(APIView):
         except User.DoesNotExist:
             return Response(status=status.HTTP_200_OK)
 
-    # def put(self, request, userName):
-    #     try:
-    #         user = User.objects.get(userName=userName)
-    #         serializer = UserSerializer(user)
-    #         return Response(status=status.HTTP_403_FORBIDDEN)
-    #     except User.DoesNotExist:
-    #         user = User.objects.get(userName=userName)
-    #         serializer = UserSerializer(user)
-    #         if serializer.is_valid():
-    #             serializer.save()
-    #             return Response(status=status.HTTP_200_OK)
-    #         return Response(status=status.HTTP_400_BAD_REQUEST)
-
 
 #To get User Asset usingdevUserId(googleId)
 class UserAsset(APIView):
@@ -105,6 +92,19 @@ class UserAsset(APIView):
             return Response(serializer.data)
         except Asset.DoesNotExist:
             raise Http404
+
+
+class ViewPublisher(APIView):
+    def post(self, request):
+        try:
+            publisher = User.objects.get(userName=request.data['userName'])
+            userData = UserSerializer(publisher)
+            assets = Asset.objects.filter(devUserId=userData.data['googleId'])
+            assetsList = AssetSerializer(assets, many=True)
+            data = {"publisher": userData.data, "assets": assetsList.data}
+            return Response(data)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class QueryAsset(APIView):
@@ -139,6 +139,7 @@ class QueryAsset(APIView):
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+
 class EditAsset(APIView):
     def put(self, request, assetId):
         try:
@@ -147,9 +148,11 @@ class EditAsset(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return Response(status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
         except Asset.DoesNotExist:
             raise Http404
+
 
 #To see the Items in the cart
 class UserCart(APIView):

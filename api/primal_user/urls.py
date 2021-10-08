@@ -1,6 +1,6 @@
 from django.urls import path
 from django.urls.resolvers import URLPattern
-from .views import EditAsset, UserAsset, UserAuth, UserCart, UserHistory, UserProfile, UserName, QueryAsset
+from .views import EditAsset, UserAsset, UserAuth, UserCart, UserHistory, UserProfile, UserName, QueryAsset, ViewPublisher
 
 #urlpatterns = [path('auth/', views.userAuth)]
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('asset/edit/assetid/<str:assetId>', EditAsset.as_view()),
     path('cart/<str:userId>', UserCart.as_view()),
     path('history/<str:userId>', UserHistory.as_view()),
+    path('view/publisher', ViewPublisher.as_view()),
 ]

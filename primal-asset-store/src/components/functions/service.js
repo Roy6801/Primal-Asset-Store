@@ -50,6 +50,11 @@ const service = {
       assetInfo
     );
   },
+  viewPublisher: (userName) => {
+    return axios.post(REACT_APP_API_BASE_URL + "user/view/publisher", {
+      userName: userName,
+    });
+  },
 };
 
 export default service;

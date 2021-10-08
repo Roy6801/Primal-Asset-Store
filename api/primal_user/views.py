@@ -123,6 +123,7 @@ class QueryAsset(APIView):
         path = os.path.join(os.path.abspath("static/media"), assetId)
         fileName = request.data['fileName']
         file = request.FILES['fileData'].read()
+        size = request.data['fileSize']
         os.makedirs(path)
         try:
             os.remove(path + "/" + fileName)
@@ -132,8 +133,23 @@ class QueryAsset(APIView):
             fw.write(file)
         response = self.conn.uploadAsset(request.data)
         if response:
+            Asset.objects.filter(assetId=assetId).update(uploaded=response,
+                                                         size=size)
             return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
+class EditAsset(APIView):
+    def put(self, request, assetId):
+        try:
+            asset = Asset.objects.get(assetId=assetId)
+            serializer = AssetSerializer(asset, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Asset.DoesNotExist:
+            raise Http404
 
 #To see the Items in the cart
 class UserCart(APIView):

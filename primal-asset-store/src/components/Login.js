@@ -51,16 +51,17 @@ const Login = () => {
       googleId: resp.profileObj.googleId,
       imageURL: resp.profileObj.imageUrl,
     };
-
+    //console.log(oauthData);
     // verify or register user and save user data locally
 
     if (!token) {
       service
         .verify(oauthData.googleId)
-        .then((resp) => {
+        .then((resp) => {          
           setUser(resp.data);
         })
         .catch((err) => {
+          console.log(oauthData);
           service.auth(oauthData).then((resp) => {
             setUser(resp.data);
           });

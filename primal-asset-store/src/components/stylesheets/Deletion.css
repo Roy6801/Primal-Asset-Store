@@ -1,11 +1,74 @@
 .confirm-popup {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   background-color: bisque;
   font-family: monospace;
+  width: 80%;
+  justify-content: center;
 }
 
 .prompt {
   font-weight: 900;
   font-size: 1.2em;
+}
+
+.button-box {
+  /* margin: 2em 0 0 6em; */
+  display: inline-block;
+  margin-left: 2em;
+}
+
+.components-del {
+  flex-direction: column;
+  background-color: grey;
+  margin: 7.2vh;
+  padding: 4vh;
+  border: 3px black solid;
+  border-radius: 3vw 3vw 3vw 3vw;
+  box-shadow: 2px 2px 2px 2px black;
+  height: fit-content;
+}
+
+.label-box {
+  /* text-align: right; */
+  text-align: center;
+  width: 40%;
+  padding: 0 0 5px 0;
+  vertical-align: top;
+  margin-top: 10px;
+}
+
+.align-box {
+  text-align: center;
+}
+
+.input-container {
+  border-radius: 1em 1em 1em 1em;
+  padding: 5px;
+  margin: 10px;
+  border: 1px solid #c0c0c0;
+  text-align: center;
+  width: 40vw;
+}
+
+.btn-container {
+  justify-content: center;
+  display: flex;
+}
+
+#del {
+  background-color: #d11a2a;
+  border-radius: 1em;
+  color: white;
+  font-size: 1em;
+  height: 3em;
+  width: 5em;
+  margin: 1em;
+  border: 0rem solid;
+}
+
+#dellabel {
+  color: #d11a2a;
+  background-color: #c0c0c0;
+  border-radius: 2px;
 }

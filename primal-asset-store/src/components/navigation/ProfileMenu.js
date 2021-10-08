@@ -61,7 +61,7 @@ const ProfileMenu = ({ setToken }) => {
               <label>{user.coins}</label>
             </div>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/profile"
               className="link-style"
@@ -70,7 +70,7 @@ const ProfileMenu = ({ setToken }) => {
               View Profile
             </NavLink>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/account"
               className="link-style"
@@ -79,7 +79,7 @@ const ProfileMenu = ({ setToken }) => {
               View Account
             </NavLink>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/publish"
               className="link-style"

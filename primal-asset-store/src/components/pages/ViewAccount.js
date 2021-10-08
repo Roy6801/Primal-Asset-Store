@@ -96,19 +96,19 @@ const ViewAccount = () => {
         <div className=" components-acc">
           <div className="  center">
             <div className="label">
-              <label>Email Id 1</label>
+              <label>Email Id 1 :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.email1}</label>
+              <label className="input-box-acc">{user.email1}</label>
             </div>
           </div>
           <div className="  center">
             <div className="label">
-              <label>Email Id 2</label>
+              <label>Email Id 2 :</label>
             </div>
             <div className="input-field">
               <input
-                className="input-box"
+                className="input-box-acc"
                 value={user.email2 ? user.email2 : ""}
                 placeholder="Edit Email Id 2"
                 disabled={!edit}
@@ -120,11 +120,11 @@ const ViewAccount = () => {
           </div>
           <div className="  center">
             <div className="label">
-              <label>Phone No.</label>
+              <label>Phone No. :</label>
             </div>
             <div className="input-field">
               <input
-                className="input-box"
+                className="input-box-acc"
                 value={user.phoneNumber ? user.phoneNumber : ""}
                 placeholder="Edit Phone Number"
                 disabled={!edit}
@@ -137,11 +137,11 @@ const ViewAccount = () => {
 
           <div className="  center">
             <div className="label">
-              <label>Password</label>
+              <label>Password :</label>
             </div>
             <div className="input-field">
               <input
-                className="input-box"
+                className="input-box-acc"
                 value={user.password ? user.password : ""}
                 placeholder="Set Password"
                 disabled={!edit}
@@ -153,42 +153,44 @@ const ViewAccount = () => {
           </div>
           <div className="  center">
             <div className="label">
-              <label>Coins</label>
+              <label>Coins :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.coins}</label>
+              <label className="input-box-acc">{user.coins}</label>
             </div>
           </div>
           <div className="  center">
             <div className="label">
-              <label>Account Created On</label>
+              <label>Account Created On :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.accountCreationDate}</label>
+              <label className="input-box-acc">
+                {user.accountCreationDate}
+              </label>
             </div>
           </div>
           <div className="  center">
             <div className="label">
-              <label>Assets Downloaded</label>
+              <label>Assets Downloaded :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.assetsDownloaded}</label>
+              <label className="input-box-acc">{user.assetsDownloaded}</label>
             </div>
           </div>
           <div className="  center">
             <div className="label">
-              <label>Assets Purchased</label>
+              <label>Assets Purchased :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.assetsPurchased}</label>
+              <label className="input-box-acc">{user.assetsPurchased}</label>
             </div>
           </div>
           <div className="  center">
             <div className="label">
-              <label>Plan</label>
+              <label>Plan :</label>
             </div>
             <div className="input-field">
-              <label className="input-box">{user.planId}</label>
+              <label className="input-box-acc">{user.planId}</label>
             </div>
           </div>
           <div>

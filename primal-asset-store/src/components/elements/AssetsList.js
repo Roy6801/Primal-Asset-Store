@@ -17,12 +17,41 @@ const AssetsList = ({ devId }) => {
   }
 
   if (devId && aList) {
+    const rows = Math.ceil(aList.length / 3);
+
+    var grid = [];
+    var u, l;
+    for (var i = 0; i < rows; i++) {
+      var tempArr = [];
+      l = i * 3;
+      u = l + 3;
+      for (var j = l; j < u; j++) {
+        tempArr.push(aList[j]);
+      }
+      grid.push(tempArr);
+    }
     return (
       <div>
-        {aList.map((assetInfo, index) => {
+        {grid.map((rows, ind) => {
           return (
-            <div style={{ backgroundColor: "yellow" }} key={index}>
-              <AdminAsset googleId={devId} props={assetInfo} />
+            <div key={ind} style={{ display: "flex", direction: "column" }}>
+              {rows.map((assetInfo, index) => {
+                console.log(assetInfo);
+                return (
+                  <div
+                    style={{
+                      margin: "1vw",
+                      display: "flex",
+                      width: "auto",
+                    }}
+                    key={index}
+                  >
+                    {assetInfo ? (
+                      <AdminAsset googleId={devId} props={assetInfo} />
+                    ) : null}
+                  </div>
+                );
+              })}
             </div>
           );
         })}

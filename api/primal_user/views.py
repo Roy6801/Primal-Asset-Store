@@ -95,9 +95,9 @@ class UserAsset(APIView):
 
 
 class ViewPublisher(APIView):
-    def post(self, request):
+    def get(self, request, userName):
         try:
-            publisher = User.objects.get(userName=request.data['userName'])
+            publisher = User.objects.get(userName=userName)
             userData = UserSerializer(publisher)
             assets = Asset.objects.filter(devUserId=userData.data['googleId'])
             assetsList = AssetSerializer(assets, many=True)

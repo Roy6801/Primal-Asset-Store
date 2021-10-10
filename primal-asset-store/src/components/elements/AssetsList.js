@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BlockLoading } from "react-loadingg";
 import service from "../functions/service";
 import AdminAsset from "./AdminAsset";
 
@@ -36,7 +37,6 @@ const AssetsList = ({ devId }) => {
           return (
             <div key={ind} style={{ display: "flex", direction: "column" }}>
               {rows.map((assetInfo, index) => {
-                console.log(assetInfo);
                 return (
                   <div
                     style={{
@@ -58,7 +58,7 @@ const AssetsList = ({ devId }) => {
       </div>
     );
   } else {
-    return null;
+    return <BlockLoading size="large" color="#FFA825" />;
   }
 };
 

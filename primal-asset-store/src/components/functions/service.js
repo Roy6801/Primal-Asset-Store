@@ -44,6 +44,9 @@ const service = {
       { headers: { "Content-Type": "multipart/form-data" } }
     );
   },
+  assetDetail: (assetId) => {
+    return axios.get(REACT_APP_API_BASE_URL + "user/asset/assetid/" + assetId);
+  },
   assetEdit: (assetInfo) => {
     return axios.put(
       REACT_APP_API_BASE_URL + "user/asset/edit/assetid/" + assetInfo.assetId,
@@ -51,9 +54,9 @@ const service = {
     );
   },
   viewPublisher: (userName) => {
-    return axios.post(REACT_APP_API_BASE_URL + "user/view/publisher", {
-      userName: userName,
-    });
+    return axios.get(
+      REACT_APP_API_BASE_URL + "user/view/publisher/" + userName
+    );
   },
 };
 

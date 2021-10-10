@@ -1,23 +1,29 @@
 import { useState } from "react";
 import service from "../functions/service";
+import { BlockLoading } from "react-loadingg";
 import "../stylesheets/AdminAsset.css";
 
 const AdminAsset = ({ googleId, props }) => {
   const [assetInfo, setAssetInfo] = useState(props);
   const [file, setFile] = useState();
   const [edit, setEdit] = useState(false);
-  console.log("props", props);
+  const [uploading, setUploading] = useState(false);
 
   const uploadLimit = 100;
   const handleUpload = (e) => {
-    console.log(file);
+    setUploading(true);
     service
       .assetUpload(assetInfo, file)
       .then((resp) => {
-        console.log(resp);
+        if (resp.status === 200) {
+          console.log(resp);
+          setUploading(false);
+        } else {
+          alert("An error occurred!");
+        }
       })
       .catch((err) => {
-        console.log(err);
+        alert("An error occurred!");
       });
   };
 
@@ -88,13 +94,18 @@ const AdminAsset = ({ googleId, props }) => {
           />
         </div>
         <div className="header">
-          <input
+          <select
             className="input-area"
             placeholder="Enter Currency"
             disabled={!edit}
             required
-            defaultValue={assetInfo.currency}
-          />
+            onChange={(e) => {
+              setAssetInfo({ ...assetInfo, currency: e.target.value });
+            }}
+          >
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+          </select>
         </div>
         <div className="header">
           <input
@@ -112,7 +123,15 @@ const AdminAsset = ({ googleId, props }) => {
       <div className="header">
         <label>
           {assetInfo.size > 1024 * 1024
-            ? `${Math.round(parseFloat(assetInfo.size) / (1024 * 1024), 2)} MB`
+            ? assetInfo.size > 1024 * 1024 * 1024
+              ? `${Math.round(
+                  parseFloat(assetInfo.size) / (1024 * 1024 * 1024),
+                  2
+                )} GB`
+              : `${Math.round(
+                  parseFloat(assetInfo.size) / (1024 * 1024),
+                  2
+                )} MB`
             : `${Math.round(parseFloat(assetInfo.size) / 1024, 2)} KB`}
         </label>
       </div>
@@ -135,15 +154,19 @@ const AdminAsset = ({ googleId, props }) => {
       </div>
       <div className="div-box">
         <div className="header ">
-          <button
-            className="btn-use"
-            disabled={!edit || !file}
-            onClick={(e) => {
-              handleUpload(e);
-            }}
-          >
-            Upload
-          </button>
+          {uploading ? (
+            <BlockLoading size="large" color="#FFA825" />
+          ) : (
+            <button
+              className="btn-use"
+              disabled={!edit || !file}
+              onClick={(e) => {
+                handleUpload(e);
+              }}
+            >
+              Upload
+            </button>
+          )}
         </div>
         <div className="header">
           <button

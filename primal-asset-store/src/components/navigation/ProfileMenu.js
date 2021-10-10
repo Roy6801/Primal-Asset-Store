@@ -1,6 +1,7 @@
 import { useState } from "react";
 import service from "../functions/service";
 import { NavLink } from "react-router-dom";
+import { BoxLoading } from "react-loadingg";
 import "../stylesheets/Home.css";
 import "../stylesheets/ProfileMenu.css";
 
@@ -27,7 +28,11 @@ const ProfileMenu = ({ setToken }) => {
         window.localStorage.removeItem("primal-UIG-asset-store-G10");
       });
 
-    return null;
+    return (
+      <div className="profile-menu-display">
+        <BoxLoading size="small" color="#FFA825" />
+      </div>
+    );
   } else {
     if (user.userName) {
       return (
@@ -61,7 +66,7 @@ const ProfileMenu = ({ setToken }) => {
               <label>{user.coins}</label>
             </div>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/profile"
               className="link-style"
@@ -70,7 +75,7 @@ const ProfileMenu = ({ setToken }) => {
               View Profile
             </NavLink>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/account"
               className="link-style"
@@ -79,7 +84,7 @@ const ProfileMenu = ({ setToken }) => {
               View Account
             </NavLink>
           </div>
-          <div className="container">
+          <div className="container-menu">
             <NavLink
               to="/user/publish"
               className="link-style"

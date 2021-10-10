@@ -21,7 +21,18 @@ const ViewProfile = () => {
 
   const PromptExists = () => {
     if (reject) {
-      return <label>Username Exists</label>;
+      return (
+        <label
+          style={{
+            textAlign: "right",
+            justifyContent: "right",
+            display: "flex",
+            color: "red",
+          }}
+        >
+          Username Exists
+        </label>
+      );
     }
     return null;
   };
@@ -117,7 +128,7 @@ const ViewProfile = () => {
               <label>Avatar : </label>
             </div>
             <div className="input-field">
-              <img className="input-box" src={user.imageURL} />
+              <img className="image-box" src={user.imageURL} />
             </div>
           </div>
           <div className=" center">
@@ -177,6 +188,7 @@ const ViewProfile = () => {
             </div>
             <div className="input-field">
               <textarea
+                style={{ height: "20vh" }}
                 className="input-box"
                 value={user.bio ? user.bio : ""}
                 placeholder="Edit Your Bio"

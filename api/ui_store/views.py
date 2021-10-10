@@ -20,14 +20,6 @@ char = [
 ]
 
 
-def discover(request):
-    return HttpResponse("UI / I Discovered!!")
-
-
-def browse(request):
-    return HttpResponse("UI / I'm Browsing!!")
-
-
 def idGen():
     return "".join(random.choices(char, k=50))
 
@@ -39,6 +31,15 @@ def validation():
         return idCreated
     except:
         validation()
+
+
+class Discover(APIView):
+    def get(self, request):
+        return HttpResponse("UI / I Discovered!!")
+
+
+def browse(request):
+    return HttpResponse("UI / I'm Browsing!!")
 
 
 #UI Assets display
@@ -66,7 +67,7 @@ class UiAssetDetails(APIView):
             raise Http404
 
     #getting assets deaetials
-    def get(self, request, assetId, format=None):
+    def get(self, request, assetId):
         user = self.get_object(assetId)
         serializer = AssetSerializer(user)
         return Response(serializer.data)
@@ -81,7 +82,7 @@ class UiAssetDetails(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     #for deleting the assets
-    def delete(self, request, assetId, forma=None):
+    def delete(self, request, assetId):
         user = self.get_object(assetId)
         user.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

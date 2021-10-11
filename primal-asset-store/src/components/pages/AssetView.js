@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import service from "../functions/service";
 import NotFound from "../NotFound";
+import Review from "../elements/Review";
 
 const AssetView = (props) => {
   const assetId = props.match.params.assetId;
@@ -33,7 +34,7 @@ const AssetView = (props) => {
       return <NotFound />;
     } else {
       return (
-        <div style={{ backgroundColor: "yellow" }}>
+        <div style={{ backgroundColor: "teal" }}>
           <NavLink to={`/user/view/asset/${assetInfo.assetId}`}>
             {assetInfo.assetName}
           </NavLink>
@@ -80,6 +81,7 @@ const AssetView = (props) => {
             </label>
           </div>
           <button>Add to Cart</button>
+          <Review assetInfo={assetInfo} />
         </div>
       );
     }

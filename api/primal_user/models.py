@@ -55,7 +55,7 @@ class Asset(models.Model):
 
 
 class Review(models.Model):
-    reviewId = models.CharField(max_length=512, primary_key=True)
+    reviewId = models.AutoField(primary_key=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
     rating = models.FloatField(null=True)

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import searchicon from "./static/Search.svg";
+import { BiSearch } from "react-icons/bi";
 import "./stylesheets/Home.css";
 
 const SearchBar = () => {
@@ -15,7 +15,7 @@ const SearchBar = () => {
         onChange={(e) => setKeyword(e.target.value)}
       />
       <button className="search-icon">
-        <img width="20vw" src={searchicon} />
+        <BiSearch size="1.5em" color="white" />
       </button>
     </div>
   );

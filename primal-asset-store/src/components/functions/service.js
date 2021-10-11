@@ -58,6 +58,28 @@ const service = {
       REACT_APP_API_BASE_URL + "user/view/publisher/" + userName
     );
   },
+  getUserReview: (assetId, userId) => {
+    return axios.get(
+      `${REACT_APP_API_BASE_URL}user/asset/review/${assetId}/${userId}`
+    );
+  },
+  editUserReview: (assetId, userId, data) => {
+    return axios.put(
+      `${REACT_APP_API_BASE_URL}user/asset/review/${assetId}/${userId}`,
+      data
+    );
+  },
+  deleteUserReview: (assetId, userId) => {
+    return axios.delete(
+      `${REACT_APP_API_BASE_URL}user/asset/review/${assetId}/${userId}`
+    );
+  },
+  postUserReview: (data) => {
+    return axios.post(REACT_APP_API_BASE_URL + "user/asset/review/post/", data);
+  },
+  allUserReviews: (assetId) => {
+    return axios.get(REACT_APP_API_BASE_URL + "user/asset/reviews/" + assetId);
+  },
 };
 
 export default service;

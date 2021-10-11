@@ -3,11 +3,10 @@ import GoogleLogin from "react-google-login";
 import ProfileMenu from "./navigation/ProfileMenu";
 import useToken from "./functions/useToken";
 import service from "./functions/service";
-import cart from "./static/Cart.svg";
+import { BsFillCartCheckFill } from "react-icons/bs";
 import "./stylesheets/Home.css";
 
 const Login = () => {
-  // window.localStorage.removeItem("primal-UIG-asset-store-G10");
   const { REACT_APP_CLIENT_ID } = process.env;
 
   const [user, setUser] = useState();
@@ -57,7 +56,7 @@ const Login = () => {
     if (!token) {
       service
         .verify(oauthData.googleId)
-        .then((resp) => {          
+        .then((resp) => {
           setUser(resp.data);
         })
         .catch((err) => {
@@ -101,7 +100,7 @@ const Login = () => {
       return (
         <div>
           <div className="menu-section">
-            <img src={cart} className="cart" />
+            <BsFillCartCheckFill size="2em" color="white" />
             <img
               src={JSON.parse(token).imageURL}
               className="profile-view"
@@ -116,7 +115,7 @@ const Login = () => {
     }
     return (
       <div className="menu-section">
-        <img src={cart} className="cart" />
+        <BsFillCartCheckFill size="2em" color="white" />
         <img
           src={JSON.parse(token).imageURL}
           className="profile-view"

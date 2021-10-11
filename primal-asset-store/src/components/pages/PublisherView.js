@@ -1,6 +1,6 @@
 import { useState } from "react";
 import service from "../functions/service";
-import { BlockLoading } from "react-loadingg";
+import NotFound from "../NotFound";
 import AssetsPanel from "../elements/AssetsPanel";
 
 const PublisherView = (props) => {
@@ -33,7 +33,7 @@ const PublisherView = (props) => {
       </div>
     );
   } else {
-    return <BlockLoading size="large" color="#FFA825" />;
+    return <NotFound />;
   }
 };
 

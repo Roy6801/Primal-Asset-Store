@@ -1,21 +1,12 @@
-from typing import final
-from django.http import response
-from django.http.response import HttpResponseBadRequest, HttpResponseForbidden, HttpResponseNotAllowed
-from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import *
-from django.contrib import messages
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics, mixins
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, UserSerializer
+from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, UserSerializer, ReviewSerializer
 from .models import User, Asset, Order
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
 from static.fire import FireAPI
-
 import os
 
 # Create your views here.
@@ -139,6 +130,14 @@ class QueryAsset(APIView):
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def delete(self, request, assetId):
+        asset = Asset.objects.get(assetId=assetId)
+        try:
+            asset.delete()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class EditAsset(APIView):
     def put(self, request, assetId):
@@ -174,3 +173,58 @@ class UserHistory(APIView):
             return Response(serializer.data)
         except Asset.DoesNotExist:
             raise Http404
+
+
+#To get Review of particular Asset
+class AssetReviews(APIView):
+    def get(self, request, assetId):
+        try:
+            review = Review.objects.filter(assetId=assetId)
+            serializer = ReviewSerializer(review, many=True)
+            data = []
+            for asset in serializer.data:
+                obj = asset
+                user = User.objects.get(googleId=asset['userId'])
+                userData = UserSerializer(user)
+                obj['userName'] = userData.data['userName']
+                data.append(obj)
+            return Response(data)
+        except Review.DoesNotExist:
+            raise Http404
+
+
+class PostReview(APIView):
+    def post(self, request):
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+#To post a review on Asset
+class UserReview(APIView):
+    def get(self, request, assetId, userId):
+        try:
+            review = Review.objects.get(assetId=assetId, userId=userId)
+            serializer = ReviewSerializer(review)
+            return Response(serializer.data)
+        except:
+            raise Http404
+
+    #For User To edit the review for asset
+    def put(self, request, assetId, userId):
+        review = Review.objects.get(assetId=assetId, userId=userId)
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, assetId, userId):
+        try:
+            review = Review.objects.get(assetId=assetId, userId=userId)
+            review.delete()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)

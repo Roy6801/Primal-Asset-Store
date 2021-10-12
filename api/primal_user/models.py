@@ -76,3 +76,8 @@ class Order(models.Model):
 class RelatedTags(models.Model):
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
     keywordId = models.ForeignKey(Tags, on_delete=models.CASCADE)
+
+
+class Thumbnail(models.Model):
+    thumbnailURL = models.CharField(primary_key=True, max_length=512)
+    assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)

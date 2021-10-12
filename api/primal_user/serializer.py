@@ -1,6 +1,5 @@
-from django.db.models import fields
 from rest_framework import serializers
-from .models import Asset, Order, Review, SearchHistory, Tags, User, Plans
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -11,7 +10,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PlansSerializer(serializers.ModelSerializer):
     class Meta:
-
         model = Plans
         fields = '__all__'
         name_fields = 'userName'
@@ -44,4 +42,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
+        fields = '__all__'
+
+
+class ThumbnailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Thumbnail
         fields = '__all__'

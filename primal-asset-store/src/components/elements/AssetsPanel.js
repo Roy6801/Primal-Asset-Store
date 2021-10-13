@@ -1,17 +1,12 @@
 import AssetCard from "./AssetCard";
-
+import "../stylesheets/PublisherView.css";
 const AssetsPanel = ({ aList, publisher }) => {
   return (
-    <div
-      style={{
-        backgroundColor: "yellow",
-        display: "flex",
-        overflowX: "scroll",
-      }}
-    >
+    <div className="asset-panel">
       {aList.map((assetInfo, index) => {
         return (
-          <div key={index} style={{ backgroundColor: "violet", margin: "1vw" }}>
+          //style={{ backgroundColor: "violet", margin: "1vw" }}
+          <div className="useless" key={index}>
             <AssetCard assetInfo={assetInfo} publisher={publisher} />
           </div>
         );

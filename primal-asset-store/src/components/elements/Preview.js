@@ -1,29 +1,36 @@
-import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import service from "../functions/service";
+import { BlockLoading } from "react-loadingg";
 
 const Preview = ({ assetInfo }) => {
-  return (
-    <div className="">
-      <div className="">
-        <a href="#">
-          <img alt={assetInfo.name} className="" src={assetInfo.picture} />
-        </a>
-      </div>
+  const [thumbnails, setThumbnails] = useState([]);
+  const [img, setImg] = useState(0);
 
-      <h4 className="" title={assetInfo.name}>
-        <a href="#">{assetInfo.name}</a>
-      </h4>
+  useEffect(() => {
+    if (thumbnails.length !== 0) {
+      setTimeout(() => {
+        if (img < thumbnails.length - 1) {
+          setImg((prev) => prev + 1);
+        } else {
+          setImg(0);
+        }
+      }, 8000);
+    }
+  }, [img, setImg, thumbnails]);
 
-      <h5 className="" title={assetInfo.brand_name}>
-        {`by ${assetInfo.brand_name}`}
-      </h5>
-
-      <div className="">{`${assetInfo.price}$`}</div>
-    </div>
-  );
-};
-
-Preview.propTypes = {
-  Preview: PropTypes.object.isRequired,
+  if (thumbnails.length === 0) {
+    service
+      .getThumbnails(assetInfo.assetId)
+      .then((resp) => {
+        setThumbnails(resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return null;
+  } else {
+    return <img src={thumbnails[img].thumbnailURL} height="100%" />;
+  }
 };
 
 export default Preview;

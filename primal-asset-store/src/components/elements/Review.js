@@ -81,6 +81,31 @@ const Review = ({ assetInfo }) => {
           }}
         />
       </div>
+      <button
+        disabled={feedback ? false : true}
+        onClick={(e) => {
+          reviewAsset(e);
+        }}
+      >
+        {reviewed === "$$$NULL$$$" ? "Post Review" : "Edit Review"}
+      </button>
+      <button
+        onClick={(e) => {
+          service
+            .deleteUserReview(assetInfo.assetId, googleId)
+            .then((resp) => {
+              window.location.reload();
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+      >
+        Delete Review
+      </button>
+      <div>
+        <AssetReviews assetId={assetInfo.assetId} />
+      </div>
       <div className="btn-class">
         <div className="btn">
           <button

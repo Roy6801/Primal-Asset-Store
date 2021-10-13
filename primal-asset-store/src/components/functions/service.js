@@ -80,6 +80,27 @@ const service = {
   allUserReviews: (assetId) => {
     return axios.get(REACT_APP_API_BASE_URL + "user/asset/reviews/" + assetId);
   },
+  thumbnailsUpload: (assetInfo, files) => {
+    var data = new FormData();
+    for (const [key, val] of Object.entries(assetInfo)) {
+      data.append(key, val);
+    }
+    data.append("fileCount", files.length);
+    for (const [key, val] of Object.entries(files)) {
+      data.append(key + "_file", val.name);
+      data.append(val.name, val);
+    }
+    return axios.post(
+      REACT_APP_API_BASE_URL + "user/asset/thumbnails/" + assetInfo.assetId,
+      data,
+      { headers: { "Content-Type": "multipart/form-data" } }
+    );
+  },
+  getThumbnails: (assetId) => {
+    return axios.get(
+      REACT_APP_API_BASE_URL + "user/asset/thumbnails/" + assetId
+    );
+  },
 };
 
 export default service;

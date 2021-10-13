@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from primal_user.models import Asset
 from primal_user.serializer import AssetSerializer
 from rest_framework.views import APIView
 from rest_framework import status
@@ -9,8 +10,37 @@ from ui_store.views import validation
 # Create your views here.
 
 
-def discover(request):
-    return HttpResponse("Game / I Discovered!!")
+class Discover(APIView):
+    type = True
+
+    def get(self, request, filter):
+
+        if filter == "latest_publishes":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('-createdDate')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        elif filter == "top_downloads":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('-downloadCount')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        elif filter == "top_rated":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('avgRating')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        else:
+            Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class Search(APIView):
+    type = True
+
+    def get(self, request, search):
+        assets = Asset.objects.filter(typeId=self.type, assetId__icontains=search)
+        serializer = AssetSerializer(assets, many=True)
+        return Response(serializer.data)
 
 
 def browse(request):

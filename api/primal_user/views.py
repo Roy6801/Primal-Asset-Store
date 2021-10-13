@@ -1,12 +1,13 @@
 from django.http import HttpResponse
 from .models import *
 from rest_framework.response import Response
-from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, UserSerializer, ReviewSerializer
-from .models import User, Asset, Order
+from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, ThumbnailSerializer, UserSerializer, ReviewSerializer
+from .models import User, Asset, Order, Thumbnail
 from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
 from static.fire import FireAPI
+from django.db.models import Avg
 import os
 
 # Create your views here.
@@ -115,8 +116,8 @@ class QueryAsset(APIView):
         fileName = request.data['fileName']
         file = request.FILES['fileData'].read()
         size = request.data['fileSize']
-        os.makedirs(path)
         try:
+            os.makedirs(path)
             os.remove(path + "/" + fileName)
         except:
             pass
@@ -198,6 +199,10 @@ class PostReview(APIView):
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            avgRating = Review.objects.filter(
+                assetId=request.data['assetId']).aggregate(Avg('rating'))
+            Asset.objects.filter(assetId=request.data['assetId']).update(
+                avgRating=avgRating['rating__avg'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -218,6 +223,10 @@ class UserReview(APIView):
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            avgRating = Review.objects.filter(
+                assetId=request.data['assetId']).aggregate(Avg('rating'))
+            Asset.objects.filter(assetId=assetId).update(
+                avgRating=avgRating['rating__avg'])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -228,3 +237,40 @@ class UserReview(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class AssetThumbnails(APIView):
+    def __init__(self):
+        self.conn = FireAPI()
+
+    def get(self, request, assetId):
+        thumbnails = Thumbnail.objects.filter(assetId=assetId)
+        serializer = ThumbnailSerializer(thumbnails, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, assetId):
+        path = os.path.join(os.path.abspath("static/media"), assetId)
+        fileCount = request.data['fileCount']
+        for i in range(int(fileCount)):
+            fileName = request.data[f"{i}_file"]
+            file = request.FILES[fileName].read()
+            try:
+                os.makedirs(path)
+                os.remove(path + "/" + fileName)
+            except:
+                pass
+            with open(path + "/" + fileName, "wb") as fw:
+                fw.write(file)
+
+        urls = self.conn.uploadThumbnails(request.data)
+        for url in urls:
+            thumbnail = ThumbnailSerializer(data={
+                'assetId': assetId,
+                'thumbnailURL': url
+            })
+            if thumbnail.is_valid():
+                thumbnail.save()
+        if len(urls) == int(fileCount):
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_404_NOT_FOUND)

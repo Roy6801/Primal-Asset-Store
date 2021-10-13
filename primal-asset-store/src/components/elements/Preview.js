@@ -29,7 +29,7 @@ const Preview = ({ assetInfo }) => {
       });
     return null;
   } else {
-    return <img src={thumbnails[img].thumbnailURL} height="100%"/>;
+    return <img src={thumbnails[img].thumbnailURL} height="100%" />;
   }
 };
 

@@ -1,6 +1,5 @@
 from re import T
 from django.db import models
-from django.core.validators import BaseValidator, RegexValidator
 
 
 # Create your models here.
@@ -52,6 +51,7 @@ class Asset(models.Model):
     downloadCount = models.BigIntegerField(null=True)
     version = models.CharField(max_length=10, default="1.0.0")
     uploaded = models.CharField(max_length=512, blank=True)
+    avgRating = models.FloatField(null=True)
 
 
 class Review(models.Model):

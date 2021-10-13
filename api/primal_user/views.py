@@ -7,6 +7,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from django.http import Http404
 from static.fire import FireAPI
+from django.db.models import Avg
 import os
 
 # Create your views here.
@@ -198,6 +199,10 @@ class PostReview(APIView):
         serializer = ReviewSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+            avgRating = Review.objects.filter(
+                assetId=request.data['assetId']).aggregate(Avg('rating'))
+            Asset.objects.filter(assetId=request.data['assetId']).update(
+                avgRating=avgRating['rating__avg'])
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -218,6 +223,10 @@ class UserReview(APIView):
         serializer = ReviewSerializer(review, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            avgRating = Review.objects.filter(
+                assetId=request.data['assetId']).aggregate(Avg('rating'))
+            Asset.objects.filter(assetId=assetId).update(
+                avgRating=avgRating['rating__avg'])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

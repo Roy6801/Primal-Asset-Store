@@ -4,6 +4,7 @@ from primal_user.serializer import AssetSerializer
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+from django.db.models import Avg
 import random
 
 # Create your views here.
@@ -29,8 +30,39 @@ def validation():
 
 
 class Discover(APIView):
-    def get(self, request):
-        return HttpResponse("UI / I Discovered!!")
+    type = False
+
+    def get(self, request, filter):
+
+        if filter == "latest_publishes":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('-createdDate')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        elif filter == "top_downloads":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('-downloadCount')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        elif filter == "top_rated":
+            assets = Asset.objects.filter(
+                typeId=self.type).order_by('avgRating')[:4]
+            serializer = AssetSerializer(assets, many=True)
+            return Response(serializer.data)
+        else:
+            Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class Search(APIView):
+    type = False
+
+    def get(self, request, search):
+        assets = Asset.objects.filter(typeId=self.type,
+                                      assetName__icontains=search)
+        assets = Asset.objects.filter(typeId=self.type,
+                                      assetName__icontains=search)
+        serializer = AssetSerializer(assets, many=True)
+        return Response(serializer.data)
 
 
 def browse(request):

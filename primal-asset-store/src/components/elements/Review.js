@@ -87,12 +87,11 @@ const Review = ({ assetInfo }) => {
           service
             .deleteUserReview(assetInfo.assetId, googleId)
             .then((resp) => {
-              console.log(resp.data);
+              window.location.reload();
             })
             .catch((err) => {
               console.log(err);
             });
-          window.location.reload();
         }}
       >
         Delete Review

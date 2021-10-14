@@ -1,5 +1,6 @@
 import { useState } from "react";
 import service from "../functions/service";
+import Preview from "./Preview";
 import { BlockLoading } from "react-loadingg";
 import "../stylesheets/AdminAsset.css";
 
@@ -8,6 +9,7 @@ const AdminAsset = ({ googleId, props }) => {
   const [file, setFile] = useState();
   const [edit, setEdit] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [thumbnails, setThumbnails] = useState();
 
   const uploadLimit = 100;
   const handleUpload = (e) => {
@@ -17,7 +19,7 @@ const AdminAsset = ({ googleId, props }) => {
       .then((resp) => {
         if (resp.status === 200) {
           console.log(resp);
-          setUploading(false);
+          window.location.reload();
         } else {
           alert("An error occurred!");
         }
@@ -44,7 +46,9 @@ const AdminAsset = ({ googleId, props }) => {
       <div className="asset-type">
         <label>{assetInfo.typeId ? "Game Asset" : "UI Asset"}</label>
       </div>
-      <div className="image-container"></div>
+      <div className="image-container">
+        <Preview assetInfo={assetInfo} />
+      </div>
       <div className="header">
         <input
           placeholder="Enter Asset Name"
@@ -144,7 +148,7 @@ const AdminAsset = ({ googleId, props }) => {
               if (e.target.files[0].size < 1024 * 1024 * uploadLimit) {
                 setFile(e.target.files[0]);
               } else {
-                alert("File Size too Big");
+                alert("File Size too Big!");
               }
             } catch (err) {
               console.log(err);
@@ -197,6 +201,37 @@ const AdminAsset = ({ googleId, props }) => {
           Download
         </button>
       ) : null}
+      <div>
+        <input
+          type="file"
+          multiple
+          onChange={(e) => {
+            setThumbnails(e.target.files);
+          }}
+        />
+        {!uploading ? (
+          <button
+            disabled={!thumbnails}
+            onClick={(e) => {
+              service
+                .thumbnailsUpload(assetInfo, thumbnails)
+                .then((resp) => {
+                  if (resp.status === 200) {
+                    window.location.reload();
+                  } else {
+                    alert("An error occurred!");
+                  }
+                })
+                .catch((err) => {
+                  alert("An error occurred!");
+                });
+              setUploading(true);
+            }}
+          >
+            Set Thumbnails
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 };

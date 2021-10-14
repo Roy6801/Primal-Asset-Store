@@ -2,6 +2,7 @@ import { useState } from "react";
 import service from "../functions/service";
 import NotFound from "../NotFound";
 import AssetsPanel from "../elements/AssetsPanel";
+import "../stylesheets/PublisherView.css";
 
 const PublisherView = (props) => {
   const [data, setData] = useState();
@@ -18,17 +19,33 @@ const PublisherView = (props) => {
   }
   if (data) {
     return (
-      <div style={{ backgroundColor: "teal" }}>
-        <img src={data.publisher.imageURL} />
-        <label>{`Username ${data.publisher.userName}`}</label>
-        <label>{`Name ${data.publisher.firstName} ${data.publisher.lastName}`}</label>
-        <div>
-          <label>Bio</label>
-          <p>{data.publisher.bio}</p>
+      <div className="publish-container">
+        <div className="image-input">
+          <img className="avatar-box" src={data.publisher.imageURL} />
         </div>
-        <label>{`Publishes ( ${
-          data.assets.length ? data.assets.length : 0
-        } )`}</label>
+        <div className="user-box">
+          <div className="user-details">
+            <label className="label-details">{`Username :   ${data.publisher.userName}`}</label>
+          </div>
+          <div className="user-details">
+            <label className="label-details">{`Name :    ${data.publisher.firstName} ${data.publisher.lastName}`}</label>
+          </div>
+        </div>
+        <div className="bio-area">
+          <div className="bio-box">
+            <label className="bio-head">Bio</label>
+          </div>
+          <div className="bio-box">
+            <p className="area-co">{data.publisher.bio}</p>
+          </div>
+        </div>
+        <div className="user-box">
+          <div className="user-details">
+            <label className="label-details">{`Publishes ( ${
+              data.assets.length ? data.assets.length : 0
+            } )`}</label>
+          </div>
+        </div>
         <AssetsPanel aList={data.assets} publisher={data.publisher} />
       </div>
     );

@@ -23,16 +23,18 @@ const AssetReviews = ({ assetId }) => {
   console.log(reviews);
   if (reviews) {
     return (
-      <div style={{ backgroundColor: "crimson", padding: "1vw" }}>
+      <div className="text-review">
         {reviews.map((review, index) => {
           return (
-            <div
-              key={index}
-              style={{ backgroundColor: "teal", border: "black solid 5px" }}
-            >
-              <StarRating total="5" count={review.rating} />
-              <p>{review.comment}</p>
-              <NavLink to={`/user/view/publisher/${review.userName}`}>
+            <div className="text-review-area" key={index}>
+              <div className="star-text">
+                <StarRating total="5" count={review.rating} />
+              </div>
+              <p className="star-text">{review.comment}</p>
+              <NavLink
+                className="star-text"
+                to={`/user/view/publisher/${review.userName}`}
+              >
                 {review.userName}
               </NavLink>
             </div>

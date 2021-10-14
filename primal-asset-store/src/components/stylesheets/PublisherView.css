@@ -1,0 +1,124 @@
+.publish-container {
+  background-color: teal;
+  display: flex;
+  justify-content: top;
+  flex-direction: column;
+  width: 80%;
+
+  height: fit-content;
+}
+
+.image-input {
+  display: flex;
+  justify-content: center;
+  margin: 2vw 10vw 1vw 32vw;
+  padding: 0.25vh;
+  width: 15vw;
+  height: 30vh;
+  /* background-color: tomato; */
+  /* border-radius: 50%; */
+}
+
+.avatar-box {
+  /* width: 100%; */
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  border: black solid 5px;
+}
+
+.user-box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* background-color: burlywood; */
+  /* margin: 0 10vw 0vw 30vw; */
+}
+
+.label-details {
+  /* background-color: lawngreen; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5em;
+  margin: 0.5vh;
+  color: yellow;
+  /* border: hotpink solid 2px; */
+}
+.user-details {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+.bio-area {
+  /* background-color: cadetblue; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* width: auto; */
+  /* margin: auto; */
+  margin: 1vh 5vh 2vh 5vh;
+}
+
+.bio-box {
+  display: flex;
+  justify-content: center;
+}
+
+.bio-head {
+  /* background-color: burlywood; */
+  color: yellow;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5em;
+}
+
+.area-co {
+  margin: 0.5em;
+  font-family: sans-serif;
+  background-color: cornflowerblue;
+  border-radius: 5px;
+  color: yellow;
+  height: 10vh;
+}
+
+.useless {
+  /* background-color: indigo; */
+  margin: 1vh;
+}
+
+.mini-container {
+  background-color: cornflowerblue;
+  flex-direction: column;
+  border: 2px black solid;
+  box-shadow: 0 2px 2px 0;
+  border-radius: 10px;
+  padding: 1vw;
+  width: 40vh;
+  box-shadow: 0 5px 5px 0 black;
+  text-align: center;
+}
+
+.max-header-sub {
+  margin: 2px;
+}
+.asset-label {
+  color: yellow;
+  font-family: cursive;
+}
+
+.btn-use1 {
+  background-color: crimson;
+  border-radius: 4px;
+  color: white;
+  font-size: 1em;
+  height: 40px;
+  width: 96px;
+  margin: 10px;
+  border: 0px solid;
+}
+
+.asset-panel {
+  background-color: teal;
+  display: flex;
+  overflow-x: scroll;
+}

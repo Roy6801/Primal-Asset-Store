@@ -2,6 +2,7 @@ import { useState } from "react";
 import StarRating from "./StarRating";
 import service from "../functions/service";
 import AssetReviews from "./AssetReviews";
+import "../stylesheets/Review.css";
 
 const Review = ({ assetInfo }) => {
   const [stars, setStars] = useState(0);
@@ -55,25 +56,31 @@ const Review = ({ assetInfo }) => {
   };
 
   return (
-    <div>
-      <StarRating total="5" count={stars} color="yellow" size="5em" />
-      <input
-        type="range"
-        min="0"
-        max="5"
-        step="0.5"
-        value={stars}
-        onChange={(e) => {
-          setStars(e.target.value);
-        }}
-      />
-      <input
-        placeholder="Write Your Feedback"
-        defaultValue={feedback}
-        onChange={(e) => {
-          setFeedback(e.target.value);
-        }}
-      />
+    <div className="review-container">
+      <div className="star-review">
+        <StarRating total="5" count={stars} color="yellow" size="5em" />
+      </div>
+      <div className="input-star">
+        <input
+          type="range"
+          min="0"
+          max="5"
+          step="0.5"
+          value={stars}
+          onChange={(e) => {
+            setStars(e.target.value);
+          }}
+        />
+      </div>
+      <div className="type-review">
+        <input
+          placeholder="Write Your Feedback"
+          defaultValue={feedback}
+          onChange={(e) => {
+            setFeedback(e.target.value);
+          }}
+        />
+      </div>
       <button
         disabled={feedback ? false : true}
         onClick={(e) => {
@@ -87,18 +94,48 @@ const Review = ({ assetInfo }) => {
           service
             .deleteUserReview(assetInfo.assetId, googleId)
             .then((resp) => {
-              console.log(resp.data);
+              window.location.reload();
             })
             .catch((err) => {
               console.log(err);
             });
-          window.location.reload();
         }}
       >
         Delete Review
       </button>
       <div>
         <AssetReviews assetId={assetInfo.assetId} />
+      </div>
+      <div className="btn-class">
+        <div className="btn">
+          <button
+            className="btn-use5"
+            disabled={feedback ? false : true}
+            onClick={(e) => {
+              reviewAsset(e);
+            }}
+          >
+            {reviewed === "$$$NULL$$$" ? "Post Review" : "Edit Review"}
+          </button>
+        </div>
+        <div className="btn">
+          <button
+            className="btn-use4"
+            onClick={(e) => {
+              service
+                .deleteUserReview(assetInfo.assetId, googleId)
+                .then((resp) => {
+                  console.log(resp.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+              window.location.reload();
+            }}
+          >
+            Delete Review
+          </button>
+        </div>
       </div>
     </div>
   );

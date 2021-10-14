@@ -1,29 +1,37 @@
-import PropTypes from "prop-types";
+import { useState } from "react";
+import { Carousel } from "react-bootstrap";
+import service from "../functions/service";
 
 const Preview = ({ assetInfo }) => {
-  return (
-    <div className="">
-      <div className="">
-        <a href="#">
-          <img alt={assetInfo.name} className="" src={assetInfo.picture} />
-        </a>
-      </div>
+  const [thumbnails, setThumbnails] = useState();
 
-      <h4 className="" title={assetInfo.name}>
-        <a href="#">{assetInfo.name}</a>
-      </h4>
-
-      <h5 className="" title={assetInfo.brand_name}>
-        {`by ${assetInfo.brand_name}`}
-      </h5>
-
-      <div className="">{`${assetInfo.price}$`}</div>
-    </div>
-  );
-};
-
-Preview.propTypes = {
-  Preview: PropTypes.object.isRequired,
+  if (!thumbnails) {
+    service
+      .getThumbnails(assetInfo.assetId)
+      .then((resp) => {
+        setThumbnails(resp.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    return null;
+  } else {
+    return (
+      <Carousel>
+        {thumbnails.map((thumbnail, index) => {
+          return (
+            <Carousel.Item key={index} style={{ height: "40vh" }}>
+              <img
+                className="d-block h-100"
+                src={thumbnail.thumbnailURL}
+                alt="thumbnail"
+              />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+    );
+  }
 };
 
 export default Preview;

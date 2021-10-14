@@ -101,6 +101,9 @@ const service = {
       REACT_APP_API_BASE_URL + "user/asset/thumbnails/" + assetId
     );
   },
+  discover: (typeId, filter) => {
+    return axios.get(`${REACT_APP_API_BASE_URL}${typeId}/discover/${filter}`);
+  },
 };
 
 export default service;

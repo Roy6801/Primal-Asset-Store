@@ -1,10 +1,13 @@
 import { NavLink } from "react-router-dom";
 import "../stylesheets/PublisherView.css";
+import Preview from "./Preview";
 
 const AssetCard = ({ assetInfo, publisher }) => {
   return (
     <div className="mini-container">
-      <div className="image-container"></div>
+      <div className="image-container">
+        <Preview assetInfo={assetInfo} />
+      </div>
 
       <div className="max-header-sub">
         <NavLink

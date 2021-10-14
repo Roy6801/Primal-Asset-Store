@@ -1,24 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { Carousel } from "react-bootstrap";
 import service from "../functions/service";
-import { BlockLoading } from "react-loadingg";
 
 const Preview = ({ assetInfo }) => {
-  const [thumbnails, setThumbnails] = useState([]);
-  const [img, setImg] = useState(0);
+  const [thumbnails, setThumbnails] = useState();
 
-  useEffect(() => {
-    if (thumbnails.length !== 0) {
-      setTimeout(() => {
-        if (img < thumbnails.length - 1) {
-          setImg((prev) => prev + 1);
-        } else {
-          setImg(0);
-        }
-      }, 8000);
-    }
-  }, [img, setImg, thumbnails]);
-
-  if (thumbnails.length === 0) {
+  if (!thumbnails) {
     service
       .getThumbnails(assetInfo.assetId)
       .then((resp) => {
@@ -29,7 +16,21 @@ const Preview = ({ assetInfo }) => {
       });
     return null;
   } else {
-    return <img src={thumbnails[img].thumbnailURL} height="100%" />;
+    return (
+      <Carousel>
+        {thumbnails.map((thumbnail, index) => {
+          return (
+            <Carousel.Item key={index} style={{ height: "40vh" }}>
+              <img
+                className="d-block h-100"
+                src={thumbnail.thumbnailURL}
+                alt="thumbnail"
+              />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
+    );
   }
 };
 

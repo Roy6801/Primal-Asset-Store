@@ -137,8 +137,6 @@ const Review = ({ assetInfo }) => {
           </button>
         </div>
       </div>
-
-      <AssetReviews assetId={assetInfo.assetId} />
     </div>
   );
 };

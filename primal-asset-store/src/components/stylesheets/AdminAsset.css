@@ -25,6 +25,7 @@
 .image-container {
   height: 40vh;
   width: 100%;
+  object-fit: cover;
   background-color: darkblue;
   border-radius: 5px;
 }

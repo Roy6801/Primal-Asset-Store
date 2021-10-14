@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import service from "../functions/service";
 import NotFound from "../NotFound";
 import Review from "../elements/Review";
+import Preview from "../elements/Preview";
 import "../stylesheets/AssetReview.css";
 
 const AssetView = (props) => {
@@ -37,7 +38,9 @@ const AssetView = (props) => {
       return (
         <div className="Asset-review">
           <div className="asset-container">
-            <div className="image-container-review"></div>
+            <div className="image-container-review">
+              <Preview assetInfo={assetInfo} />
+            </div>
             <div className="review-info">
               <NavLink to={`/user/view/asset/${assetInfo.assetId}`}>
                 {assetInfo.assetName}

@@ -10,6 +10,8 @@ urlpatterns = [
     path('asset/userid/<str:devUserId>', UserAsset.as_view()),
     path('asset/assetid/<str:assetId>', QueryAsset.as_view()),
     path('asset/edit/assetid/<str:assetId>', EditAsset.as_view()),
+    path('cart/order', CreateOrder.as_view()),
+    path('cart/order/<str:cartId>', DeleteOrder.as_view()),
     path('cart/<str:userId>', UserCart.as_view()),
     path('history/<str:userId>', UserHistory.as_view()),
     path('view/publisher/<str:userName>', ViewPublisher.as_view()),

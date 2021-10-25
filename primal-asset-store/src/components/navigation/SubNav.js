@@ -9,6 +9,10 @@ const SubNav = () => {
 
   path = path.replace("/browse", "");
 
+  var temp = path.split("/");
+
+  const typeId = temp[temp.length - 1];
+
   return (
     <div className="sub-nav">
       <NavLink
@@ -31,7 +35,7 @@ const SubNav = () => {
         className="sub-nav-link"
         style={{ display: "flex", flexGrow: 1, flexDirection: "row-reverse" }}
       >
-        <SearchBar />
+        <SearchBar typeId={typeId} />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+from django.db.models import fields
 from rest_framework import serializers
 from .models import *
 
@@ -48,4 +49,10 @@ class OrderSerializer(serializers.ModelSerializer):
 class ThumbnailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Thumbnail
+        fields = '__all__'
+
+
+class DownloadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Downloads
         fields = '__all__'

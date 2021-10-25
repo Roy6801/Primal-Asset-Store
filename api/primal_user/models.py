@@ -1,4 +1,3 @@
-from re import T
 from django.db import models
 
 
@@ -64,11 +63,14 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    cartId = models.CharField(max_length=512, primary_key=True)
+    cartId = models.AutoField(primary_key=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
-    orderId = models.CharField(max_length=512)
-    transactionId = models.CharField(max_length=50)
+
+
+class Downloads(models.Model):
+    orderId = models.ForeignKey(Order, on_delete=models.CASCADE)
+    transactionId = models.CharField(max_length=512, blank=True)
     success = models.BooleanField(default=False)
     purchaseDate = models.DateField(auto_now_add=True)
 

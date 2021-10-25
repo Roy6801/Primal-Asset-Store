@@ -43,6 +43,7 @@ class Discover(APIView):
         return data
 
     def get(self, request, filter):
+        assets = ""
         if filter == "latest_publishes":
             assets = Asset.objects.filter(
                 typeId=self.type).order_by('-createdDate')[:4]
@@ -65,8 +66,6 @@ class Search(APIView):
     type = False
 
     def get(self, request, search):
-        assets = Asset.objects.filter(typeId=self.type,
-                                      assetName__icontains=search)
         assets = Asset.objects.filter(typeId=self.type,
                                       assetName__icontains=search)
         serializer = AssetSerializer(assets, many=True)

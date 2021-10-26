@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0.5vh;
+  margin-top: 3vh;
   border-radius: 5px;
 }
 

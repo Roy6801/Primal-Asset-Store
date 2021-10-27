@@ -59,6 +59,10 @@
   border: 0px solid;
 }
 
+.btn-use5:disabled {
+  background-color: #abd5ff;
+}
+
 .text-review-area {
   background-color: #3e424b;
   border: 2px black solid;

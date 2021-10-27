@@ -154,15 +154,51 @@ class EditAsset(APIView):
             raise Http404
 
 
-#To see the Items in the cart
+#User Cart
 class UserCart(APIView):
     def get(self, request, userId):
         try:
             user = Order.objects.filter(userId=userId)
             serializer = OrderSerializer(user, many=True)
+            obj = {}
+            key = 0
+            for order in serializer.data:
+                obj[key] = order
+                assetInfo = Asset.objects.get(assetId=order['assetId'])
+                assetData = AssetSerializer(assetInfo)
+                obj[key]['assetInfo'] = assetData.data
+                key += 1
             return Response(serializer.data)
         except Asset.DoesNotExist:
             raise Http404
+
+    def delete(self, request, userId):
+        try:
+            user = Order.objects.filter(userId=userId)
+            user.delete()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class CreateOrder(APIView):
+    def post(self, request):
+        serializer = OrderSerializer(data=request.data)
+        print(request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class DeleteOrder(APIView):
+    def delete(self, request, cartId):
+        try:
+            user = Order.objects.filter(cartId=cartId)
+            user.delete()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 #To view the history of User

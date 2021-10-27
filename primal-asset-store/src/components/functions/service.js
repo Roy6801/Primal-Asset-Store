@@ -104,6 +104,21 @@ const service = {
   discover: (typeId, filter) => {
     return axios.get(`${REACT_APP_API_BASE_URL}${typeId}/discover/${filter}`);
   },
+  search: (typeId, keyword) => {
+    return axios.get(`${REACT_APP_API_BASE_URL}${typeId}/search/${keyword}`);
+  },
+  addToCart: (cartData) => {
+    return axios.post(`${REACT_APP_API_BASE_URL}user/cart/order`, cartData);
+  },
+  removeFromCart: (cartId) => {
+    return axios.delete(`${REACT_APP_API_BASE_URL}user/cart/order/${cartId}`);
+  },
+  userCart: (userId) => {
+    return axios.get(`${REACT_APP_API_BASE_URL}user/cart/${userId}`);
+  },
+  emptyCart: (userId) => {
+    return axios.delete(`${REACT_APP_API_BASE_URL}user/cart/${userId}`);
+  },
 };
 
 export default service;

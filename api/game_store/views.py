@@ -24,6 +24,7 @@ class Discover(APIView):
         return data
 
     def get(self, request, filter):
+        assets = ""
         if filter == "latest_publishes":
             assets = Asset.objects.filter(
                 typeId=self.type).order_by('-createdDate')[:4]

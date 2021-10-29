@@ -1,6 +1,4 @@
-from re import T
 from django.db import models
-from django.core.validators import BaseValidator, RegexValidator
 
 
 # Create your models here.
@@ -52,6 +50,7 @@ class Asset(models.Model):
     downloadCount = models.BigIntegerField(null=True)
     version = models.CharField(max_length=10, default="1.0.0")
     uploaded = models.CharField(max_length=512, blank=True)
+    avgRating = models.FloatField(null=True)
 
 
 class Review(models.Model):
@@ -64,11 +63,14 @@ class Review(models.Model):
 
 
 class Order(models.Model):
-    cartId = models.CharField(max_length=512, primary_key=True)
+    cartId = models.AutoField(primary_key=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
-    orderId = models.CharField(max_length=512)
-    transactionId = models.CharField(max_length=50)
+
+
+class Downloads(models.Model):
+    orderId = models.ForeignKey(Order, on_delete=models.CASCADE)
+    transactionId = models.CharField(max_length=512, blank=True)
     success = models.BooleanField(default=False)
     purchaseDate = models.DateField(auto_now_add=True)
 
@@ -76,3 +78,8 @@ class Order(models.Model):
 class RelatedTags(models.Model):
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
     keywordId = models.ForeignKey(Tags, on_delete=models.CASCADE)
+
+
+class Thumbnail(models.Model):
+    thumbnailURL = models.CharField(primary_key=True, max_length=512)
+    assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)

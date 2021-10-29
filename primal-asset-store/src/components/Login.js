@@ -5,6 +5,7 @@ import useToken from "./functions/useToken";
 import service from "./functions/service";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import "./stylesheets/Home.css";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   const { REACT_APP_CLIENT_ID } = process.env;
@@ -100,7 +101,9 @@ const Login = () => {
       return (
         <div>
           <div className="menu-section">
-            <BsFillCartCheckFill size="2em" color="white" />
+            <NavLink to="/cart">
+              <BsFillCartCheckFill size="2em" color="white" />
+            </NavLink>
             <img
               src={JSON.parse(token).imageURL}
               className="profile-view"
@@ -115,7 +118,9 @@ const Login = () => {
     }
     return (
       <div className="menu-section">
-        <BsFillCartCheckFill size="2em" color="white" />
+        <NavLink to="/cart">
+          <BsFillCartCheckFill size="2em" color="white" />
+        </NavLink>
         <img
           src={JSON.parse(token).imageURL}
           className="profile-view"

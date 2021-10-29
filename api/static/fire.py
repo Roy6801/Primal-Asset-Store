@@ -23,6 +23,7 @@ class FireAPI:
     def __init__(self):
         self.remote_dir = "assets"
         self.base_dir = os.path.abspath("static/media")
+        self.remote_thumbnail_dir = "thumbnails"
         print("Connected")
 
     def uploadAsset(self, assetInfo):
@@ -52,6 +53,38 @@ class FireAPI:
                 os.remove(os.path.join(asset_dir, file))
             os.rmdir(asset_dir)
             return downloadUrl
+        except Exception as e:
+            print(e)
+            return False
+
+    def uploadThumbnails(self, assetInfo):
+        global db, storage, auth
+        user = auth.sign_in_with_email_and_password(
+            os.getenv("admin_email"), os.getenv("admin_password"))
+        urls = []
+        try:
+            version = assetInfo['version'].replace(".", "_")
+            asset_dir = os.path.join(self.base_dir, assetInfo['assetId'])
+            for file in os.listdir(asset_dir):
+                url = storage.child(self.remote_thumbnail_dir).child(
+                    assetInfo['assetId']).child(version).child(file).put(
+                        os.path.join(asset_dir, file), user['idToken'])
+                downloadUrl = storage.child(self.remote_thumbnail_dir).child(
+                    assetInfo['assetId']).child(version).child(file).get_url(
+                        url['downloadTokens'])
+                db.child(self.remote_thumbnail_dir).child(
+                    assetInfo['assetId']).push({
+                        'file': file,
+                        'url': downloadUrl
+                    })
+                urls.append(downloadUrl)
+
+            db.child(self.remote_thumbnail_dir).child(
+                assetInfo['assetId']).child("version").set(version)
+            for file in os.listdir(asset_dir):
+                os.remove(os.path.join(asset_dir, file))
+            os.rmdir(asset_dir)
+            return urls
         except Exception as e:
             print(e)
             return False

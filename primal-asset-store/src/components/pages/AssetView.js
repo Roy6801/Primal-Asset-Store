@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import service from "../functions/service";
 import NotFound from "../NotFound";
 import Review from "../elements/Review";
+import Preview from "../elements/Preview";
 import "../stylesheets/AssetReview.css";
+import StarRating from "../elements/StarRating";
 
 const AssetView = (props) => {
   const assetId = props.match.params.assetId;
@@ -34,10 +36,21 @@ const AssetView = (props) => {
         });
       return <NotFound />;
     } else {
+      var googleId;
+      try {
+        googleId = JSON.parse(
+          window.localStorage.getItem("primal-UIG-asset-store-G10")
+        ).googleId;
+      } catch (e) {
+        return <NotFound />;
+      }
+
       return (
         <div className="Asset-review">
           <div className="asset-container">
-            <div className="image-container-review"></div>
+            <div className="image-container-review">
+              <Preview assetInfo={assetInfo} />
+            </div>
             <div className="review-info">
               <NavLink to={`/user/view/asset/${assetInfo.assetId}`}>
                 {assetInfo.assetName}
@@ -50,7 +63,12 @@ const AssetView = (props) => {
                   {publisherInfo.userName}
                 </NavLink>
               </div>
-              <div className="info1"></div>
+              <div className="info1">
+                <div>
+                  <StarRating total="5" count={assetInfo.avgRating} />
+                </div>
+                <label style={{ fontSize: "2em" }}>{assetInfo.avgRating}</label>
+              </div>
             </div>
             <div className="review-info">
               <label className="label-border">
@@ -101,7 +119,29 @@ const AssetView = (props) => {
               </label>
             </div>
 
-            <button className="btn-use3">Add to Cart</button>
+            <button
+              className="btn-use3"
+              onClick={(e) => {
+                const cartData = {
+                  userId: googleId,
+                  assetId: assetId,
+                };
+                service
+                  .addToCart(cartData)
+                  .then((resp) => {
+                    if (resp.status === 200) {
+                      alert("Added to Cart!");
+                    } else {
+                      alert("Couldn't add to Cart!");
+                    }
+                  })
+                  .catch((err) => {
+                    alert("Couldn't add to Cart!");
+                  });
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
           <div>
             <Review assetInfo={assetInfo} />

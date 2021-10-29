@@ -12,6 +12,7 @@ import Publish from "./components/pages/Publish";
 import PublisherView from "./components/pages/PublisherView";
 import AssetView from "./components/pages/AssetView";
 import NotFound from "./components/NotFound";
+import Cart from "./components/pages/Cart";
 import Preview from "./components/elements/Preview";
 import AssetsList from "./components/elements/AssetsList";
 
@@ -61,6 +62,7 @@ const App = () => {
             />
             <Route path="/about" component={About} />
             <Route path="/faq" component={FAQ} />
+            <Route path="/cart" component={Cart} />
             <Route path="/preview" component={Preview} />
             <Route path="/assetslist" component={AssetsList} />
             <Route component={NotFound} />

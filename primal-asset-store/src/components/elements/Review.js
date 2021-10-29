@@ -81,6 +81,9 @@ const Review = ({ assetInfo }) => {
           }}
         />
       </div>
+      <div>
+        <AssetReviews assetId={assetInfo.assetId} />
+      </div>
       <div className="btn-class">
         <div className="btn">
           <button
@@ -112,8 +115,6 @@ const Review = ({ assetInfo }) => {
           </button>
         </div>
       </div>
-
-      <AssetReviews assetId={assetInfo.assetId} />
     </div>
   );
 };

@@ -98,7 +98,9 @@ const Publish = () => {
             Add Asset
           </button>
         </div>
-        <AssetsList devId={googleId} />
+        <div className="my-admin">
+          <AssetsList devId={googleId} />
+        </div>
       </div>
     );
   } else {

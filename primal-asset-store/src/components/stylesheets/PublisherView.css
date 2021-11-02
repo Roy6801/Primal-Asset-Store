@@ -1,5 +1,5 @@
 .publish-container {
-  background-color: teal;
+  background-color: #ffefd5;
   display: flex;
   justify-content: top;
   flex-direction: column;
@@ -40,7 +40,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5em;
   margin: 0.5vh;
-  color: yellow;
+  color: #212529;
   /* border: hotpink solid 2px; */
 }
 .user-details {
@@ -67,7 +67,7 @@
 
 .bio-head {
   /* background-color: burlywood; */
-  color: yellow;
+  color: #212529;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5em;
 }
@@ -75,10 +75,11 @@
 .area-co {
   margin: 0.5em;
   font-family: sans-serif;
-  background-color: cornflowerblue;
+  background-color: #f5deb3;
   border-radius: 5px;
-  color: yellow;
+  color: #212529;
   height: 10vh;
+  padding: 2vh;
 }
 
 .useless {
@@ -87,7 +88,7 @@
 }
 
 .mini-container {
-  background-color: cornflowerblue;
+  background-color: #f5deb3;
   flex-direction: column;
   border: 2px black solid;
   box-shadow: 0 2px 2px 0;
@@ -102,12 +103,12 @@
   margin: 2px;
 }
 .asset-label {
-  color: yellow;
+  color: #272b2f;
   font-family: cursive;
 }
 
 .btn-use1 {
-  background-color: crimson;
+  background-color: #0d6efd;
   border-radius: 4px;
   color: white;
   font-size: 1em;
@@ -118,7 +119,24 @@
 }
 
 .asset-panel {
-  background-color: teal;
+  background-color: #212529;
   display: flex;
   overflow-x: scroll;
+  border-radius: 2vh;
+}
+.asset-panel::-webkit-scrollbar {
+  display: none;
+}
+
+.new-panel {
+  border-radius: 2vh;
+}
+
+.img-size-set {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1vh;
+  object-fit: contain;
 }

@@ -94,6 +94,7 @@ const ProfileMenu = ({ setToken }) => {
             </NavLink>
           </div>
           <button
+            className="btn-use10"
             onClick={(e) => {
               setToken();
               window.localStorage.removeItem("primal-UIG-asset-store-G10");

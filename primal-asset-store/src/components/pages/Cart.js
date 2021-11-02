@@ -6,6 +6,7 @@ import Preview from "../elements/Preview";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Checkout from "../elements/Checkout";
+import "../stylesheets/Cart.css";
 
 const { REACT_APP_PUBLISHABLE_KEY } = process.env;
 const stripePromise = loadStripe(REACT_APP_PUBLISHABLE_KEY);
@@ -61,32 +62,38 @@ const Cart = () => {
     return <BlockLoading size="large" color="#FFA825" />;
   } else {
     return (
-      <div>
-        <button
-          onClick={(e) => {
-            service
-              .emptyCart(googleId)
-              .then((resp) => {
-                setCart();
-              })
-              .catch((err) => {
-                alert("An Error Occurred!");
-              });
-          }}
-        >
-          Empty Cart
-        </button>
+      <div className="cart-container">
+        <div className="btn-adjust">
+          <button
+            className="btn-use9"
+            onClick={(e) => {
+              service
+                .emptyCart(googleId)
+                .then((resp) => {
+                  setCart();
+                })
+                .catch((err) => {
+                  alert("An Error Occurred!");
+                });
+            }}
+          >
+            Empty Cart
+          </button>
+        </div>
         <div>
           {cart.map((asset, index) => {
             return (
-              <div key={index} style={{ backgroundColor: "teal" }}>
-                <Preview assetInfo={asset.assetInfo} />
-                <div>
-                  <label>{asset.assetInfo.assetName}</label>
-                  <label>{asset.assetInfo.price}</label>
+              <div key={index} className="cart-asset">
+                <div className="asset-cart-preview">
+                  <Preview assetInfo={asset.assetInfo} />
+                </div>
+                <div className="cart-asset-info">
+                  <label>Name: {asset.assetInfo.assetName}</label>
+                  <label> Price: {asset.assetInfo.price}</label>
                   <label>{asset.assetInfo.currency}</label>
                 </div>
                 <button
+                  className="btn-use10"
                   onClick={(e) => {
                     service
                       .removeFromCart(asset.cartId)
@@ -104,13 +111,16 @@ const Cart = () => {
             );
           })}
         </div>
-        <button
-          onClick={(e) => {
-            setCheckout(true);
-          }}
-        >
-          Check Out
-        </button>
+        <div className="btn-adjust">
+          <button
+            className="btn-use9"
+            onClick={(e) => {
+              setCheckout(true);
+            }}
+          >
+            Check Out
+          </button>
+        </div>
       </div>
     );
   }

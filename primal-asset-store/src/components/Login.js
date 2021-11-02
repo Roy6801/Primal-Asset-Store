@@ -7,9 +7,9 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import "./stylesheets/Home.css";
 import { NavLink } from "react-router-dom";
 
-const Login = () => {
-  const { REACT_APP_CLIENT_ID } = process.env;
+const { REACT_APP_CLIENT_ID } = process.env;
 
+const Login = () => {
   const [user, setUser] = useState();
 
   const userValue = useRef(user);

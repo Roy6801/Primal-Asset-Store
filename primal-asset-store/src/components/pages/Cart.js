@@ -3,10 +3,18 @@ import { BlockLoading } from "react-loadingg";
 import service from "../functions/service";
 import NotFound from "../NotFound";
 import Preview from "../elements/Preview";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Checkout from "../elements/Checkout";
+
+const { REACT_APP_PUBLISHABLE_KEY } = process.env;
+const stripePromise = loadStripe(REACT_APP_PUBLISHABLE_KEY);
 
 const Cart = () => {
   const [cart, setCart] = useState();
+  const [checkout, setCheckout] = useState(false);
 
+  console.log(cart);
   var googleId;
   try {
     googleId = JSON.parse(
@@ -15,6 +23,14 @@ const Cart = () => {
   } catch (e) {
     return <NotFound />;
   }
+
+  const totalPay = () => {
+    var sum = 0;
+    for (var i in cart) {
+      sum += cart[i].assetInfo.price;
+    }
+    return sum;
+  };
 
   const setCartData = () => {
     service
@@ -27,24 +43,23 @@ const Cart = () => {
       });
   };
 
+  if (checkout) {
+    return (
+      <Elements stripe={stripePromise}>
+        <Checkout
+          price={totalPay()}
+          currency="INR"
+          cart={cart}
+          googleId={googleId}
+        />
+      </Elements>
+    );
+  }
+
   if (!cart) {
     setCartData();
-
     return <BlockLoading size="large" color="#FFA825" />;
   } else {
-    const totalPay = () => {
-      var sum = 0;
-      for (var i in cart) {
-        if (cart[i].assetInfo.currency === "USD") {
-          if (cart[i].assetInfo.price) {
-          }
-        } else if (cart[i].assetInfo.price) {
-          sum += cart[i].assetInfo.price;
-        }
-      }
-    };
-    totalPay();
-
     return (
       <div>
         <button
@@ -89,7 +104,13 @@ const Cart = () => {
             );
           })}
         </div>
-        <button>Check Out</button>
+        <button
+          onClick={(e) => {
+            setCheckout(true);
+          }}
+        >
+          Check Out
+        </button>
       </div>
     );
   }

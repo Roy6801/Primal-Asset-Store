@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from stripe.api_resources import payment_method
 from .models import *
 from rest_framework.response import Response
 from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, ThumbnailSerializer, UserSerializer, ReviewSerializer
@@ -8,7 +9,12 @@ from rest_framework.views import APIView
 from django.http import Http404
 from static.fire import FireAPI
 from django.db.models import Avg
+from dotenv import load_dotenv, find_dotenv
 import os
+
+import stripe
+
+load_dotenv(find_dotenv())
 
 # Create your views here.
 
@@ -158,7 +164,7 @@ class EditAsset(APIView):
 class UserCart(APIView):
     def get(self, request, userId):
         try:
-            user = Order.objects.filter(userId=userId)
+            user = Order.objects.filter(userId=userId, bought=False)
             serializer = OrderSerializer(user, many=True)
             obj = {}
             key = 0
@@ -172,19 +178,45 @@ class UserCart(APIView):
         except Asset.DoesNotExist:
             raise Http404
 
+    def put(self, request, userId):
+        try:
+            for item in request.data:
+                Order.objects.filter(
+                    userId=userId, assetId=item['assetId']).update(bought=True)
+            return Response(status=status.HTTP_200_OK)
+        except:
+            raise Http404
+
     def delete(self, request, userId):
         try:
-            user = Order.objects.filter(userId=userId)
+            user = Order.objects.filter(userId=userId, bought=False)
             user.delete()
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+class UserOrders(APIView):
+    def get(self, request, userId):
+        try:
+            user = Order.objects.filter(userId=userId, bought=True)
+            serializer = OrderSerializer(user, many=True)
+            obj = {}
+            key = 0
+            for order in serializer.data:
+                obj[key] = order
+                assetInfo = Asset.objects.get(assetId=order['assetId'])
+                assetData = AssetSerializer(assetInfo)
+                obj[key]['assetInfo'] = assetData.data
+                key += 1
+            return Response(serializer.data)
+        except Asset.DoesNotExist:
+            raise Http404
+
+
 class CreateOrder(APIView):
     def post(self, request):
         serializer = OrderSerializer(data=request.data)
-        print(request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(status=status.HTTP_200_OK)
@@ -199,6 +231,30 @@ class DeleteOrder(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PayIntent(APIView):
+
+    stripe.api_key = os.getenv("stripe_secret_key")
+
+    def post(self, request):
+        print(request.data["amount"])
+        client_secret = stripe.PaymentIntent.create(
+            amount=request.data["amount"],
+            currency=request.data["currency"])["client_secret"]
+        return HttpResponse(client_secret)
+
+
+class SetPay(APIView):
+    def put(self, request):
+        try:
+            User.objects.filter(googleId=request.data['googleId']).update(
+                accountNumber=request.data['accountNumber'],
+                ifsc=request.data['ifsc'])
+            return Response(status=status.HTTP_200_OK)
+        except Exception as e:
+            print(e)
+            raise Http404
 
 
 #To view the history of User

@@ -108,7 +108,7 @@ const AdminAsset = ({ googleId, props }) => {
             }}
           >
             <option value="INR">INR</option>
-            <option value="USD">USD</option>
+            {/* <option value="USD">USD</option> */}
           </select>
         </div>
         <div className="header">

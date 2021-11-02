@@ -10,9 +10,7 @@ const service = {
     return axios.get(REACT_APP_API_BASE_URL + "user/profile/" + googleId);
   },
   editProfile: (googleId, user) => {
-    return axios.put(REACT_APP_API_BASE_URL + "user/profile/" + googleId, {
-      ...user,
-    });
+    return axios.put(REACT_APP_API_BASE_URL + "user/profile/" + googleId, user);
   },
   deleteAccount: (googleId) => {
     return axios.delete(REACT_APP_API_BASE_URL + "user/profile/" + googleId);
@@ -116,8 +114,28 @@ const service = {
   userCart: (userId) => {
     return axios.get(`${REACT_APP_API_BASE_URL}user/cart/${userId}`);
   },
+  userCartBought: (userId, cart) => {
+    return axios.put(`${REACT_APP_API_BASE_URL}user/cart/${userId}`, cart);
+  },
   emptyCart: (userId) => {
     return axios.delete(`${REACT_APP_API_BASE_URL}user/cart/${userId}`);
+  },
+  payIntent: (price, currency) => {
+    return axios.post(REACT_APP_API_BASE_URL + "user/checkout/paymentIntents", {
+      amount: price * 100,
+      currency: currency.toLowerCase(),
+    });
+  },
+  setPayments: (data) => {
+    return axios.put(REACT_APP_API_BASE_URL + "user/setPayments", data);
+  },
+  userOrders: (userId) => {
+    return axios.get(`${REACT_APP_API_BASE_URL}user/orders/${userId}`);
+  },
+  coins: (newCoins, userId) => {
+    return axios.put(REACT_APP_API_BASE_URL + "user/profile/" + userId, {
+      coins: newCoins,
+    });
   },
 };
 

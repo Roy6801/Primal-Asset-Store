@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Discover from "./components/pages/Discover";
 import About from "./components/pages/About";
-import FAQ from "./components/pages/Faq";
 import Browse from "./components/pages/Browse";
 import ViewProfile from "./components/pages/ViewProfile";
 import ViewAccount from "./components/pages/ViewAccount";
@@ -16,6 +15,7 @@ import Cart from "./components/pages/Cart";
 import Preview from "./components/elements/Preview";
 import AssetsList from "./components/elements/AssetsList";
 import Orders from "./components/pages/Orders";
+import Redeem from "./components/pages/Redeem";
 
 import "./components/stylesheets/Home.css";
 import "./App.css";
@@ -62,11 +62,11 @@ const App = () => {
               component={AssetView}
             />
             <Route path="/about" component={About} />
-            <Route path="/faq" component={FAQ} />
             <Route path="/cart" component={Cart} />
             <Route path="/preview" component={Preview} />
             <Route path="/assetslist" component={AssetsList} />
             <Route path="/orders" component={Orders} />
+            <Route path="/redeem" component={Redeem} />
             <Route component={NotFound} />
           </Switch>
         </div>

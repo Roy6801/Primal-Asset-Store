@@ -42,52 +42,25 @@ const Checkout = ({ price, currency, cart, googleId }) => {
     );
 
     if (confirmedCardPayment.paymentIntent.status === "succeeded") {
-      service
-        .userCartBought(googleId, cart)
-        .then((resp) => {
-          if (resp.status === 200) {
-            service
-              .verify(googleId)
-              .then((resp) => {
-                const totalCoins = resp.data.coins + Math.ceil(price * 0.05);
-                service
-                  .coins(totalCoins, googleId)
-                  .then((resp) => {
-                    console.log(resp);
-                  })
-                  .catch((err) => {
-                    alert(err);
-                  });
-              })
-              .catch((err) => {
-                alert(err);
-              });
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
+      var { status } = await service.userCartBought(googleId, cart);
+
+      if (status === 200) {
+        var { data } = await service.verify(googleId);
+
+        const totalCoins = data.coins + Math.ceil(price * 0.05);
+        await service.coins(googleId, { coins: totalCoins });
+      }
 
       for (var i in cart) {
         var assetPrice = cart[i].assetInfo.price;
         assetPrice = assetPrice - Math.ceil(assetPrice * 0.15);
+
         var dev = cart[i].assetInfo.devUserId;
-        service
-          .verify(dev)
-          .then((resp) => {
-            const totalCoins = resp.data.coins + assetPrice;
-            service
-              .coins(totalCoins, googleId)
-              .then((resp) => {
-                console.log(resp);
-              })
-              .catch((err) => {
-                alert(err);
-              });
-          })
-          .catch((err) => {
-            alert(err);
-          });
+        var { data } = await service.verify(dev);
+        const devCoins = data.coins + assetPrice;
+        console.log(devCoins, data.coins);
+
+        await service.coins(dev, { coins: devCoins });
       }
 
       window.location.href = "orders";

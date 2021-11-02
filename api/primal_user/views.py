@@ -57,12 +57,16 @@ class UserProfile(APIView):
 
     #for updatind user Details
     def put(self, request, googleId):
-        user = self.get_object(googleId)
-        serializer = UserSerializer(user, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_200_OK)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            user = self.get_object(googleId)
+            serializer = UserSerializer(user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_200_OK)
+            return Response(serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print(e)
 
     #for deleting user account
     def delete(self, request, googleId):
@@ -195,6 +199,13 @@ class UserCart(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class UserCoins(APIView):
+    def put(self, request, googleId):
+        try:
+            User.objects.filter(googleId=googleId).update(coins=request.data['coins'])
+            return Response(status=status.HTTP_200_OK)
+        except:
+            raise Http404
 
 class UserOrders(APIView):
     def get(self, request, userId):
@@ -238,7 +249,6 @@ class PayIntent(APIView):
     stripe.api_key = os.getenv("stripe_secret_key")
 
     def post(self, request):
-        print(request.data["amount"])
         client_secret = stripe.PaymentIntent.create(
             amount=request.data["amount"],
             currency=request.data["currency"])["client_secret"]

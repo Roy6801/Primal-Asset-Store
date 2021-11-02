@@ -28,6 +28,8 @@ class User(models.Model):
     coins = models.IntegerField(default=2)
     assetsDownloaded = models.IntegerField(default=0)
     assetsPurchased = models.IntegerField(default=0)
+    accountNumber = models.CharField(max_length=512, null=True)
+    ifsc = models.CharField(max_length=512, null=True)
 
 
 class SearchHistory(models.Model):
@@ -66,6 +68,7 @@ class Order(models.Model):
     cartId = models.AutoField(primary_key=True)
     userId = models.ForeignKey(User, on_delete=models.CASCADE)
     assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
+    bought = models.BooleanField(default=False)
 
 
 class Downloads(models.Model):

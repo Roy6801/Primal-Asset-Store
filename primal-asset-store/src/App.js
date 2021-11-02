@@ -15,6 +15,7 @@ import NotFound from "./components/NotFound";
 import Cart from "./components/pages/Cart";
 import Preview from "./components/elements/Preview";
 import AssetsList from "./components/elements/AssetsList";
+import Orders from "./components/pages/Orders";
 
 import "./components/stylesheets/Home.css";
 import "./App.css";
@@ -65,6 +66,7 @@ const App = () => {
             <Route path="/cart" component={Cart} />
             <Route path="/preview" component={Preview} />
             <Route path="/assetslist" component={AssetsList} />
+            <Route path="/orders" component={Orders} />
             <Route component={NotFound} />
           </Switch>
         </div>

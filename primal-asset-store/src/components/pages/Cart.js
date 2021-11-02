@@ -3,6 +3,7 @@ import { BlockLoading } from "react-loadingg";
 import service from "../functions/service";
 import NotFound from "../NotFound";
 import Preview from "../elements/Preview";
+import "../stylesheets/Cart.css";
 
 const Cart = () => {
   const [cart, setCart] = useState();
@@ -46,32 +47,38 @@ const Cart = () => {
     totalPay();
 
     return (
-      <div>
-        <button
-          onClick={(e) => {
-            service
-              .emptyCart(googleId)
-              .then((resp) => {
-                setCart();
-              })
-              .catch((err) => {
-                alert("An Error Occurred!");
-              });
-          }}
-        >
-          Empty Cart
-        </button>
+      <div className="cart-container">
+        <div className="btn-adjust">
+          <button
+            className="btn-use9"
+            onClick={(e) => {
+              service
+                .emptyCart(googleId)
+                .then((resp) => {
+                  setCart();
+                })
+                .catch((err) => {
+                  alert("An Error Occurred!");
+                });
+            }}
+          >
+            Empty Cart
+          </button>
+        </div>
         <div>
           {cart.map((asset, index) => {
             return (
-              <div key={index} style={{ backgroundColor: "teal" }}>
-                <Preview assetInfo={asset.assetInfo} />
-                <div>
-                  <label>{asset.assetInfo.assetName}</label>
-                  <label>{asset.assetInfo.price}</label>
+              <div key={index} className="cart-asset">
+                <div className="asset-cart-preview">
+                  <Preview assetInfo={asset.assetInfo} />
+                </div>
+                <div className="cart-asset-info">
+                  <label>Name: {asset.assetInfo.assetName}</label>
+                  <label> Price: {asset.assetInfo.price}</label>
                   <label>{asset.assetInfo.currency}</label>
                 </div>
                 <button
+                  className="btn-use10"
                   onClick={(e) => {
                     service
                       .removeFromCart(asset.cartId)
@@ -89,7 +96,9 @@ const Cart = () => {
             );
           })}
         </div>
-        <button>Check Out</button>
+        <div className="btn-adjust">
+          <button className="btn-use9">Check Out</button>
+        </div>
       </div>
     );
   }

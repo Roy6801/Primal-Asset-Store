@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@google-cloud/storage": "^5.14.3",
+    "@stripe/react-stripe-js": "^1.6.0",
+    "@stripe/stripe-js": "^1.20.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -16,6 +18,7 @@
     "react-loadingg": "^1.7.2",
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
+    "stripe": "^8.186.0",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.1.2"
   },

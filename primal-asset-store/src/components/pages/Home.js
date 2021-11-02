@@ -1,11 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const Home = () => {
-return (
-  <div style={{ width: "80%", height: "100vh", backgroundColor: "yellow" }}>
-    <h1>Primal</h1>
-  </div>
-);
+  window.location.href = "/ui";
+  return <div style={{ width: "80%", height: "100vh" }}></div>;
 };
 
 export default Home;

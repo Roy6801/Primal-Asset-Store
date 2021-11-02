@@ -42,15 +42,9 @@ const ProfileMenu = ({ setToken }) => {
               <label>User</label>
               <label>Name</label>
               <label>Coins</label>
-              <label>Downloads</label>
-              <label>Purchases</label>
-              <label>Projects</label>
               <label>Favorites</label>
             </div>
             <div className="profile-menu-display-section1 ">
-              <label>-</label>
-              <label>-</label>
-              <label>-</label>
               <label>-</label>
               <label>-</label>
               <label>-</label>
@@ -59,9 +53,6 @@ const ProfileMenu = ({ setToken }) => {
             <div className="profile-menu-display-section1 detail-info">
               <label>{user.userName}</label>
               <label>{user.firstName + " " + user.lastName}</label>
-              <label>{user.coins}</label>
-              <label>{user.assetsDownloaded}</label>
-              <label>{user.assetsPurchased}</label>
               <label>{user.coins}</label>
               <label>{user.coins}</label>
             </div>
@@ -93,7 +84,26 @@ const ProfileMenu = ({ setToken }) => {
               Publish Asset
             </NavLink>
           </div>
+          <div className="container-menu">
+            <NavLink
+              to="/orders"
+              className="link-style"
+              activeStyle={{ color: "#FFA825" }}
+            >
+              Your Orders
+            </NavLink>
+          </div>
+          <div className="container-menu">
+            <NavLink
+              to="/redeem"
+              className="link-style"
+              activeStyle={{ color: "#FFA825" }}
+            >
+              Redeem Cash
+            </NavLink>
+          </div>
           <button
+            className="btn-use10"
             onClick={(e) => {
               setToken();
               window.localStorage.removeItem("primal-UIG-asset-store-G10");

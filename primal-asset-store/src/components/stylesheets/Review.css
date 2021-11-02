@@ -1,10 +1,10 @@
 .review-container {
-  background-color: burlywood;
+  background-color: #f5deb3;
   /* height: 40vh; */
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 0.5vh;
+  margin-top: 3vh;
   border-radius: 5px;
 }
 
@@ -40,7 +40,7 @@
 .btn-use4 {
   background-color: crimson;
   border-radius: 4px;
-  color: white;
+  color: #212529;
   font-size: 1em;
   height: fit-content;
   width: 150px;
@@ -48,7 +48,7 @@
   border: 0px solid;
 }
 .btn-use5 {
-  background-color: #1a8cff;
+  background-color: #0d6efd;
   border-radius: 4px;
   color: white;
   font-size: 1em;
@@ -71,5 +71,5 @@
 
 .star-text {
   margin-left: 2vh;
-  color: white;
+  color: #212529;
 }

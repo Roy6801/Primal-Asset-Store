@@ -26,13 +26,6 @@ const Nav = () => {
       >
         About
       </NavLink>
-      <NavLink
-        to="/faq"
-        activeStyle={{ color: "#FFA825" }}
-        className="nav-link"
-      >
-        FAQ
-      </NavLink>
 
       <div className="menu-section">
         <Login />

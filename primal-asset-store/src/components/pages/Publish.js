@@ -21,17 +21,21 @@ const Publish = () => {
   if (!devMode) {
     //request for info
     service
-      .assetList(googleId)
+      .verify(googleId)
       .then((resp) => {
-        setDevMode(1);
+        if (resp.data.accountNumber && resp.data.ifsc) {
+          setDevMode(1);
+        } else {
+          setDevMode(-1);
+        }
       })
       .catch((err) => {
-        setDevMode(-1);
+        alert("Some error occurred!");
       });
   }
 
   if (devMode === -1) {
-    return <SetPay />;
+    return <SetPay googleId={googleId} />;
   } else if (devMode === 1) {
     return (
       <div className="main-div">
@@ -94,7 +98,9 @@ const Publish = () => {
             Add Asset
           </button>
         </div>
-        <AssetsList devId={googleId} />
+        <div className="my-admin">
+          <AssetsList devId={googleId} />
+        </div>
       </div>
     );
   } else {

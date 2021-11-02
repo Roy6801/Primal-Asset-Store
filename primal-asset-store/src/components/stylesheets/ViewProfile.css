@@ -1,5 +1,5 @@
 .profilebackground {
-  background-color: red;
+  background-color: #ffefd5;
   justify-content: center;
   display: flex;
   width: 80%;
@@ -8,7 +8,7 @@
 
 .components {
   flex-direction: column;
-  background-color: cornflowerblue;
+  background-color: #f5deb3;
   margin: 7.2vh;
   padding: 4vh;
   border: 3px black solid;
@@ -18,7 +18,7 @@
 }
 .components-acc {
   flex-direction: column;
-  background-color: cornflowerblue;
+  background-color: #f5deb3;
   margin: 2vw;
   padding: 4.5vh 5vh 0vh 0vh;
   border: 3px black solid;
@@ -32,7 +32,7 @@
   margin: 1vh 5vh 0 0;
   /* padding: 0.5vh 1vh 1vh 0vh; */
   font-family: Helvetica, sans-serif;
-  color: yellow;
+  color: #212529;
 }
 
 .buttonsave {
@@ -95,7 +95,7 @@
   vertical-align: middle;
 }
 #btnid {
-  background-color: #1a8cff;
+  background-color: #0d6efd;
   border-radius: 1em;
   color: white;
   font-size: 1em;

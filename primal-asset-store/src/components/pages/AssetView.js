@@ -121,6 +121,7 @@ const AssetView = (props) => {
 
             <button
               className="btn-use3"
+              disabled={assetInfo.devUserId === googleId}
               onClick={(e) => {
                 const cartData = {
                   userId: googleId,

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 const Browse = ({ assetType }) => {
   return (
-    <div style={{ width: "80%", height: "90vh", backgroundColor: "yellow" }}>
+    <div style={{ width: "90%", height: "90vh" }}>
       <SubNav />
-      <h2>{assetType === "ui" ? "UI Browse" : "Game Browse"}</h2>
+      <h1>Coming Soon...</h1>
     </div>
   );
 };

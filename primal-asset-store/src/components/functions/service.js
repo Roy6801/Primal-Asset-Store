@@ -132,10 +132,8 @@ const service = {
   userOrders: (userId) => {
     return axios.get(`${REACT_APP_API_BASE_URL}user/orders/${userId}`);
   },
-  coins: (newCoins, userId) => {
-    return axios.put(REACT_APP_API_BASE_URL + "user/profile/" + userId, {
-      coins: newCoins,
-    });
+  coins: (googleId, data) => {
+    return axios.put(REACT_APP_API_BASE_URL + "user/coins/" + googleId, data);
   },
 };
 

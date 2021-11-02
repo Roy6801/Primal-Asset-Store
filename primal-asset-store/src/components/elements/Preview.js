@@ -17,7 +17,7 @@ const Preview = ({ assetInfo }) => {
     return null;
   } else {
     return (
-      <Carousel>
+      <Carousel prevLabel="" nextLabel="">
         {thumbnails.map((thumbnail, index) => {
           return (
             <Carousel.Item key={index} style={{ height: "42vh" }}>

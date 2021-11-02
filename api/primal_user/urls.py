@@ -14,7 +14,7 @@ urlpatterns = [
     path('cart/order/<str:cartId>', DeleteOrder.as_view()),
     path('cart/<str:userId>', UserCart.as_view()),
     path('orders/<str:userId>', UserOrders.as_view()),
-    path('coins/<str:userId>', UserProfile.as_view()),
+    path('coins/<str:googleId>', UserCoins.as_view()),
     path('checkout/paymentIntents', PayIntent.as_view()),
     path('setPayments', SetPay.as_view()),
     path('history/<str:userId>', UserHistory.as_view()),

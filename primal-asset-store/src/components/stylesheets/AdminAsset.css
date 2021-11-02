@@ -1,18 +1,19 @@
 .asset-type {
-  background-color: cornflowerblue;
+  background-color: #272b2f;
   display: flex;
   border-radius: 5px 5px 0 0;
   margin-bottom: 1vh;
   justify-content: center;
+  color: white;
 }
 
 .container {
-  background-color: white;
+  background-color: #f5deb3;
   border: 2px black solid;
   box-shadow: 0 2px 2px 0;
   border-radius: 10px;
   padding: 1vw;
-  max-width: 30vw;
+  width: 30vw;
   box-shadow: 0 5px 5px 0 black;
   text-align: center;
 }
@@ -25,8 +26,7 @@
 .image-container {
   height: 40vh;
   width: 100%;
-  object-fit: cover;
-  background-color: darkblue;
+  background-color: #212529;
   border-radius: 5px;
 }
 
@@ -45,7 +45,7 @@
   width: 7vw;
 }
 .btn-use {
-  background-color: #1a8cff;
+  background-color: #0d6efd;
   border-radius: 4px;
   color: white;
   font-size: 1em;
@@ -65,4 +65,5 @@
 
 .asset-info {
   height: 15vh;
+  color: #ffa825;
 }

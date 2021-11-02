@@ -1,5 +1,5 @@
 .main-div {
-  background-color: crimson;
+  background-color: #ffefd5;
   display: flex;
   flex-grow: 1;
   align-items: center;
@@ -38,4 +38,9 @@
   padding: 0 2vh 0 2vh;
   font-family: monospace;
   font-size: 1.6em;
+}
+
+.my-admin {
+  background-color: #272b2f;
+  border-radius: 2vh 2vh 0 0;
 }

@@ -4,6 +4,7 @@ import { BlockLoading } from "react-loadingg";
 import service from "../functions/service";
 import PropTypes from "prop-types";
 import AssetsPanel from "../elements/AssetsPanel";
+import "../stylesheets/discover.css";
 
 const Discover = ({ assetType }) => {
   const [latestPublishes, setLatestPublishes] = useState();
@@ -53,19 +54,21 @@ const Discover = ({ assetType }) => {
 
   if (latestPublishes && topDownloads && topRated) {
     return (
-      <div style={{ width: "80%", height: "90vh", backgroundColor: "yellow" }}>
+      <div className="discover-main-container">
         <SubNav />
-        <div>
-          <h1>Latest Publishes</h1>
-          <AssetsPanel aList={latestPublishes} />
-        </div>
-        <div>
-          <h1>Top Downloads</h1>
-          <AssetsPanel aList={topDownloads} />
-        </div>
-        <div>
-          <h1>Top Rated</h1>
-          <AssetsPanel aList={topRated} />
+        <div className="discover-sub-container">
+          <div className="hot-list">
+            <h1>Latest Publishes</h1>
+            <AssetsPanel aList={latestPublishes} />
+          </div>
+          <div className="hot-list">
+            <h1>Top Downloads</h1>
+            <AssetsPanel aList={topDownloads} />
+          </div>
+          <div className="hot-list">
+            <h1>Top Rated</h1>
+            <AssetsPanel aList={topRated} />
+          </div>
         </div>
       </div>
     );

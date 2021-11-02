@@ -3,7 +3,7 @@ import "../stylesheets/PublisherView.css";
 const AssetsPanel = ({ aList, publisher }) => {
   if (publisher) {
     return (
-      <div className="asset-panel">
+      <div className="asset-panel new panel">
         {aList.map((assetInfo, index) => {
           return (
             <div className="useless" key={index}>
@@ -15,7 +15,7 @@ const AssetsPanel = ({ aList, publisher }) => {
     );
   } else {
     return (
-      <div className="asset-panel">
+      <div className="asset-panel new-panel">
         {aList.map((assetInfo, index) => {
           return (
             <div className="useless" key={index}>

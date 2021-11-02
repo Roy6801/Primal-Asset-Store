@@ -1,5 +1,5 @@
 .Asset-review {
-  background-color: brown;
+  background-color: #212529;
   display: flex;
   justify-content: center;
   width: 80%;
@@ -9,7 +9,7 @@
 }
 
 .asset-container {
-  background-color: burlywood;
+  background-color: #f5deb3;
   /* display: flex; */
   /* justify-content: center; */
   /* flex-direction: column; */
@@ -31,7 +31,7 @@
   font-size: 1.2em;
 }
 .btn-use3 {
-  background-color: crimson;
+  background-color: #0d6efd;
   border-radius: 4px;
   color: white;
   font-size: 1em;
@@ -42,11 +42,12 @@
 }
 
 .image-container-review {
-  height: 40vh;
-  width: 90%;
-  background-color: darkblue;
+  height: 50vh;
+  width: 90vh;
+  background-color: #212529;
   border-radius: 5px;
   margin: 1vh 2vh 1vh 4vh;
+  padding: 2vh;
 }
 
 .label-review {

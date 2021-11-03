@@ -4,6 +4,7 @@ import NotFound from "../NotFound";
 import Preview from "../elements/Preview";
 import { NavLink } from "react-router-dom";
 import { BlockLoading } from "react-loadingg";
+import "../stylesheets/Fav.css";
 
 const Favorites = () => {
   const [fav, setFav] = useState();
@@ -29,15 +30,17 @@ const Favorites = () => {
     return <BlockLoading size="large" color="#FFA825" />;
   } else {
     return (
-      <div>
+      <div className="fav-con">
         <h1>Favorites</h1>
         {fav["assetList"].map((asset, index) => {
           return (
-            <div key={index} style={{ backgroundColor: "teal" }}>
-              <Preview assetInfo={asset} />
-              <div>
+            <div key={index} className="fav-con1">
+              <div className="asset-cart-preview">
+                <Preview assetInfo={asset} />
+              </div>
+              <div className="nav-link-fav">
                 <NavLink
-                  className="asset-label"
+                  className="nav-link-fav"
                   to={`/user/view/asset/${asset.assetId}`}
                 >
                   {asset.assetName}

@@ -26,10 +26,11 @@ const SearchBar = ({ typeId }) => {
     return (
       <div
         style={{
-          backgroundColor: "teal",
+          backgroundColor: "#272B2F",
           width: "30vw",
           height: "fit-content",
           position: "absolute",
+          color: "",
         }}
       >
         {results.map((assetInfo, index) => {

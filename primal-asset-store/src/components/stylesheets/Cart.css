@@ -45,6 +45,7 @@
   padding: 1vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .btn-use10 {

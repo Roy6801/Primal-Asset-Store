@@ -40,7 +40,7 @@
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.5em;
   margin: 0.5vh;
-  color: #212529;
+  color: #212529 !important;
   /* border: hotpink solid 2px; */
 }
 .user-details {
@@ -97,13 +97,14 @@
   width: 40vh;
   box-shadow: 0 5px 5px 0 black;
   text-align: center;
+  color: #212529 !important;
 }
 
 .max-header-sub {
   margin: 2px;
 }
 .asset-label {
-  color: #272b2f;
+  color: #272b2f !important;
   font-family: cursive;
 }
 

@@ -29,6 +29,8 @@
   justify-content: left;
   font-family: monospace;
   font-size: 1.2em;
+  color: #212529 !important;
+  font-weight: 800;
 }
 .btn-use3 {
   background-color: #0d6efd;

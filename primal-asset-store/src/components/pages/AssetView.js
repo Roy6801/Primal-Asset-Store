@@ -68,7 +68,10 @@ const AssetView = (props) => {
               <Preview assetInfo={assetInfo} />
             </div>
             <div className="review-info">
-              <NavLink to={`/user/view/asset/${assetInfo.assetId}`}>
+              <NavLink
+                style={{ color: "#212529", fontSize: "1.5rem" }}
+                to={`/user/view/asset/${assetInfo.assetId}`}
+              >
                 {assetInfo.assetName}
               </NavLink>
               <div
@@ -88,7 +91,10 @@ const AssetView = (props) => {
             <div className="review-info">
               <div className="info">
                 <label className="label-review">Publisher</label>
-                <NavLink to={`/user/view/publisher/${publisherInfo.userName}`}>
+                <NavLink
+                  style={{ color: "#212529" }}
+                  to={`/user/view/publisher/${publisherInfo.userName}`}
+                >
                   {publisherInfo.userName}
                 </NavLink>
               </div>

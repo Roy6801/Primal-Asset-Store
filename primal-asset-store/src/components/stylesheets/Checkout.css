@@ -1,0 +1,50 @@
+form {
+  background-color: #f5deb3;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: monospace;
+}
+
+.label-checkout {
+  display: inline-block;
+  text-align: right;
+  width: 10%;
+  vertical-align: top;
+  margin-right: 2vh;
+}
+
+.input-field-checkout {
+  display: inline-block;
+  text-align: right;
+  width: 20%;
+  vertical-align: middle;
+}
+
+.form-adjust {
+  margin-top: 2vh;
+  padding-left: 50vh;
+}
+
+.input-box-checkout {
+  border-radius: 4px;
+  width: 20vw;
+  text-align: center;
+}
+
+.btn-use11 {
+  background-color: #0d6efd;
+  border-radius: 1em;
+  color: white;
+  font-size: 1em;
+  height: 3em;
+  width: 10em;
+  margin-left: 7em;
+  border: 0rem solid;
+}
+
+.align-head {
+  display: flex;
+  justify-content: center;
+}

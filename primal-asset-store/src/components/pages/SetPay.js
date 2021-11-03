@@ -1,5 +1,6 @@
 import { useState } from "react";
 import service from "../functions/service";
+import "../stylesheets/Setpay.css";
 
 const SetPay = ({ googleId }) => {
   const [payInfo, setPayInfo] = useState({ googleId: googleId });
@@ -19,11 +20,14 @@ const SetPay = ({ googleId }) => {
 
   return (
     <div>
-      <h1>Setup Payments</h1>
+      <h1>
+        <b>Setup Payments</b>
+      </h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Bank Account Number</label>
+        <div className="set-pay">
+          <label>Bank Account Number:</label>
           <input
+            className="input-box-checkout"
             type="text"
             required
             placeholder="Account No."
@@ -32,19 +36,24 @@ const SetPay = ({ googleId }) => {
             }}
           />
         </div>
-        <div>
-          <label>Bank IFSC Code</label>
-          <input
-            type="text"
-            required
-            placeholder="IFSC Code"
-            onChange={(e) => {
-              setPayInfo({ ...payInfo, ifsc: e.target.value });
-            }}
-          />
+        <div className="set-pay">
+          <label>Bank IFSC Code:</label>
+          <div>
+            <input
+              className="input-box-checkout"
+              type="text"
+              required
+              placeholder="IFSC Code"
+              onChange={(e) => {
+                setPayInfo({ ...payInfo, ifsc: e.target.value });
+              }}
+            />
+          </div>
         </div>
-        <div>
-          <button type="submit">Setup</button>
+        <div className="set-pay">
+          <button className="btn-use1" type="submit">
+            Setup
+          </button>
         </div>
       </form>
     </div>

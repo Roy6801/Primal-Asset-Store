@@ -45,8 +45,9 @@ const Favorites = () => {
                 >
                   {asset.assetName}
                 </NavLink>
-                <label>{asset.price}</label>
-                <label>{asset.currency}</label>
+                <div>
+                  <label>{`${asset.price} ${asset.currency}`}</label>
+                </div>
               </div>
             </div>
           );

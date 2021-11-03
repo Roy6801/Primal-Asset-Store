@@ -40,8 +40,6 @@ const Login = () => {
     }
   }, [showMenu, setShowMenu]);
 
-  // console.log(showMenu);
-
   const onSuccess = (resp) => {
     // get user profile on login and encrypt data
     const oauthData = {
@@ -51,7 +49,7 @@ const Login = () => {
       googleId: resp.profileObj.googleId,
       imageURL: resp.profileObj.imageUrl,
     };
-    //console.log(oauthData);
+
     // verify or register user and save user data locally
 
     if (!token) {
@@ -99,17 +97,15 @@ const Login = () => {
 
     if (showMenu) {
       return (
-        <div>
-          <div className="menu-section">
-            <NavLink to="/cart">
-              <BsFillCartCheckFill size="2em" color="white" />
-            </NavLink>
-            <img
-              src={JSON.parse(token).imageURL}
-              className="profile-view"
-              onClick={(e) => setShowMenu(false)}
-            />
-          </div>
+        <div className="menu-section">
+          <NavLink style={{ alignSelf: "center" }} to="/cart">
+            <BsFillCartCheckFill size="2em" color="white" />
+          </NavLink>
+          <img
+            src={JSON.parse(token).imageURL}
+            className="profile-view"
+            onClick={(e) => setShowMenu(false)}
+          />
           <div className="profile-menu">
             <ProfileMenu setToken={setToken} />
           </div>
@@ -118,7 +114,7 @@ const Login = () => {
     }
     return (
       <div className="menu-section">
-        <NavLink to="/cart">
+        <NavLink style={{ alignSelf: "center" }} to="/cart">
           <BsFillCartCheckFill size="2em" color="white" />
         </NavLink>
         <img

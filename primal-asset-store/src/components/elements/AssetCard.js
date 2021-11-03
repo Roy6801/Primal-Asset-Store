@@ -62,7 +62,7 @@ const AssetCard = ({ assetInfo, publisher }) => {
         onClick={(e) => {
           const cartData = {
             userId: googleId,
-            assetId: assetId,
+            assetId: assetInfo.assetId,
           };
           service
             .addToCart(cartData)

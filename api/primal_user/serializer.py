@@ -46,6 +46,12 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class FavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favorites
+        fields = '__all__'
+
+
 class ThumbnailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Thumbnail

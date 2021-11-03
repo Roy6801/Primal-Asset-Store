@@ -1,8 +1,9 @@
 from django.http import HttpResponse
+from rest_framework.serializers import Serializer
 from stripe.api_resources import payment_method
 from .models import *
 from rest_framework.response import Response
-from .serializer import AssetSerializer, OrderSerializer, SearchHistorySerializer, ThumbnailSerializer, UserSerializer, ReviewSerializer
+from .serializer import AssetSerializer, FavoriteSerializer, OrderSerializer, SearchHistorySerializer, ThumbnailSerializer, UserSerializer, ReviewSerializer
 from .models import User, Asset, Order, Thumbnail
 from rest_framework import status
 from rest_framework.views import APIView
@@ -199,13 +200,16 @@ class UserCart(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class UserCoins(APIView):
     def put(self, request, googleId):
         try:
-            User.objects.filter(googleId=googleId).update(coins=request.data['coins'])
+            User.objects.filter(googleId=googleId).update(
+                coins=request.data['coins'])
             return Response(status=status.HTTP_200_OK)
         except:
             raise Http404
+
 
 class UserOrders(APIView):
     def get(self, request, userId):
@@ -242,6 +246,55 @@ class DeleteOrder(APIView):
         except:
             return Response(status=status.HTTP_404_NOT_FOUND)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UserFav(APIView):
+    def get(self, request, googleId, assetId):
+        try:
+            val = Favorites.objects.filter(userId=googleId,
+                                           assetId=assetId).count()
+            if val == 0:
+                raise Http404
+            return Response(status=status.HTTP_200_OK)
+        except Favorites.DoesNotExist:
+            raise Http404
+
+    def post(self, request, googleId, assetId):
+        try:
+            serializer = FavoriteSerializer(data={
+                "userId": googleId,
+                "assetId": assetId
+            })
+            if serializer.is_valid():
+                serializer.save()
+                return Response(status=status.HTTP_201_CREATED)
+        except:
+            pass
+        raise Http404
+
+    def delete(self, request, googleId, assetId):
+        try:
+            fav = Favorites.objects.filter(userId=googleId, assetId=assetId)
+            fav.delete()
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class ListFav(APIView):
+    def get(self, request, googleId):
+        try:
+            fav = Favorites.objects.filter(userId=googleId)
+            favSerializer = FavoriteSerializer(fav, many=True)
+            obj = {"count": fav.count(), "assetList": []}
+            print(obj)
+            for i in favSerializer.data:
+                asset = Asset.objects.get(assetId=i["assetId"])
+                assetSerializer = AssetSerializer(asset)
+                obj['assetList'].append(assetSerializer.data)
+            return Response(obj)
+        except:
+            raise Http404
 
 
 class PayIntent(APIView):

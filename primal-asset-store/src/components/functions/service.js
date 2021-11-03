@@ -135,6 +135,24 @@ const service = {
   coins: (googleId, data) => {
     return axios.put(REACT_APP_API_BASE_URL + "user/coins/" + googleId, data);
   },
+  favorite: (googleId, assetId, cmd) => {
+    if (cmd === "GET") {
+      return axios.get(
+        `${REACT_APP_API_BASE_URL}user/fav/${googleId}/${assetId}`
+      );
+    } else if (cmd === "POST") {
+      return axios.post(
+        `${REACT_APP_API_BASE_URL}user/fav/${googleId}/${assetId}`
+      );
+    } else {
+      return axios.delete(
+        `${REACT_APP_API_BASE_URL}user/fav/${googleId}/${assetId}`
+      );
+    }
+  },
+  userFavs: (googleId) => {
+    return axios.get(`${REACT_APP_API_BASE_URL}user/listFav/${googleId}`);
+  },
 };
 
 export default service;

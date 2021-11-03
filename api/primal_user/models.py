@@ -71,6 +71,11 @@ class Order(models.Model):
     bought = models.BooleanField(default=False)
 
 
+class Favorites(models.Model):
+    userId = models.ForeignKey(User, on_delete=models.CASCADE)
+    assetId = models.ForeignKey(Asset, on_delete=models.CASCADE)
+
+
 class Downloads(models.Model):
     orderId = models.ForeignKey(Order, on_delete=models.CASCADE)
     transactionId = models.CharField(max_length=512, blank=True)

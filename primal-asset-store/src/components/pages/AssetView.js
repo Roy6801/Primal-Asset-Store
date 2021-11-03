@@ -6,12 +6,14 @@ import Review from "../elements/Review";
 import Preview from "../elements/Preview";
 import "../stylesheets/AssetReview.css";
 import StarRating from "../elements/StarRating";
+import Heart from "../elements/Heart";
 
 const AssetView = (props) => {
   const assetId = props.match.params.assetId;
 
   const [assetInfo, setAssetInfo] = useState();
   const [publisherInfo, setPublisherInfo] = useState();
+  const [fav, setFav] = useState("$$$NULL$$$");
 
   if (!assetInfo) {
     service
@@ -45,6 +47,20 @@ const AssetView = (props) => {
         return <NotFound />;
       }
 
+      if (fav === "$$$NULL$$$") {
+        service
+          .favorite(googleId, assetId, "GET")
+          .then((resp) => {
+            console.log(resp);
+            if (resp.status === 200) {
+              setFav(true);
+            }
+          })
+          .catch((err) => {
+            setFav(false);
+          });
+      }
+
       return (
         <div className="Asset-review">
           <div className="asset-container">
@@ -55,6 +71,19 @@ const AssetView = (props) => {
               <NavLink to={`/user/view/asset/${assetInfo.assetId}`}>
                 {assetInfo.assetName}
               </NavLink>
+              <div
+                onClick={(e) => {
+                  if (!fav) {
+                    service.favorite(googleId, assetId, "POST");
+                    setFav(true);
+                  } else {
+                    service.favorite(googleId, assetId);
+                    setFav(false);
+                  }
+                }}
+              >
+                <Heart fill={fav} />
+              </div>
             </div>
             <div className="review-info">
               <div className="info">

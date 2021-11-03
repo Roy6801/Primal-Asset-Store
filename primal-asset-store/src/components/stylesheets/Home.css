@@ -92,13 +92,13 @@
 
 .menu-section {
   display: flex;
-  width: 20vw;
-  justify-content: flex-end;
-  margin: auto 2vw auto auto;
+  width: 15vw;
+  justify-content: space-between;
+  margin: auto 5vw auto auto;
 }
 
 .profile-view {
-  width: 3.5vw;
+  width: 3vw;
   border-radius: 50%;
 }
 
@@ -107,7 +107,7 @@
   width: 20vw;
   padding: 1vw;
   border-radius: 2vh;
-  margin: 5vh auto auto auto;
+  margin: 10vh auto auto -10vw;
   background-color: #212529;
   box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.4);
 }

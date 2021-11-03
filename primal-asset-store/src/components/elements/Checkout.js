@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import service from "../functions/service";
+import "../stylesheets/Checkout.css";
 
 const Checkout = ({ price, currency, cart, googleId }) => {
   const [cred, setCred] = useState({});
@@ -71,78 +72,114 @@ const Checkout = ({ price, currency, cart, googleId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h1>Payment</h1>
-      <div>
-        <label>Name</label>
-        <input
-          type="text"
-          required
-          placeholder="Enter Name on Card"
-          onChange={(e) => {
-            setCred({ ...cred, name: e.target.value });
-          }}
-        />
+      <div className="align-head">
+        <h1>
+          <b>Payment</b>
+        </h1>
       </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          required
-          placeholder="Enter Email"
-          onChange={(e) => {
-            setCred({ ...cred, email: e.target.value });
-          }}
-        />
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>Name:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            input
+            type="text"
+            required
+            placeholder="Enter Name on Card"
+            onChange={(e) => {
+              setCred({ ...cred, name: e.target.value });
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <label>Address</label>
-        <input
-          type="text"
-          required
-          placeholder="Enter Address"
-          onChange={(e) => {
-            setCred({ ...cred, line1: e.target.value });
-          }}
-        />
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>Email:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            type="text"
+            required
+            placeholder="Enter Email"
+            onChange={(e) => {
+              setCred({ ...cred, email: e.target.value });
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <label>City</label>
-        <input
-          type="text"
-          required
-          placeholder="City"
-          onChange={(e) => {
-            setCred({ ...cred, city: e.target.value });
-          }}
-        />
+
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>Address:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            type="text"
+            required
+            placeholder="Enter Address"
+            onChange={(e) => {
+              setCred({ ...cred, line1: e.target.value });
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <label>State</label>
-        <input
-          type="text"
-          required
-          placeholder="State"
-          onChange={(e) => {
-            setCred({ ...cred, state: e.target.value });
-          }}
-        />
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>City:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            type="text"
+            required
+            placeholder="City"
+            onChange={(e) => {
+              setCred({ ...cred, city: e.target.value });
+            }}
+          />
+        </div>
       </div>
-      <div>
-        <label>Zip</label>
-        <input
-          type="text"
-          required
-          placeholder="Zipcode"
-          onChange={(e) => {
-            setCred({ ...cred, zip: e.target.value });
-          }}
-        />
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>State:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            type="text"
+            required
+            placeholder="State"
+            onChange={(e) => {
+              setCred({ ...cred, state: e.target.value });
+            }}
+          />
+        </div>
       </div>
-      <div>
+      <div className="form-adjust">
+        <div className="label-checkout">
+          <label>Zip:</label>
+        </div>
+        <div className="input-field-checkout">
+          <input
+            className="input-box-checkout"
+            type="text"
+            required
+            placeholder="Zipcode"
+            onChange={(e) => {
+              setCred({ ...cred, zip: e.target.value });
+            }}
+          />
+        </div>
+      </div>
+      <div className="form-adjust" style={{ width: "50vw", margin: "2vw" }}>
         <CardElement options={{ hidePostalCode: true }} />
       </div>
-      <div>
-        <button type="submit" disabled={processing}>
+      <div className="form-adjust">
+        <button className="btn-use11" type="submit" disabled={processing}>
           {processing ? "Processing..." : `Pay ${price} ${currency}`}
         </button>
       </div>

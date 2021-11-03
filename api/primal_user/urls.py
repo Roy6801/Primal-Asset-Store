@@ -23,4 +23,6 @@ urlpatterns = [
     path('asset/review/<str:assetId>/<str:userId>', UserReview.as_view()),
     path('asset/reviews/<str:assetId>', AssetReviews.as_view()),
     path('asset/thumbnails/<str:assetId>', AssetThumbnails.as_view()),
+    path('fav/<str:googleId>/<str:assetId>', UserFav.as_view()),
+    path('listFav/<str:googleId>', ListFav.as_view())
 ]

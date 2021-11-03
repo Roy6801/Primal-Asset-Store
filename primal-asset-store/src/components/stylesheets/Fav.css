@@ -1,0 +1,27 @@
+.fav-con {
+  background-color: #272b2f;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  height: fit-content;
+  color: white;
+  text-align: center;
+}
+
+.fav-con1 {
+  background-color: #f5deb3;
+  margin: 2vh;
+  width: 80%;
+  height: fit-content;
+  padding: 2vh;
+  border-radius: 1vh;
+  margin-left: 15vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-link-fav {
+  font-size: 1.2em;
+  color: #212529 !important;
+}

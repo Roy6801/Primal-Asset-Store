@@ -1,8 +1,18 @@
 import { NavLink } from "react-router-dom";
 import "../stylesheets/PublisherView.css";
 import Preview from "./Preview";
+import service from "../functions/service";
 
 const AssetCard = ({ assetInfo, publisher }) => {
+  var googleId;
+  try {
+    googleId = JSON.parse(
+      window.localStorage.getItem("primal-UIG-asset-store-G10")
+    ).googleId;
+  } catch (e) {
+    console.log(e);
+  }
+
   return (
     <div className="mini-container">
       <div className="image-container">
@@ -46,7 +56,30 @@ const AssetCard = ({ assetInfo, publisher }) => {
           {publisher.userName}
         </NavLink>
       </div>
-      <button className="btn-use1">Add to Cart</button>
+      <button
+        className="btn-use1"
+        disabled={!googleId || assetInfo.devUserId === googleId}
+        onClick={(e) => {
+          const cartData = {
+            userId: googleId,
+            assetId: assetInfo.assetId,
+          };
+          service
+            .addToCart(cartData)
+            .then((resp) => {
+              if (resp.status === 200) {
+                alert("Added to Cart!");
+              } else {
+                alert("Couldn't add to Cart!");
+              }
+            })
+            .catch((err) => {
+              alert("Couldn't add to Cart!");
+            });
+        }}
+      >
+        Add to Cart
+      </button>
     </div>
   );
 };

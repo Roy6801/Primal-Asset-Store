@@ -15,6 +15,7 @@ import Cart from "./components/pages/Cart";
 import Preview from "./components/elements/Preview";
 import AssetsList from "./components/elements/AssetsList";
 import Orders from "./components/pages/Orders";
+import Favorites from "./components/pages/Favorites";
 import Redeem from "./components/pages/Redeem";
 
 import "./components/stylesheets/Home.css";
@@ -66,6 +67,7 @@ const App = () => {
             <Route path="/preview" component={Preview} />
             <Route path="/assetslist" component={AssetsList} />
             <Route path="/orders" component={Orders} />
+            <Route path="/favorites" component={Favorites} />
             <Route path="/redeem" component={Redeem} />
             <Route component={NotFound} />
           </Switch>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import service from "../functions/service";
 import NotFound from "../NotFound";
+import "../stylesheets/Redeem.css";
 
 const Redeem = () => {
   const [coins, setCoins] = useState();
@@ -25,12 +26,15 @@ const Redeem = () => {
     return null;
   } else {
     return (
-      <div>
-        <h1>{`Total Coins - ${coins}`}</h1>
+      <div className="redeem-cont">
+        <h1>
+          <b>{`Total Coins - ${coins}`}</b>
+        </h1>
         <h3>
           You are about to transfer all your coins/cash to your bank account
         </h3>
         <button
+          className="btn-use9"
           onClick={(e) => {
             service
               .coins(googleId, { coins: 0 })

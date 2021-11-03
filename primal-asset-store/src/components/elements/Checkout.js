@@ -175,7 +175,7 @@ const Checkout = ({ price, currency, cart, googleId }) => {
           />
         </div>
       </div>
-      <div>
+      <div className="form-adjust" style={{ width: "50vw", margin: "2vw" }}>
         <CardElement options={{ hidePostalCode: true }} />
       </div>
       <div className="form-adjust">

@@ -3,6 +3,8 @@ import service from "../functions/service";
 import NotFound from "../NotFound";
 import Preview from "../elements/Preview";
 import { BlockLoading } from "react-loadingg";
+import { NavLink } from "react-router-dom";
+import "../stylesheets/Fav.css";
 
 const Orders = () => {
   const [orders, setOrders] = useState();
@@ -28,16 +30,26 @@ const Orders = () => {
     return <BlockLoading size="large" color="#FFA825" />;
   } else {
     return (
-      <div>
+      <div className="fav-con">
         <h1>Downloads/Purchases</h1>
         {orders.map((asset, index) => {
           return (
-            <div key={index} style={{ backgroundColor: "teal" }}>
-              <Preview assetInfo={asset.assetInfo} />
+            <div key={index} className="fav-con1">
+              <div className="asset-cart-preview">
+                <Preview assetInfo={asset.assetInfo} />
+              </div>
               <div>
-                <label>{asset.assetInfo.assetName}</label>
-                <label>{asset.assetInfo.price}</label>
-                <label>{asset.assetInfo.currency}</label>
+                <div className="nav-link-fav">
+                  <NavLink
+                    className="nav-link-fav"
+                    to={`/user/view/asset/${asset.assetInfo.assetId}`}
+                  >
+                    {asset.assetInfo.assetName}
+                  </NavLink>
+                </div>
+                <div style={{ color: "#212529" }}>
+                  <label>{`${asset.assetInfo.price} ${asset.assetInfo.currency}`}</label>
+                </div>
                 <a href={asset.assetInfo.uploaded} target="_blank">
                   Download
                 </a>

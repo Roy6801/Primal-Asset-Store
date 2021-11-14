@@ -102,7 +102,11 @@ const AssetView = (props) => {
                 <div>
                   <StarRating total="5" count={assetInfo.avgRating} />
                 </div>
-                <label style={{ fontSize: "2em" }}>{assetInfo.avgRating}</label>
+                <label style={{ fontSize: "2em" }}>
+                  {assetInfo.avgRating
+                    ? assetInfo.avgRating.toFixed(2)
+                    : assetInfo.avgRating}
+                </label>
               </div>
             </div>
             <div className="review-info">

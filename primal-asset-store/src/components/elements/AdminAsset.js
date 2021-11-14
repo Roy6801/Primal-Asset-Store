@@ -107,6 +107,7 @@ const AdminAsset = ({ googleId, props }) => {
               setAssetInfo({ ...assetInfo, currency: e.target.value });
             }}
           >
+            <option value=""></option>
             <option value="INR">INR</option>
             {/* <option value="USD">USD</option> */}
           </select>
